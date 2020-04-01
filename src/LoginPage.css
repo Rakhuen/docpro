@@ -1,0 +1,13 @@
+.utamaContainer{
+display: flex;
+
+justify-content: center;
+justify-content: space-around;
+}
+
+
+.komponenDua{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
