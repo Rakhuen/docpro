@@ -3,11 +3,101 @@ display: flex;
 
 justify-content: center;
 justify-content: space-around;
+height: 100vh;
+}
+
+.headerContainer{
+  margin: 2vw;
+  width: 90%;
+  
+
+}
+
+.Foto{
+  width: 90%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0px 30px 50px rgba(0, 0, 0, 0.1);
+
 }
 
 
-.komponenDua{
+
+
+.headerItem{
+  font-size: 36px;
+  font-weight: 500;
+  color: #2762FF;
+}
+
+
+.formContainer {
+  margin: 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.komponenSatu{
+  width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+
+
+
+
+.komponenDua{
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E3F0FF;
+}
+
+.formItem {
+  
+  width: 100%;
+  margin: 1vw 1vw;
+}
+
+.formLabel {
+  text-align: left;
+  color: #9b9b9b;
+  font-size: 16px;
+  
+}
+
+.inputText {
+  border: 0.88255px solid #BDBDBD;
+  font-size: 18px;
+  margin-top: 1vw;
+  padding: 3px;
+  width: 100%;
+  height: 12vw;
+  max-height: 40px;
+  background-color: #e9e9e9;
+ 
+  border-radius: 6px;
+}
+
+
+.formBtn {
+  margin: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #278AFF;
+  width: 40%;
+  height: 9vw;
+  max-height: 40px;
+  
+  border-radius: 6px;
+}
+

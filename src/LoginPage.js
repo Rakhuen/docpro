@@ -1,12 +1,19 @@
 import React from "react";
 import './LoginPage.css';
+import foto from "./asset/image2.png";
+
+
+
+
+
+
 
 const Header = () => {
 
     return(
        
-       <div className="HeaderContainer">
-            <div className="HeaderItem">DocPro.</div>
+       <div className="headerContainer">
+            <div className="headerItem">DocPro.</div>
 
        </div>
         
@@ -24,17 +31,18 @@ const Form = () => {
          <div className="utamaContainer">
         
         <div className="komponenDua">
-               
-                <div className="kotak">ini kotak</div>
+                
+                <img className="Foto" src={foto} />
+                
             </div>
 
 
 
             <div className="komponenSatu">
-                    <Header />
-
+                    
                 <div className="formContainer"> 
-         
+                <Header />
+
                         <div className="formItem">
                                 <div className="formLabel">Username</div>
                                 <input type="text" className="inputText" name="username"/>

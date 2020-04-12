@@ -1,0 +1,107 @@
+.CardContainer{
+    background-color: #FFFFFF;
+    width: 22%;
+    border-radius: 12px;
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+.DeleteContainer{
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.Delete{
+    padding-right: 10px;
+    padding-top: 10px;
+    width: 6%;
+}
+
+
+.FotodanNama{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    display: flex;
+    justify-content: space-around;
+align-items: center;
+
+}
+
+.Foto2{
+    width: 20%;
+    border-radius: 100%;
+
+}
+
+.Nama{
+    width: 60%;
+
+
+}
+
+.Atas{
+    font-size: 18px;
+    font-weight: 500;
+
+}
+
+.Bawah{
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #777777;
+}
+
+.CheckOrCancelContainer{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #8B8B8B;
+    border-bottom: 1px solid #8B8B8B;
+}
+
+.JamJadwal{
+    width: 30%;
+    font-size: 36px;
+    font-weight: 500;
+
+}
+
+.CnC{
+    
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btnCheck{
+    font-weight: 700;
+    color: #278AFF;
+
+}
+
+.btnCancel{
+    color: rgba(236, 0, 0, 0.53);
+
+
+
+}
+
+.DetailsContainer{
+    padding: 2vh;
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.btnDetails{
+
+    font-weight: 500;
+font-size: 18px;
+
+}
+

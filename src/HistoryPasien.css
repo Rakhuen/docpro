@@ -1,0 +1,62 @@
+.IsiHistory{
+    height: 100vh;
+    background-color: white;
+    margin-left: 6px;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+}
+
+.ContainerLuarHistory{
+    
+    width: 100%;
+
+
+}
+
+.ContainerHeaderHistory{
+    width: 100;
+    margin-left: 50px;
+    
+}
+
+.KeteranganContainer{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.ketContainer{
+    width: 93%;
+
+
+}
+
+.Item{
+    width: 30%;
+
+
+}
+
+.ItemTanggal{
+    width: 10%;
+
+
+}
+
+.ItemNama{
+    width: 20%;
+
+
+
+}
+
+.IsiKeteranganContainer{
+    width: 100%;
+    margin-top: 1vh;
+    display: flex;
+    justify-content: space-between;
+
+}
