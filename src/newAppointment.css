@@ -1,0 +1,27 @@
+.popupContainer{
+    margin-top: 4vh;
+    width: 640px;
+    height: 680px;
+    background-color: grey;
+    color: white;
+    
+    position: absolute;
+    z-index: 100;
+}
+
+.containerHidden{
+    display: none;
+
+
+
+}
+
+.backgroundGelap{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       width: 100px;
+       height: 100%;
+       background-color: black;
+
+}

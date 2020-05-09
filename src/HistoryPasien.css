@@ -1,4 +1,4 @@
-.IsiHistory{
+.HistoryTable{
     height: 100vh;
     background-color: white;
     margin-left: 6px;
@@ -21,10 +21,25 @@
 }
 
 .KeteranganContainer{
+    color: #808080 ;
     width: 100%;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.IsiKeterangan{
+    
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.FormIsiContainer{
+    flex-wrap: wrap;
 
 }
 
@@ -53,9 +68,34 @@
 
 }
 
+.IsiNamaHistory{
+    font-weight: 500;
+    font-size: 16px;
+
+}
+
+.IsiKeluhanHistory{
+    font-weight: normal;
+    font-size: 16px;
+    color: rgba(236, 0, 0, 0.53);
+}
+
+.IsiPenangananHistory{
+    font-weight: normal;
+    font-size: 16px;
+    color: #00AE07;
+
+
+}
+
+
 .IsiKeteranganContainer{
+   
     width: 100%;
-    margin-top: 1vh;
+    border-top: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     justify-content: space-between;
 

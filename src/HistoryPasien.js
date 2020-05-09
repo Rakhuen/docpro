@@ -17,7 +17,7 @@ const Isi = () => {
     </div>
 
 
-    <div className="IsiHistory">
+    <div className="HistoryTable">
         <div className="ketContainer">
         <div className="KeteranganContainer">
             <div className="ItemTanggal">
@@ -34,22 +34,44 @@ const Isi = () => {
             </div>
         </div>
 
+      
         <div className="IsiKeteranganContainer">
-        <div className="KeteranganContainer">
-            <div className="ItemTanggal">
-            <div className="Tanggal"> 22\10\2020</div>
-            </div>
-            <div className="ItemNama">
-            <div className="NamaHistory">Nandhika Preatama pAuhuhs</div>
-            </div>
-            <div className="Item">
-            <div className="KeluhanHistory">sfvdsfdsfsdfcd sdfdsfhfbjshbfub sfausfusuedgbu fasfusfuyebfub</div>
-            </div>
-            <div className="Item">
-            <div className="PenangananHistory">fvdsfdsfsdfcd sdfdsfhfbjshbfub sfausfusuedgbu fasfusfuyebfub</div>
-            </div>
+            <IsiHistory
+                tanggalHistory="22/10/2020"
+                namaHistory="Nandhika Pratama Putra"
+                keluhanHistory="Gigi graham copot, tetapi masih ada sebagian yang menempel"
+                penangananHistory="Melakukan pencabutan untuk gigi yang masih menempel"
+            />
+            
+            
         </div>
-   
+
+        <div className="IsiKeteranganContainer">
+        <IsiHistory
+                tanggalHistory="22/10/2020"
+                namaHistory="Nandhika Pratama Putra"
+                keluhanHistory="Gigi graham copot, tetapi masih ada sebagian yang menempel"
+                penangananHistory="Melakukan pencabutan untuk gigi yang masih menempel"
+            />
+        </div>
+
+        <div className="IsiKeteranganContainer">
+        <IsiHistory
+                tanggalHistory="22/10/2020"
+                namaHistory="Nandhika Pratama Putra"
+                keluhanHistory="Gigi graham copot, tetapi masih ada sebagian yang menempel"
+                penangananHistory="Melakukan pencabutan untuk gigi yang masih menempel"
+            />
+        </div>
+
+        <div className="IsiKeteranganContainer">
+        <IsiHistory
+                tanggalHistory="22/10/2020"
+                namaHistory="Nandhika Pratama Putra"
+                keluhanHistory="Gigi graham copot, tetapi masih ada sebagian yang menempel"
+                penangananHistory="Melakukan pencabutan untuk gigi yang masih menempel"
+            />
+        </div>
 
         </div>
 
@@ -57,7 +79,7 @@ const Isi = () => {
     </div>
 
 
-    </div>
+    
     
     );
 
@@ -67,8 +89,27 @@ const Isi = () => {
 };
 
 
+  const IsiHistory = props => {
+    const { tanggalHistory, namaHistory, keluhanHistory, penangananHistory} = props;
+    return(
+        <div className="IsiKeterangan">
+        <div className="ItemTanggal">
+    <div className="IsiTanggal"> {tanggalHistory}</div>
+        </div>
+        <div className="ItemNama">
+    <div className="IsiNamaHistory">{namaHistory}</div>
+        </div>
+        <div className="Item">
+    <div className="IsiKeluhanHistory">{keluhanHistory}</div>
+        </div>
+        <div className="Item">
+    <div className="IsiPenangananHistory">{penangananHistory}</div>
+        </div>
+    </div>
 
+    );
 
+  }
 
 
 const HistoryContainer = () => {

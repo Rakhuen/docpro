@@ -2,12 +2,12 @@ import React from 'react';
 import './HeaderButton.css';
 
 const HeaderMenu = props => {
-    const { btnKiri, btnKanan} = props;
+    const { btnKiri, btnKanan, functionKiri} = props;
     return(
        
         <div className="Header2Container">
-            <div className="buttonKiri">{btnKiri}</div>
-            <div className="buttonKanan">{btnKanan}</div>
+            <button className="buttonKiri" onClick =  {functionKiri}>{btnKiri}</button>
+            <button className="buttonKanan" onClick>{btnKanan}</button>
         </div>
         
     
