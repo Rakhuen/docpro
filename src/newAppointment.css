@@ -1,27 +1,22 @@
-.popupContainer{
-    margin-top: 4vh;
-    width: 640px;
-    height: 680px;
-    background-color: grey;
-    color: white;
-    
-    position: absolute;
-    z-index: 100;
+.popupContainer {
+  margin-top: 4vh;
+  width: 640px;
+  height: 680px;
+  background-color: grey;
+  color: white;
+  position: absolute;
 }
 
-.containerHidden{
-    display: none;
-
-
-
+.containerHidden {
+  display: none;
 }
 
-.backgroundGelap{
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       width: 100px;
-       height: 100%;
-       background-color: black;
-
+.backgroundGelap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #00000057;
+  position: absolute;
 }

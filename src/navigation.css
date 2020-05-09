@@ -1,70 +1,57 @@
-.NavContainer{
-    background : #FFFFFF;
-    width: 12%;
-    display: flex;
-    justify-content: center;
-    height: 100vh;
+.NavContainer {
+  background: #ffffff;
+  width: 12%;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  z-index: 100;
 }
 
-.MenuContainer{
-    margin-top: 4vh;
-    
-
+.MenuContainer {
+  margin-top: 4vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.Logo{
-    margin-top: 2vh;
-    font-size: 36px;
-    color: #2762FF;
-    font-weight: 100;
+.Logo {
+  margin-top: 2vh;
+  font-size: 36px;
+  color: #2762ff;
+  font-weight: 100;
 }
 
-.NamaMenu1{
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    padding-left: 2vh;
-    background: #278AFF;
-    margin-bottom: 2vh;
-    margin-top: 2vh;
-    border-radius: 9px ;
-    color: #FFFFFF;
-    font-size: 18px;
-    font-weight: 500;
+.menuActive {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-left: 2vh;
+  background: #278aff;
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+  border-radius: 9px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
 }
 
-.NamaMenu2{
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    padding-left: 1vh;
-    margin-bottom: 2vh;
-    margin-top: 2vh;
-    font-size: 18px;
-    font-weight: 500;
-    color: #278AFF;
+.menuInactive {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-left: 1vh;
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+  font-size: 18px;
+  font-weight: 500;
+  color: #278aff;
+  text-decoration: none;
 }
 
-.NamaMenu3{
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    padding-left: 1vh;
-    margin-bottom: 2vh;
-    margin-top: 2vh;
-    font-size: 18px;
-    font-weight: 500;
-    color: #278AFF;
+.footer {
+  display: flex;
+  margin-top: 650px;
+  justify-content: space-around;
 }
 
-
-
-.footer{
-    display: flex;
-   margin-top: 650px;
-    justify-content: space-around;
+.NavigationCon {
+  width: 70%;
 }
-
-.NavigationCon{
-    width: 70%;
-
-
-}
-
