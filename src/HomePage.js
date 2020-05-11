@@ -94,6 +94,7 @@ const Isi = () => {
       <div>
         <p>ini form schedule ya</p>
         <p>test test 1 2 3</p>
+        <button onClick={() => setNextForm(false)}>back</button>
       </div>
     );
   };
