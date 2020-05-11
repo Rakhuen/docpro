@@ -10,94 +10,119 @@ import Alex from "./asset/alex.png";
 import Nuno from "./asset/nuno.png";
 import "./newAppointment.css";
 
-
-const PopupContent = () => {
-  const [contentShow, setContentShow] = useState(false);
-  return(
-    <div className="pasienForm" >
-              
-    <div className="form1">
-    
-    <div className="fotoProfile">
-    <div className="LabelProfile">Upload Photo</div>
-          <input type="file" className="inputImage" name="fotoPasien"/>
-    </div>
-
-        
-        
-        <div className="namadanHp">
-        
-        <div className="formNama">
-          <div className="Label">Nama</div>
-          <input type="text" className="inputTeks" name="namaPasien" required />
-        </div>
-            
-        <div className="formNomorHp">
-          <div className="Label">No. HP</div>
-          <input type="tel" className="inputTeks" name="nomorHp" pattern="[0-9]{11}" required/>
-        </div>
-
-
-        </div>
-
-    </div>
-
-    <div className="form2">
-    
-    <div className="formAlamat">
-          <div className="Label">Alamat</div>
-          <input type="text" className="inputForm2" name="alamatPasien" />
-        </div>
-
-        <div className="formTTD">
-          <div className="Label">Tanggal Lahir</div>
-          <input type="date" className="inputForm2" name="TTDPasien" required/>
-        </div>
-
-
-
-    </div>
-
-    <div className="form3">
-    <div className="formNIK">
-          <div className="Label">NIK</div>
-          <input type="tel" className="inputNIK" name="nomorNIK" pattern="[0-9]{11}" required/>
-        </div>
-
-    </div>
-
-  <div className="form4">
-    <input type="submit" className="btnNext"  value="Next"/>
-  </div>
-
-
-</div>
-
-  );
-};
-
-
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
+  const [nextForm, setNextForm] = useState(false);
 
-  const NewAppointment = () => {
+  const PatientForm = () => {
     return (
-      <div className={popupShow ? "backgroundGelap" : "containerHidden"}>
-        
-        <div className="popupContainer">
-          <div className="containerFormNewpatient">
-          
-          <div className="headerNewPatient"> 
-          <div className="judulForm">New Patient</div>
-          <button className="btnClose" onClick={() => setPopupShow(false)}>X</button>
+      <div className="pasienForm">
+        <div className="form1">
+          <div className="fotoProfile">
+            <div className="LabelProfile">Upload Photo</div>
+            <input type="file" className="inputImage" name="fotoPasien" />
           </div>
 
-        <PopupContent/>
+          <div className="namadanHp">
+            <div className="formNama">
+              <div className="Label">Nama</div>
+              <input
+                type="text"
+                className="inputTeks"
+                name="namaPasien"
+                required
+              />
+            </div>
 
-
-
-
+            <div className="formNomorHp">
+              <div className="Label">No. HP</div>
+              <input
+                type="tel"
+                className="inputTeks"
+                name="nomorHp"
+                pattern="[0-9]{11}"
+                required
+              />
+            </div>
+          </div>
         </div>
+
+        <div className="form2">
+          <div className="formAlamat">
+            <div className="Label">Alamat</div>
+            <input type="text" className="inputForm2" name="alamatPasien" />
+          </div>
+
+          <div className="formTTD">
+            <div className="Label">Tanggal Lahir</div>
+            <input
+              type="date"
+              className="inputForm2"
+              name="TTDPasien"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="form3">
+          <div className="formNIK">
+            <div className="Label">NIK</div>
+            <input
+              type="tel"
+              className="inputNIK"
+              name="nomorNIK"
+              pattern="[0-9]{11}"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="form4">
+          <input
+            type="submit"
+            className="btnNext"
+            value="Next"
+            onClick={() => setNextForm(true)}
+          />
+        </div>
+      </div>
+    );
+  };
+
+  const AppointmentForm = () => {
+    return (
+      <div>
+        <p>ini form schedule ya</p>
+        <p>test test 1 2 3</p>
+      </div>
+    );
+  };
+
+  const handlePopup = () => {
+    setPopupShow(false);
+    setNextForm(false);
+  };
+
+  const NewAppointment = () => {
+    let popupContent = nextForm ? (
+      <AppointmentForm></AppointmentForm>
+    ) : (
+      <PatientForm></PatientForm>
+    );
+
+    return (
+      <div className={popupShow ? "backgroundGelap" : "containerHidden"}>
+        <div className="popupContainer">
+          <div className="containerFormNewpatient">
+            <div className="headerNewPatient">
+              <div className="judulForm">New Patient</div>
+              <button className="btnClose" onClick={() => handlePopup()}>
+                X
+              </button>
+            </div>
+
+            {popupContent}
+          </div>
         </div>
       </div>
     );
