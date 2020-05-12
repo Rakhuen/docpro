@@ -171,12 +171,15 @@ const Isi = () => {
   };
 
   const NewAppointment = () => {
+
     
     let popupContent = nextForm ? (
       <AppointmentForm></AppointmentForm>
     ) : (
       <PatientForm></PatientForm>
     );
+
+  
 
     return (
       <div className={popupShow ? "backgroundGelap" : "containerHidden"}>
