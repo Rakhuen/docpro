@@ -123,6 +123,9 @@
 
 
 }
+
+
+
 .formAlamat{
   width: 40%;
 
@@ -164,6 +167,89 @@
 
 .btnNext{
   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #278aff;
+  width: 20%;
+  height: 6vh;
+ 
+  text-decoration: none;
+  border-radius: 6px;
+
+
+
+}
+
+.formAtas{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2vh;
+}
+
+.formKeperluan{
+  width: 30%;
+
+}
+
+.inputKeluhan{
+  border: 0.88255px solid #bdbdbd;
+  font-size: 18px;
+  margin-top: 1vh;
+  padding: 3px;
+  width: 100%;
+  height: 15vh;
+  
+  background-color: #e9e9e9;
+
+  border-radius: 6px;
+}
+
+.formTengah{
+    margin-top: 1vh;
+
+}
+
+.uploadPhotos{
+  margin-top: 2vh;
+
+}
+
+.inputPhoto{
+  margin-top: 1vh;
+
+
+}
+
+.backNsubmit{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 27vh;
+
+}
+
+.btnBack{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #278aff;
+  font-size: 16px;
+  font-weight: bold;
+  border-color: #278aff;
+  background-color: white;
+  width: 20%;
+  height: 6vh;
+ 
+  text-decoration: none;
+  border-radius: 6px;
+
+
+}
+
+.btnSubmit{
   display: flex;
   justify-content: center;
   align-items: center;

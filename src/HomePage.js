@@ -13,6 +13,14 @@ import "./newAppointment.css";
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [nextForm, setNextForm] = useState(false);
+  const [namaPasien,setNamaPasien] = useState("");
+
+  const changeNamaPasien = text => {
+    setNamaPasien(text.target.value);
+    console.log(namaPasien);
+  };
+
+
 
   const PatientForm = () => {
     return (
@@ -30,7 +38,9 @@ const Isi = () => {
                 type="text"
                 className="inputTeks"
                 name="namaPasien"
-                required
+                value={namaPasien}
+                onChange={changeNamaPasien}
+                
               />
             </div>
 
@@ -91,10 +101,66 @@ const Isi = () => {
 
   const AppointmentForm = () => {
     return (
-      <div>
-        <p>ini form schedule ya</p>
-        <p>test test 1 2 3</p>
-        <button onClick={() => setNextForm(false)}>back</button>
+      <div classname="bookingContainer">
+          
+          <div className="formAtas">
+          <div className="formKeperluan">
+              <div className="Label">Keperluan</div>
+              <input
+                type="text"
+                className="inputTeks"
+                name="keperluan"
+                required
+              />
+            </div>
+
+            <div className="formKeperluan">
+              <div className="Label">Tanggal</div>
+              <input
+                type="Date"
+                className="inputTeks"
+                name="keperluan"
+                required
+              />
+            </div>
+
+
+            <div className="formKeperluan">
+              <div className="Label">Jam</div>
+              <input
+                type="time"
+                className="inputTeks"
+                name="keperluan"
+                required
+              />
+            </div>
+            </div>
+
+            <div className="formTengah">
+               
+               <input type="text" className="inputKeluhan" name="keluhan" placeholder="Keluhan"/>
+               
+
+               <div className="uploadPhotos">
+             <div className="Label">Photo/File</div>
+             <input
+               type="file"
+               className="inputPhoto"
+               name="keperluan"
+               required
+             />
+           </div>
+
+            <div className="backNsubmit">
+            <button className="btnBack" onClick={() => setNextForm(false)}>back</button>
+            <button className="btnSubmit" onClick={() => handlePopup()}>submit</button>
+
+            </div>
+
+
+
+           </div>
+
       </div>
     );
   };
@@ -105,6 +171,7 @@ const Isi = () => {
   };
 
   const NewAppointment = () => {
+    
     let popupContent = nextForm ? (
       <AppointmentForm></AppointmentForm>
     ) : (
