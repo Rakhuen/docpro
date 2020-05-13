@@ -13,10 +13,10 @@ import "./newAppointment.css";
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [nextForm, setNextForm] = useState(false);
-  const [namaPasien,setNamaPasien] = useState("");
+  const [namaPasien,setNamaPasien] = useState(" ");
 
-  const changeNamaPasien = text => {
-    setNamaPasien(text.target.value);
+  const changeNamaPasien = e => {
+    setNamaPasien(e.target.value);
     console.log(namaPasien);
   };
 
@@ -40,7 +40,7 @@ const Isi = () => {
                 name="namaPasien"
                 value={namaPasien}
                 onChange={changeNamaPasien}
-                
+                onKeyUp={changeNamaPasien}
               />
             </div>
 

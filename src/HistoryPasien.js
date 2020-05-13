@@ -38,7 +38,7 @@ const Isi = () => {
     {
       date: "22/10/2020",
       name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+      concern: "Gigi graham copot, tetapi masih ada ",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
     },
     {
@@ -50,7 +50,7 @@ const Isi = () => {
     {
       date: "22/10/2020",
       name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+      concern: "Gigi graham copot, tetapi masih yang menempel",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
     },
     {
@@ -95,6 +95,7 @@ const Isi = () => {
               <div className="PenangananHistory">Penanganan</div>
             </div>
           </div>
+
           {historyData.map((data, index) => (
             <div className="IsiKeteranganContainer">
               <IsiHistory
@@ -106,6 +107,7 @@ const Isi = () => {
               />
             </div>
           ))}
+
         </div>
       </div>
     </div>
