@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
-import LoginContainer from "./LoginPage.js";
+import LoginContainer from "./View/LoginPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import HomeContainer from "./HomePage.js";
-import PasienContainer from "./DataPasien.js";
-import HistoryContainer from "./HistoryPasien.js";
+import HomeContainer from "./View/HomePage";
+import PasienContainer from "./View/DataPasien.js";
+import HistoryContainer from "./View/HistoryPasien.js";
 
 const Container = () => {
   return (
