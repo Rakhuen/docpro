@@ -1,0 +1,268 @@
+.popupContainer {
+    display: flex;
+    justify-content: center;
+    border-radius: 13px;
+  
+  width: 640px;
+  height: 80%;
+  
+  background-color: white;
+  color: black;
+  position: absolute;
+}
+
+.containerFormNewpatient{
+  width: 90%;
+  margin-top: 2vh;
+
+
+}
+
+.headerNewPatient{
+   
+    width: 100%;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.formNomorHp{
+  margin-top: 1vh;
+
+
+}
+
+.btnClose{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    font-size: 18px;
+}
+
+.containerHidden {
+  display: none;
+}
+
+.backgroundGelap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 88%;
+    height: 100%;
+    background-color: #00000057;
+    position: absolute;
+
+}
+
+.form1{
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.form2{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4vh;
+}
+
+
+.fotoProfile{
+  width: 30%;
+
+
+}
+
+.namadanHp{
+  width: 60%;
+
+
+}
+
+.inputTeks{
+  border: 0.88255px solid #bdbdbd;
+  font-size: 18px;
+  margin-top: 1vh;
+  padding: 3px;
+  width: 100%;
+  height: 3vh;
+  max-height: 40px;
+  background-color: #e9e9e9;
+
+  border-radius: 6px;
+
+
+}
+
+.inputForm2{
+  border: 0.88255px solid #bdbdbd;
+  font-size: 18px;
+  margin-top: 1vh;
+  padding: 3px;
+  width: 100%;
+  height: 10vh;
+  
+  background-color: #e9e9e9;
+
+  border-radius: 6px;
+
+
+
+}
+
+.inputImage{
+  width: 100%;
+  margin-top: 2vh;
+
+}
+
+.pasienForm{
+  margin-top: 2vh;
+
+
+}
+
+
+
+.formAlamat{
+  width: 40%;
+
+
+}
+
+.formTTD{
+  width: 50%;
+
+
+}
+
+.form3{
+  margin-top: 4vh;
+
+}
+
+.form4{
+  margin-top: 12vh;
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.inputNIK{
+  border: 0.88255px solid #bdbdbd;
+  font-size: 18px;
+  margin-top: 1vh;
+  padding: 3px;
+  width: 100%;
+  height: 6vh;
+  
+  background-color: #e9e9e9;
+
+  border-radius: 6px;
+
+
+}
+
+.btnNext{
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #278aff;
+  width: 20%;
+  height: 6vh;
+ 
+  text-decoration: none;
+  border-radius: 6px;
+
+
+
+}
+
+.formAtas{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2vh;
+}
+
+.formKeperluan{
+  width: 30%;
+
+}
+
+.inputKeluhan{
+  border: 0.88255px solid #bdbdbd;
+  font-size: 18px;
+  margin-top: 1vh;
+  padding: 3px;
+  width: 100%;
+  height: 15vh;
+  
+  background-color: #e9e9e9;
+
+  border-radius: 6px;
+}
+
+.formTengah{
+    margin-top: 1vh;
+
+}
+
+.uploadPhotos{
+  margin-top: 2vh;
+
+}
+
+.inputPhoto{
+  margin-top: 1vh;
+
+
+}
+
+.backNsubmit{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 27vh;
+
+}
+
+.btnBack{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #278aff;
+  font-size: 16px;
+  font-weight: bold;
+  border-color: #278aff;
+  background-color: white;
+  width: 20%;
+  height: 6vh;
+ 
+  text-decoration: none;
+  border-radius: 6px;
+
+
+}
+
+.btnSubmit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #278aff;
+  width: 20%;
+  height: 6vh;
+ 
+  text-decoration: none;
+  border-radius: 6px;
+
+
+
+}
