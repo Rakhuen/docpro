@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ItemPage.css";
 import NavigationContainer from "./NavigationMenu.js";
-import HeaderMenu from "./HeaderButton.js";
+import HeaderMenu from "./Components/HeaderButton.js";
 import "./NewItem.css";
 
 const IsiItem = (props) => {
