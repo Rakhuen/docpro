@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomeContainer from "./View/HomePage";
 import PasienContainer from "./View/DataPasien.js";
 import HistoryContainer from "./View/HistoryPasien.js";
+import InputBiayaContainer from "./ItemPage.js";
 
 const Container = () => {
   return (
