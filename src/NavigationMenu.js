@@ -6,7 +6,8 @@ const NavigationMenu = () => {
   const homeActive = window.location.pathname === "/home";
   const patientActive = window.location.pathname === "/pasien";
   const historyActive = window.location.pathname === "/history";
-  
+  const inputbiayaActive = window.location.pathname === "/inputbiaya";
+
   return (
     <div className="NavigationCon">
       <div className="LogoContainer">
@@ -34,6 +35,14 @@ const NavigationMenu = () => {
         >
           History
         </NavLink>
+
+        <NavLink
+          to="/inputbiaya"
+          className={inputbiayaActive ? "menuActive" : "menuInactive"}
+        >
+          Input Biaya
+        </NavLink>
+
       </div>
 
       <div className="footer">

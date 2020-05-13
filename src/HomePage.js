@@ -10,6 +10,7 @@ import Alex from "./asset/alex.png";
 import Nuno from "./asset/nuno.png";
 import "./newAppointment.css";
 
+
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [nextForm, setNextForm] = useState(false);
@@ -199,6 +200,38 @@ const Isi = () => {
     );
   };
 
+  const cardData = [
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
+  ];
+
+
   return (
     <div className="ContainerLuar2">
       <NewAppointment />
@@ -212,37 +245,9 @@ const Isi = () => {
         />
 
         <div className="CardContainer1">
-          <Card
-            imageDelete={DeleteImage}
-            image={Kurt}
-            nama="Nandhika"
-            perawatan="Kontrol Gigi"
-            jam="12:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Liam}
-            nama="Pratama"
-            perawatan="Kontrol Behel"
-            jam="13:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Alex}
-            nama="Putra"
-            perawatan="Ganti Karet"
-            jam="14:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Nuno}
-            nama="Nesia"
-            perawatan="Tambel gigi"
-            jam="15:00"
-          ></Card>
+        
+       
+          
 
           <Card
             imageDelete={DeleteImage}
@@ -275,6 +280,52 @@ const Isi = () => {
             perawatan="Tambel gigi"
             jam="15:00"
           ></Card>
+
+          <Card
+            imageDelete={DeleteImage}
+            image={Kurt}
+            nama="Nandhika"
+            perawatan="Kontrol Gigi"
+            jam="12:00"
+          ></Card>
+
+          <Card
+            imageDelete={DeleteImage}
+            image={Liam}
+            nama="Pratama"
+            perawatan="Kontrol Behel"
+            jam="13:00"
+          ></Card>
+
+          <Card
+            imageDelete={DeleteImage}
+            image={Alex}
+            nama="Putra"
+            perawatan="Ganti Karet"
+            jam="14:00"
+          ></Card>
+
+          <Card
+            imageDelete={DeleteImage}
+            image={Nuno}
+            nama="Nesia"
+            perawatan="Tambel gigi"
+            jam="15:00"
+          ></Card>
+
+{cardData.map((data, index) => (
+            
+            <Card
+              key={index}
+              imageDelete={data.deleteIcon}
+              image={data.fotoPasien}
+              nama={data.nama}
+              perawatan={data.treatment}
+              jam={data.jam}
+            />
+          
+        ))}
+
         </div>
       </div>
     </div>

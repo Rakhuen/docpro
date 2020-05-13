@@ -1,0 +1,102 @@
+.HistoryTable{
+    height: 100vh;
+    background-color: white;
+    margin-left: 6px;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+}
+
+.ContainerLuarHistory{
+    
+    width: 100%;
+
+
+}
+
+.ContainerHeaderHistory{
+    width: 100;
+    margin-left: 50px;
+    
+}
+
+.KeteranganContainer{
+    color: #808080 ;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.IsiKeterangan{
+    
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.FormIsiContainer{
+    flex-wrap: wrap;
+
+}
+
+.ketContainer{
+    width: 93%;
+
+
+}
+
+.Item{
+    width: 30%;
+
+
+}
+
+.ItemTanggal{
+    width: 10%;
+
+
+}
+
+.ItemNama{
+    width: 20%;
+
+
+
+}
+
+.IsiNamaHistory{
+    font-weight: 500;
+    font-size: 16px;
+
+}
+
+.IsiKeluhanHistory{
+    font-weight: normal;
+    font-size: 16px;
+    color: rgba(236, 0, 0, 0.53);
+}
+
+.IsiPenangananHistory{
+    font-weight: normal;
+    font-size: 16px;
+    color: #00AE07;
+
+
+}
+
+
+.IsiKeteranganContainer{
+   
+    width: 100%;
+    border-top: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+}

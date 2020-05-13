@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomeContainer from "./HomePage.js";
 import PasienContainer from "./DataPasien.js";
 import HistoryContainer from "./HistoryPasien.js";
+import InputBiayaContainer from "./ItemPage.js";
 
 const Container = () => {
   return (
@@ -15,6 +16,7 @@ const Container = () => {
         <Route path="/home" component={HomeContainer} />
         <Route path="/pasien" component={PasienContainer} />
         <Route path="/history" component={HistoryContainer} />
+        <Route path="/inputbiaya" component={InputBiayaContainer} />
       </Router>
     </div>
   );
