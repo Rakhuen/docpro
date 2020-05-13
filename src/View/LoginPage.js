@@ -1,6 +1,6 @@
 import React from "react";
 import "./LoginPage.css";
-import foto from "./asset/image2.png";
+import foto from "../asset/image2.png";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
