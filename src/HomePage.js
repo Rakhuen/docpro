@@ -229,6 +229,41 @@ const Isi = () => {
       treatment: "Kontrol behel",
       jam : "11:00"
     },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam : "11:00"
+    },
   ];
 
 
@@ -245,75 +280,8 @@ const Isi = () => {
         />
 
         <div className="CardContainer1">
-        
-       
-          
 
-          <Card
-            imageDelete={DeleteImage}
-            image={Kurt}
-            nama="Nandhika"
-            perawatan="Kontrol Gigi"
-            jam="12:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Liam}
-            nama="Pratama"
-            perawatan="Kontrol Behel"
-            jam="13:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Alex}
-            nama="Putra"
-            perawatan="Ganti Karet"
-            jam="14:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Nuno}
-            nama="Nesia"
-            perawatan="Tambel gigi"
-            jam="15:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Kurt}
-            nama="Nandhika"
-            perawatan="Kontrol Gigi"
-            jam="12:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Liam}
-            nama="Pratama"
-            perawatan="Kontrol Behel"
-            jam="13:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Alex}
-            nama="Putra"
-            perawatan="Ganti Karet"
-            jam="14:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Nuno}
-            nama="Nesia"
-            perawatan="Tambel gigi"
-            jam="15:00"
-          ></Card>
-
-{cardData.map((data, index) => (
+        {cardData.map((data, index) => (
             
             <Card
               key={index}
