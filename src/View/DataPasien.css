@@ -1,34 +1,54 @@
-.ContainerUtama {
-  background: #f4f4f4;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100vh;
+.ContainerUtama{
+    background: #F4F4F4;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
 }
 
-.MenuBtn {
-  display: flex;
+
+
+
+.MenuBtn{
+    display: flex;
+   
+
 }
 
-.ContainerLuar2 {
-  display: flex;
-  justify-content: center;
-  width: 88%;
+.ContainerLuar2{
+    display: flex;
+    justify-content: center;
+    width: 88%;
+
+
 }
 
-.ContainerDua {
-  width: 90%;
+
+
+
+
+.ContainerDua{
+    width: 90%;
+
+
 }
 
-.CardContainer1 {
-  width: 100%;
-  margin-top: 2vh;
-  display: flex;
-  justify-content: space-between;
+
+
+
+
+.CardContainer1{
+    width: 100%;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-between;
+
 }
 
-.Header {
-  margin-top: 2vh;
-  font-size: 36px;
-  font-weight: 500;
+.Header{
+    margin-top: 2vh;
+    font-size: 36px;
+    font-weight: 500;
+    
 }
+

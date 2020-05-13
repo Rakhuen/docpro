@@ -1,6 +1,6 @@
 import React from "react";
 import "./HistoryPasien.css";
-import NavigationContainer from "../NavigationMenu.js";
+import NavigationContainer from "../Components/NavigationMenu.js";
 
 const IsiHistory = (props) => {
   const {

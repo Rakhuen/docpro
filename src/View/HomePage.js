@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./HomePage.css";
-import NavigationContainer from "../NavigationMenu.js";
+import NavigationContainer from "../Components/NavigationMenu.js";
 import DeleteImage from "../asset/delete.png";
 import HeaderMenu from "../Components/HeaderButton.js";
 import Card from "../Components/Content.js";
@@ -9,16 +9,80 @@ import Kurt from "../asset/MaskGroup.png";
 import Liam from "../asset/liam.png";
 import Alex from "../asset/alex.png";
 import Nuno from "../asset/nuno.png";
+import "../Components/NewAppointment.css";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
 
+  const cardData = [
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+    },
+  ];
+
   return (
     <div className="ContainerLuar2">
-      <NewAppointment
-        popup={popupShow}
-        setPopup={setPopupShow}
-      ></NewAppointment>
+      <NewAppointment popup={popupShow} setPopup={setPopupShow} />
       <div className="ContainerDua">
         <div className="Header">Jadwal Pasien</div>
 
@@ -29,69 +93,16 @@ const Isi = () => {
         />
 
         <div className="CardContainer1">
-          <Card
-            imageDelete={DeleteImage}
-            image={Kurt}
-            nama="Nandhika"
-            perawatan="Kontrol Gigi"
-            jam="12:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Liam}
-            nama="Pratama"
-            perawatan="Kontrol Behel"
-            jam="13:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Alex}
-            nama="Putra"
-            perawatan="Ganti Karet"
-            jam="14:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Nuno}
-            nama="Nesia"
-            perawatan="Tambel gigi"
-            jam="15:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Kurt}
-            nama="Nandhika"
-            perawatan="Kontrol Gigi"
-            jam="12:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Liam}
-            nama="Pratama"
-            perawatan="Kontrol Behel"
-            jam="13:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Alex}
-            nama="Putra"
-            perawatan="Ganti Karet"
-            jam="14:00"
-          ></Card>
-
-          <Card
-            imageDelete={DeleteImage}
-            image={Nuno}
-            nama="Nesia"
-            perawatan="Tambel gigi"
-            jam="15:00"
-          ></Card>
+          {cardData.map((data, index) => (
+            <Card
+              key={index}
+              imageDelete={data.deleteIcon}
+              image={data.fotoPasien}
+              nama={data.nama}
+              perawatan={data.treatment}
+              jam={data.jam}
+            />
+          ))}
         </div>
       </div>
     </div>

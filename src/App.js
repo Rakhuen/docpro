@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import LoginContainer from "./View/LoginPage";
+import LoginContainer from "./View/LoginPage.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import HomeContainer from "./View/HomePage";
+import HomeContainer from "./View/HomePage.js";
 import PasienContainer from "./View/DataPasien.js";
 import HistoryContainer from "./View/HistoryPasien.js";
-import InputBiayaContainer from "./ItemPage.js";
+import InputBiayaContainer from "./View/ItemPage.js";
 
 const Container = () => {
   return (

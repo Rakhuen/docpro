@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import "./NewAppointment.css";
 
 const NewAppointment = (props) => {
   const { popup, setPopup } = props;
   const [nextForm, setNextForm] = useState(false);
   const [namaPasien, setNamaPasien] = useState("");
-
-  const handlePopup = () => {
-    setPopup(false);
-    setNextForm(false);
-  };
 
   const changeNamaPasien = (e) => {
     setNamaPasien(e.target.value);
@@ -28,7 +22,6 @@ const NewAppointment = (props) => {
           <div className="formNama">
             <div className="Label">Nama</div>
             <input
-              key="name"
               type="text"
               className="inputTeks"
               name="namaPasien"
@@ -131,6 +124,11 @@ const NewAppointment = (props) => {
     </div>
   );
 
+  const handlePopup = () => {
+    setPopup(false);
+    setNextForm(false);
+  };
+
   let popupContent = nextForm ? AppointmentForm : PatientForm;
 
   return (
@@ -143,6 +141,7 @@ const NewAppointment = (props) => {
               X
             </button>
           </div>
+
           {popupContent}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./HomePage.css";
-import NavigationContainer from "../NavigationMenu.js";
+import NavigationContainer from "../Components/NavigationMenu.js";
 import HeaderMenu from "../Components/HeaderButton.js";
 import CardPasien from "../Components/ContentPasien.js";
 import Kurt from "../asset/MaskGroup.png";
