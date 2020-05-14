@@ -26,6 +26,24 @@ const IsiItem = (props) => {
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
+  const [namaItem, setNamaItem] = useState("");
+  const [keteranganItem, setKeteranganItem] = useState("");
+  const [biayaItem, setBiayaItem] = useState("");
+
+  const changeNamaItem = (text) => {
+    setNamaItem(text.target.value);
+    console.log(namaItem);
+  };
+
+  const changeKeteranganItem = (text) => {
+    setKeteranganItem(text.target.value);
+    console.log(keteranganItem);
+  };
+
+  const changeBiayaItem = (text) => {
+    setBiayaItem(text.target.value);
+    console.log(biayaItem);
+  };
 
   const PatientForm = () => {
     return (
@@ -33,7 +51,7 @@ const Isi = () => {
         <div className="namaItemContainer">
           <div className="formNamaItem">
             <div className="Label">Nama Item</div>
-            <input type="text" className="inputItem" name="namaItem" />
+            <input type="text" className="inputItem" name="namaItem" value={namaItem} onChange={changeNamaItem} onKeyUp={changeNamaItem} />
           </div>
         </div>
 

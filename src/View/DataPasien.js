@@ -12,14 +12,52 @@ import "../Components/NewAppointment.css";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
+ 
 
   const PatientForm = () => {
+    const [namaPasien, setNamaPasien] = useState("");
+    const [fotoPasien, setFotoPasien] = useState("");
+    const [nomorHpPasien, setNomorHp] = useState("");
+    const [alamatPasien, setAlamatPasien] = useState("");
+    const [tanggalLahirPasien, setTanggalLahir] = useState("");
+    const [NikPasien, setNikPasien] = useState("");
+  
+  
+    const changeNamaPasien = (text) => {
+      setNamaPasien(text.target.value);
+      console.log(namaPasien);
+    };
+  
+    const changeFotoPasien = (photo) => {
+      setFotoPasien(photo.target.value);
+      console.log(fotoPasien);
+    }
+  
+    const changeNomorHpPasien = (text) => {
+      setNomorHp(text.target.value);
+      console.log(nomorHpPasien);
+    }
+  
+    const changeAlamatPasien = (text) => {
+      setAlamatPasien(text.target.value);
+      console.log(alamatPasien);
+    }
+  
+    const changeTanggalLahirPasien = (tanggal) => {
+      setTanggalLahir(tanggal.target.value);
+      console.log(tanggalLahirPasien);
+    }
+  
+    const changeNikPasien = (text) => {
+      setNikPasien(text.target.value);
+      console.log(NikPasien);
+    }
     return (
       <div className="pasienForm">
         <div className="form1">
           <div className="fotoProfile">
             <div className="LabelProfile">Upload Photo</div>
-            <input type="file" className="inputImage" name="fotoPasien" />
+            <input type="file" className="inputImage" name="fotoPasien" value={fotoPasien} onChange={changeFotoPasien} onKeyUp={changeFotoPasien}/>
           </div>
 
           <div className="namadanHp">
@@ -29,6 +67,9 @@ const Isi = () => {
                 type="text"
                 className="inputTeks"
                 name="namaPasien"
+                value={namaPasien}
+              onChange={changeNamaPasien}
+              onKeyUp={changeNamaPasien}
                 required
               />
             </div>
@@ -40,6 +81,9 @@ const Isi = () => {
                 className="inputTeks"
                 name="nomorHp"
                 pattern="[0-9]{11}"
+                value={nomorHpPasien}
+              onChange={changeNomorHpPasien}
+              onKeyUp={changeNomorHpPasien}
                 required
               />
             </div>
@@ -49,7 +93,7 @@ const Isi = () => {
         <div className="form2">
           <div className="formAlamat">
             <div className="Label">Alamat</div>
-            <input type="text" className="inputForm2" name="alamatPasien" />
+            <input type="text" className="inputForm2" name="alamatPasien" value={alamatPasien} onChange={changeAlamatPasien} onKeyUp={changeAlamatPasien} />
           </div>
 
           <div className="formTTD">
@@ -58,6 +102,7 @@ const Isi = () => {
               type="date"
               className="inputForm2"
               name="TTDPasien"
+              value={tanggalLahirPasien} onChange={changeTanggalLahirPasien} onKeyUp={changeTanggalLahirPasien}
               required
             />
           </div>
@@ -71,6 +116,9 @@ const Isi = () => {
               className="inputNIK"
               name="nomorNIK"
               pattern="[0-9]{11}"
+              value={NikPasien}
+              onChange={changeNikPasien}
+              onKeyUp={changeNikPasien}
               required
             />
           </div>
