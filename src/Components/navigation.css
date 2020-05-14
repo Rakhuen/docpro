@@ -3,12 +3,19 @@
   width: 12%;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  align-content: center;
+  min-height: 110vh;
+  height: 100%;
   z-index: 100;
 }
 
+.upperNavContainer {
+  align-self: center;
+}
+
 .MenuContainer {
-  margin-top: 4vh;
+  width: 100%;
+  margin: 4vh 0;
   display: flex;
   flex-direction: column;
 }
@@ -21,9 +28,8 @@
 }
 
 .menuActive {
-  padding-top: 1vh;
-  padding-bottom: 1vh;
-  padding-left: 2vh;
+  text-align: center;
+  padding: 10px;
   background: #278aff;
   margin-bottom: 2vh;
   margin-top: 2vh;
@@ -47,11 +53,44 @@
 }
 
 .footer {
-  display: flex;
-  margin-top: 400px;
-  justify-content: space-around;
+  width: 100%;
 }
 
 .NavigationCon {
-  width: 70%;
+  width: 90%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profilePhoto {
+  object-fit: cover;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+}
+
+.signoutContainer {
+  margin: 0 10px;
+}
+
+.username {
+  font-size: 14px;
+}
+
+.btnSignout {
+  color: #278aff;
+  text-decoration: none;
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  margin: 8px 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+hr {
+  width: 100%;
+  margin: 15px 0;
 }
