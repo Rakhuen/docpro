@@ -26,26 +26,27 @@ const IsiItem = (props) => {
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
-  const [namaItem, setNamaItem] = useState("");
-  const [keteranganItem, setKeteranganItem] = useState("");
-  const [biayaItem, setBiayaItem] = useState("");
 
-  const changeNamaItem = (text) => {
-    setNamaItem(text.target.value);
-    console.log(namaItem);
-  };
-
-  const changeKeteranganItem = (text) => {
-    setKeteranganItem(text.target.value);
-    console.log(keteranganItem);
-  };
-
-  const changeBiayaItem = (text) => {
-    setBiayaItem(text.target.value);
-    console.log(biayaItem);
-  };
 
   const PatientForm = () => {
+    const [namaItem, setNamaItem] = useState("");
+    const [keteranganItem, setKeteranganItem] = useState("");
+    const [biayaItem, setBiayaItem] = useState("");
+  
+    const changeNamaItem = (text) => {
+      setNamaItem(text.target.value);
+      console.log(namaItem);
+    };
+  
+    const changeKeteranganItem = (text) => {
+      setKeteranganItem(text.target.value);
+      console.log(keteranganItem);
+    };
+  
+    const changeBiayaItem = (text) => {
+      setBiayaItem(text.target.value);
+      console.log(biayaItem);
+    };
     return (
       <div className="pasienForm">
         <div className="namaItemContainer">
@@ -58,7 +59,7 @@ const Isi = () => {
         <div className="keteranganContainer">
           <div className="formKeterangan">
             <div className="Label">Keterangan</div>
-            <input type="text" className="inputKeterangan" name="keterangan" />
+            <input type="text" className="inputKeterangan" name="keterangan" value={keteranganItem} onChange={changeKeteranganItem} onKeyUp={changeKeteranganItem} />
           </div>
         </div>
 
@@ -70,6 +71,9 @@ const Isi = () => {
               className="inputBiaya"
               name="biayaItem"
               pattern="[0-9]"
+              value={biayaItem}
+              onChange={changeBiayaItem}
+              onKeyUp={changeBiayaItem}
               required
             />
           </div>

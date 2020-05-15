@@ -5,14 +5,17 @@ import DeleteImage from "../asset/delete.png";
 import HeaderMenu from "../Components/HeaderButton.js";
 import Card from "../Components/Content.js";
 import NewAppointment from "../Components/NewAppointment.js";
+import FinishContainer from "../Components/FinishForm.js";
 import Kurt from "../asset/MaskGroup.png";
 import Liam from "../asset/liam.png";
 import Alex from "../asset/alex.png";
 import Nuno from "../asset/nuno.png";
 import "../Components/NewAppointment.css";
+import "../Components/FinishForm.css";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
+  const [popupFinish, setPopupFinish] = useState(false);
 
   const cardData = [
     {
@@ -21,6 +24,8 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
     {
       deleteIcon: DeleteImage,
@@ -28,6 +33,8 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
     {
       deleteIcon: DeleteImage,
@@ -35,6 +42,8 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
     {
       deleteIcon: DeleteImage,
@@ -42,6 +51,8 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
     {
       deleteIcon: DeleteImage,
@@ -49,6 +60,8 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
     {
       deleteIcon: DeleteImage,
@@ -56,6 +69,8 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
     {
       deleteIcon: DeleteImage,
@@ -63,6 +78,8 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
     {
       deleteIcon: DeleteImage,
@@ -70,6 +87,8 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
     {
       deleteIcon: DeleteImage,
@@ -77,12 +96,25 @@ const Isi = () => {
       nama: "Kurt cobain",
       treatment: "Kontrol behel",
       jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      treatment: "Kontrol behel",
+      jam: "11:00",
+      btnFinish: "Finish",
+      btnCancel: "Cancel",
     },
   ];
 
   return (
     <div className="ContainerLuar2">
+      <FinishContainer popupFinish={popupFinish} setPopupFinish={setPopupFinish}/>
       <NewAppointment popup={popupShow} setPopup={setPopupShow} />
+      
       <div className="ContainerDua">
         <div className="Header">Jadwal Pasien</div>
 
@@ -101,6 +133,10 @@ const Isi = () => {
               nama={data.nama}
               perawatan={data.treatment}
               jam={data.jam}
+              btnFinish={data.btnFinish}
+              btnCancel={data.btnCancel}
+              functionFinish={() => setPopupFinish(true)}
+
             />
           ))}
         </div>

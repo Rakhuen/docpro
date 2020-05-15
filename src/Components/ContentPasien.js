@@ -20,7 +20,7 @@ const CardPasien = props => {
             </div>
 
             <div className="TanggalContainer">
-                <div className="TanggalAdd">{tanggal}</div>
+                <div className="TanggalAdd">Added on {tanggal}</div>
 
                 
             </div>

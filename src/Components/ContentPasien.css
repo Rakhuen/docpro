@@ -79,18 +79,7 @@
     justify-content: space-around;
 }
 
-.btnCheck{
-    font-weight: 700;
-    color: #278AFF;
 
-}
-
-.btnCancel{
-    color: rgba(236, 0, 0, 0.53);
-
-
-
-}
 
 .DetailsContainer{
     padding: 2vh;
