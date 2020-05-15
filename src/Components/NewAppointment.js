@@ -9,10 +9,9 @@ const NewAppointment = (props) => {
   const [alamatPasien, setAlamatPasien] = useState("");
   const [tanggalLahirPasien, setTanggalLahir] = useState("");
   const [NikPasien, setNikPasien] = useState("");
-
   const [keperluanPasien, setKeperluanPasien] = useState("");
   const [tanggalBookingPasien, setTanggalBooking] = useState("");
-  const [jamBookingPasien, setJamBooking]= useState("");
+  const [jamBookingPasien, setJamBooking] = useState("");
   const [keluhanPasien, setKeluhanPasien] = useState("");
   const [fotoPengobatanPasien, setFotoPengobatan] = useState("");
 
@@ -24,64 +23,66 @@ const NewAppointment = (props) => {
   const changeFotoPasien = (photo) => {
     setFotoPasien(photo.target.value);
     console.log(fotoPasien);
-  }
+  };
 
   const changeNomorHpPasien = (text) => {
     setNomorHp(text.target.value);
     console.log(nomorHpPasien);
-  }
+  };
 
   const changeAlamatPasien = (text) => {
     setAlamatPasien(text.target.value);
     console.log(alamatPasien);
-  }
+  };
 
   const changeTanggalLahirPasien = (tanggal) => {
     setTanggalLahir(tanggal.target.value);
     console.log(tanggalLahirPasien);
-  }
+  };
 
   const changeNikPasien = (text) => {
     setNikPasien(text.target.value);
     console.log(NikPasien);
-  }
-
+  };
 
   const changeKeperluanPasien = (text) => {
     setKeperluanPasien(text.target.value);
     console.log(keperluanPasien);
-  }
+  };
 
   const changeTanggalBookingPasien = (tanggal) => {
     setTanggalBooking(tanggal.target.value);
     console.log(tanggalBookingPasien);
-  }
+  };
 
   const changeJamBookingPasien = (jam) => {
     setJamBooking(jam.target.value);
     console.log(jamBookingPasien);
-  }
+  };
 
   const changeKeluhanPasien = (text) => {
     setKeluhanPasien(text.target.value);
     console.log(keluhanPasien);
-  }
+  };
 
   const changeFotoPengobatanPasien = (photo) => {
     setFotoPengobatan(photo.target.value);
     console.log(fotoPengobatanPasien);
-  }
-
-
-
-
+  };
 
   const PatientForm = (
     <div className="pasienForm">
       <div className="form1">
         <div className="fotoProfile">
           <div className="LabelProfile">Upload Photo</div>
-          <input type="file" className="inputImage" name="fotoPasien" value={fotoPasien} onChange={changeFotoPasien} onKeyUp={changeFotoPasien}/>
+          <input
+            type="file"
+            className="inputImage"
+            name="fotoPasien"
+            value={fotoPasien}
+            onChange={changeFotoPasien}
+            onKeyUp={changeFotoPasien}
+          />
         </div>
 
         <div className="namadanHp">
@@ -116,12 +117,27 @@ const NewAppointment = (props) => {
       <div className="form2">
         <div className="formAlamat">
           <div className="Label">Alamat</div>
-          <input type="text" className="inputForm2" name="alamatPasien" value={alamatPasien} onChange={changeAlamatPasien} onKeyUp={changeAlamatPasien}/>
+          <input
+            type="text"
+            className="inputForm2"
+            name="alamatPasien"
+            value={alamatPasien}
+            onChange={changeAlamatPasien}
+            onKeyUp={changeAlamatPasien}
+          />
         </div>
 
         <div className="formTTD">
           <div className="Label">Tanggal Lahir</div>
-          <input type="date" className="inputForm2" name="TTDPasien" value={tanggalLahirPasien} onChange={changeTanggalLahirPasien} onKeyUp={changeTanggalLahirPasien} required />
+          <input
+            type="date"
+            className="inputForm2"
+            name="TTDPasien"
+            value={tanggalLahirPasien}
+            onChange={changeTanggalLahirPasien}
+            onKeyUp={changeTanggalLahirPasien}
+            required
+          />
         </div>
       </div>
 
@@ -157,17 +173,41 @@ const NewAppointment = (props) => {
       <div className="formAtas">
         <div className="formKeperluan">
           <div className="Label">Keperluan</div>
-          <input type="text" className="inputTeks" name="keperluan" value={keperluanPasien} onChange={changeKeperluanPasien} onKeyUp={changeKeperluanPasien}  required />
+          <input
+            type="text"
+            className="inputTeks"
+            name="keperluan"
+            value={keperluanPasien}
+            onChange={changeKeperluanPasien}
+            onKeyUp={changeKeperluanPasien}
+            required
+          />
         </div>
 
         <div className="formKeperluan">
           <div className="Label">Tanggal</div>
-          <input type="Date" className="inputTeks" name="tanggal" value={tanggalBookingPasien} onChange={changeTanggalBookingPasien} onKeyUp={changeTanggalBookingPasien} required />
+          <input
+            type="Date"
+            className="inputTeks"
+            name="tanggal"
+            value={tanggalBookingPasien}
+            onChange={changeTanggalBookingPasien}
+            onKeyUp={changeTanggalBookingPasien}
+            required
+          />
         </div>
 
         <div className="formKeperluan">
           <div className="Label">Jam</div>
-          <input type="time" className="inputTeks" name="jam" value={jamBookingPasien} onChange={changeJamBookingPasien} onKeyUp={changeJamBookingPasien} required />
+          <input
+            type="time"
+            className="inputTeks"
+            name="jam"
+            value={jamBookingPasien}
+            onChange={changeJamBookingPasien}
+            onKeyUp={changeJamBookingPasien}
+            required
+          />
         </div>
       </div>
 
@@ -180,13 +220,19 @@ const NewAppointment = (props) => {
           onChange={changeKeluhanPasien}
           onKeyUp={changeKeluhanPasien}
           placeholder="Keluhan"
-
-
         />
 
         <div className="uploadPhotos">
           <div className="Label">Photo/File</div>
-          <input type="file" className="inputPhoto" name="fotoPengobatan" value={fotoPengobatanPasien} onChange={changeFotoPengobatanPasien} onKeyUp={changeFotoPengobatanPasien} required />
+          <input
+            type="file"
+            className="inputPhoto"
+            name="fotoPengobatan"
+            value={fotoPengobatanPasien}
+            onChange={changeFotoPengobatanPasien}
+            onKeyUp={changeFotoPengobatanPasien}
+            required
+          />
         </div>
 
         <div className="backNsubmit">

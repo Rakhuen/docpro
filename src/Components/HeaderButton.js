@@ -8,9 +8,11 @@ const HeaderMenu = (props) => {
       <button className="buttonKiri" onClick={functionKiri}>
         {btnKiri}
       </button>
-      <button className="buttonKanan" onClick={functionKanan}>
-        {btnKanan}
-      </button>
+      {btnKanan && (
+        <button className="buttonKanan" onClick={functionKanan}>
+          {btnKanan}
+        </button>
+      )}
     </div>
   );
 };
