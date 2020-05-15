@@ -1,7 +1,28 @@
-import React from "react";
+import React from "react"; 
+import Dropdown from "./DropDown.js";
+
 
 const FinishContainer = (props) => {
   const { popupFinish, setPopupFinish } = props;
+
+  const items = [
+    {
+      id: 1,
+      value: "Pulp Fiction",
+
+    },
+    {
+      id: 2,
+      value: "Pulp Fiction",
+
+    },
+    {
+      id: 3,
+      value: "Pulp Fiction",
+
+    },
+
+  ]
 
   const PatientForm = (
     <div className="finishForm">
@@ -38,24 +59,13 @@ const FinishContainer = (props) => {
         <div className="inputBiayaItem">
             <div className="Atas">Input Biaya</div>
 
-        <div className="customselect">
-        <select className="selectItem">
-        <option value="0">Choose Item</option>
-        <option value="1">Audi</option>
-        <option value="2">BMW</option>
-        <option value="3">Citroen</option>
-        <option value="4">Ford</option>
-        <option value="5">Honda</option>
-        <option value="6">Jaguar</option>
-        <option value="7">Land Rover</option>
-        <option value="8">Mercedes</option>
-        <option value="9">Mini</option>
-        <option value="10">Nissan</option>
-        <option value="11">Toyota</option>
-        <option value="12">Volvo</option>
-        </select>
-        </div>
-        
+            <Dropdown
+              title="Select Movie" 
+              items={items}
+              multiSelect
+            />
+
+       
         </div>
 
 
