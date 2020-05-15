@@ -81,12 +81,13 @@ align-items: center;
 .btnCheck{
     font-weight: 700;
     color: #278AFF;
-
+    height: 30px;
+    border-radius: 10px;
 }
 
 .btnCancel{
     color: rgba(236, 0, 0, 0.53);
-
+    border-radius: 10px;
 
 
 }

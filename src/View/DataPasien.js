@@ -155,6 +155,33 @@ const Isi = () => {
     );
   };
 
+
+  const cardDataPasien = [
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      nomorTlp: "08589sdf3243",
+      tanggalAdd: "22/10/2020",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      nomorTlp: "08589sdf3243",
+      tanggalAdd: "22/10/2020",
+    },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      nomorTlp: "08589sdf3243",
+      tanggalAdd: "22/10/2020",
+    },
+  ];
+
+
+
   return (
     <div className="ContainerLuar2">
       <NewAppointment />
@@ -168,72 +195,22 @@ const Isi = () => {
         />
 
         <div className="CardContainer1">
-          <CardPasien
-            imageDelete={DeleteImage}
-            image={Kurt}
-            nama="Nandhika Pratama Putra"
-            nomorTlp="085891573243"
-            tanggal="Added on 12/02/2020"
-          ></CardPasien>
-
-          <CardPasien
-            imageDelete={DeleteImage}
-            image={Liam}
-            nama="Nesia Shafira Yunindya"
-            nomorTlp="085891573243"
-            tanggal="Added on 12/02/2020"
-          ></CardPasien>
-
-          <CardPasien
-            imageDelete={DeleteImage}
-            image={Alex}
-            nama="Bintang Ramadhan Putra"
-            nomorTlp="085891573243"
-            tanggal="Added on 12/02/2020"
-          ></CardPasien>
-
-          <CardPasien
-            imageDelete={DeleteImage}
-            image={Nuno}
-            nama="Gilang Pranadjaya Putra"
-            nomorTlp="085891573243"
-            tanggal="Added on 12/02/2020"
-          ></CardPasien>
+          
+        {cardDataPasien.map((data, index) => (
+            <CardPasien
+              key={index}
+              imageDelete={data.deleteIcon}
+              image={data.fotoPasien}
+              nama={data.nama}
+              nomorTlp={data.nomorTlp}
+              tanggal={data.tanggalAdd}
+            />
+          ))}
+          
+         
         </div>
 
-        <div className="CardContainer1">
-          <CardPasien
-            imageDelete={DeleteImage}
-            image={Kurt}
-            nama="Nandhika"
-            nomorTlp="085891573243"
-            tanggal="Added on 12/02/2020"
-          ></CardPasien>
-
-          <CardPasien
-            imageDelete={DeleteImage}
-            image={Liam}
-            nama="Pratama"
-            nomorTlp="085891573243"
-            tanggal="Added on 12/02/2020"
-          ></CardPasien>
-
-          <CardPasien
-            imageDelete={DeleteImage}
-            image={Alex}
-            nama="Putra"
-            nomorTlp="085891573243"
-            tanggal="Added on 12/02/2020"
-          ></CardPasien>
-
-          <CardPasien
-            imageDelete={DeleteImage}
-            image={Nuno}
-            nama="Nesia"
-            nomorTlp="085891573243"
-            tanggal="Added on 12/02/2020"
-          ></CardPasien>
-        </div>
+       
       </div>
     </div>
   );

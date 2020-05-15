@@ -1,0 +1,65 @@
+.fotoNamadanKeperluanPasien{
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+
+}
+
+.jamFinish{
+    width: 10%;
+
+}
+
+.tanggalFinish{
+    width: 20%;
+
+
+}
+
+.formPenanganan{
+    margin-top: 2vh;
+
+}
+
+.selectItem{
+    width: 100%;
+    height: 30px;
+    border: 2px solid #278AFF;
+}
+
+.formBawah{
+    margin-top: 30vh;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inputBiayaItem{
+    margin-top: 2vh;
+
+}
+
+.customselect{
+    margin-top: 1vh;
+
+}
+
+.btnFinish {
+    display: flex;
+    justify-content: center;
+
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #278aff;
+    width: 20%;
+    height: 6vh;
+  
+    text-decoration: none;
+    border-radius: 6px;
+  }
+
+  .formInfoBooking{
+    display: flex;
+  justify-content: space-between;
+    margin-top: 2vh;
+  }

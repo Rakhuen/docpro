@@ -3,7 +3,7 @@ import "./Content.css";
 
 
 const Card = props => {
-    const { nama, perawatan, jam, image, imageDelete} = props;
+    const { nama, perawatan, jam, image, imageDelete,btnFinish,btnCancel,functionFinish,functionCancel} = props;
     return(
         <div className="CardContainer">
             <div className="DeleteContainer">
@@ -22,8 +22,13 @@ const Card = props => {
                 <div className="JamJadwal">{jam}</div>
 
                 <div className="CnC">
-                    <div className="btnCheck">Finish</div>
-                    <div className="btnCancel">Cancel</div>
+                <button className="btnCheck" onClick={functionFinish}>
+                     {btnFinish}
+                </button>
+                <button className="btnCancel" onClick={functionCancel}>
+                     {btnCancel}
+                </button>
+                   
                 </div>
             </div>
 
