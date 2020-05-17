@@ -6,6 +6,7 @@ import HeaderMenu from "../Components/HeaderButton.js";
 import Card from "../Components/Content.js";
 import NewAppointment from "../Components/NewAppointment.js";
 import FinishContainer from "../Components/FinishForm.js";
+import ViewDetailsContainer from "../Components/formViewDetails.js"
 import Kurt from "../asset/MaskGroup.png";
 import Liam from "../asset/liam.png";
 import Alex from "../asset/alex.png";
@@ -16,6 +17,7 @@ import "../Components/FinishForm.css";
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupFinish, setPopupFinish] = useState(false);
+  const [popupViewDetails, setPopupViewDetails] = useState(false);
 
   const cardData = [
     {
@@ -26,6 +28,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -35,6 +38,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -44,6 +48,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -53,6 +58,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -62,6 +68,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -71,6 +78,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -80,6 +88,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -89,6 +98,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -98,6 +108,7 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
@@ -107,11 +118,13 @@ const Isi = () => {
       jam: "11:00",
       btnFinish: "Finish",
       btnCancel: "Cancel",
+      btnViewDetails: "View Details",
     },
   ];
 
   return (
     <div className="ContainerLuar2">
+      <ViewDetailsContainer popupViewDetails={popupViewDetails} setPopupViewDetails={setPopupViewDetails}/>
       <FinishContainer popupFinish={popupFinish} setPopupFinish={setPopupFinish}/>
       <NewAppointment popup={popupShow} setPopup={setPopupShow} />
       
@@ -135,8 +148,9 @@ const Isi = () => {
               jam={data.jam}
               btnFinish={data.btnFinish}
               btnCancel={data.btnCancel}
+              btnViewDetails={data.btnViewDetails}
               functionFinish={() => setPopupFinish(true)}
-
+              functionDetails={() => setPopupViewDetails(true)}
             />
           ))}
         </div>

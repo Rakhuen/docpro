@@ -3,7 +3,7 @@ import "./Content.css";
 
 
 const Card = props => {
-    const { nama, perawatan, jam, image, imageDelete,btnFinish,btnCancel,functionFinish,functionCancel} = props;
+    const { nama, perawatan, jam, image, imageDelete,btnFinish,btnCancel,functionFinish,functionCancel,btnViewDetails,functionDetails} = props;
     return(
         <div className="CardContainer">
             <div className="DeleteContainer">
@@ -33,7 +33,10 @@ const Card = props => {
             </div>
 
             <div className="DetailsContainer">
-                <div className="btnDetails">View details</div>
+            <button className="btnDetails" onClick={functionDetails}>
+                     {btnViewDetails}
+                </button>
+                
             </div>
 
         </div>
