@@ -4,7 +4,7 @@ import React, { useState } from "react";
 function Dropdown({ title, items = [], multiSelect = false}) {
     const [open, setOpen] = useState(false);
     const [selection, setSelection]= useState([]);
-    const toggle = () => setOpen(open);
+    const toggle = () => setOpen(!open);
     
 
 
@@ -37,7 +37,7 @@ function Dropdown({ title, items = [], multiSelect = false}) {
                 className="dd-header" 
                 role="button" 
                 onKeyPress={() => toggle(!open)} 
-                onclick={() => toggle(!open)} 
+                onClick={() => toggle(!open)} 
             >
                     <div className="dd-header_title">
                             <p className="dd-header_title--bold">{title}</p>
@@ -50,7 +50,7 @@ function Dropdown({ title, items = [], multiSelect = false}) {
                         <ul className="dd-list">
                             {items.map(item=>(
                                     <li className="dd-list-item" key={item.id}>
-                                        <button type="button" onclick={()=> handleOnClick(item)}>
+                                        <button type="button" onClick={()=> handleOnClick(item)}>
                                                 <span>{item.value}</span>
                                                 <span>{isItemInSelection(item) && 'Selected'} </span>
                                         </button>
