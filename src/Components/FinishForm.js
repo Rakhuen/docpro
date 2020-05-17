@@ -1,6 +1,5 @@
-import React from "react"; 
+import React from "react";
 import Dropdown from "./DropDown.js";
-
 
 const FinishContainer = (props) => {
   const { popupFinish, setPopupFinish } = props;
@@ -9,74 +8,57 @@ const FinishContainer = (props) => {
     {
       id: 1,
       value: "Pulp Fiction",
-
     },
     {
       id: 2,
       value: "Pulp Fiction",
-
     },
     {
       id: 3,
       value: "Pulp Fiction",
-
     },
-
-  ]
+  ];
 
   const PatientForm = (
     <div className="finishForm">
       <div className="formInfoBooking">
-            <div className="fotoNamadanKeperluanPasien">
-                <div className="fotoPasien">foto</div>
-                
-                <div className="namaDanKeperluanPasien">
-                    <div className="Atas">kurt Cobain</div>
-                    <div className="Bawah">kontrol gigi</div>
-                </div>
+        <div className="fotoNamadanKeperluanPasien">
+          <div className="fotoPasien">foto</div>
 
-            </div>
+          <div className="namaDanKeperluanPasien">
+            <div className="Atas">kurt Cobain</div>
+            <div className="Bawah">kontrol gigi</div>
+          </div>
+        </div>
 
-            <div className="jamFinish">
-                    <div className="Atas">Jam</div>
-                    <div className="Bawah">11:00</div>
-                </div>
+        <div className="jamFinish">
+          <div className="Atas">Jam</div>
+          <div className="Bawah">11:00</div>
+        </div>
 
-                <div className="tanggalFinish">
-                    <div className="Atas">Tanggal</div>
-                    <div className="Bawah">22/10/2020</div>
-                </div>
-
-
+        <div className="tanggalFinish">
+          <div className="Atas">Tanggal</div>
+          <div className="Bawah">22/10/2020</div>
+        </div>
       </div>
 
-        
-        
-          <div className="formPenanganan">
-          <input type="text" className="inputForm2" name="alamatPasien" placeholder="Penanganan"/>
-          </div>
-
-        <div className="inputBiayaItem">
-            <div className="Atas">Input Biaya</div>
-
-            <Dropdown
-              title="Select Movie" 
-              items={items}
-              multiSelect
-            />
-
-       
-        </div>
-
-
-        <div className="formBawah">
+      <div className="formPenanganan">
         <input
-          type="submit"
-          className="btnFinish"
-          value="Finish"
-          
+          type="text"
+          className="inputForm2"
+          name="alamatPasien"
+          placeholder="Penanganan"
         />
-        </div>
+      </div>
+
+      <div className="inputBiayaItem">
+        <div className="Atas">Input Biaya</div>
+        <Dropdown title="Select Movie" items={items} multiSelect />
+      </div>
+
+      <div className="formBawah">
+        <input type="submit" className="btnFinish" value="Finish" />
+      </div>
     </div>
   );
 
