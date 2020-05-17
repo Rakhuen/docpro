@@ -1,109 +1,92 @@
-.CardContainer{
-    margin-top: 2vh;
-    background-color: #FFFFFF;
-    width: 22%;
-    border-radius: 12px;
-   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+.CardContainer {
+  margin-top: 2vh;
+  background-color: #ffffff;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-
-.DeleteContainer{
-    display: flex;
-    justify-content: flex-end;
-
+.DeleteContainer {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.Delete{
-    padding-right: 10px;
-    padding-top: 10px;
-    width: 6%;
+.Delete {
+  padding-right: 10px;
+  padding-top: 10px;
+  width: 6%;
 }
 
-
-.FotodanNama{
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    display: flex;
-    justify-content: space-around;
-align-items: center;
-
+.FotodanNama {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.Foto2{
-    width: 20%;
-    border-radius: 100%;
-
+.Foto2 {
+  width: 20%;
+  border-radius: 100%;
 }
 
-.Nama{
-    width: 60%;
-
-
+.Nama {
+  width: 60%;
 }
 
-.Atas{
-    font-size: 18px;
-    font-weight: 500;
-
+.Atas {
+  font-size: 18px;
+  font-weight: 500;
 }
 
-.Bawah{
-    margin-top: 2px;
-    font-size: 14px;
-    font-weight: normal;
-    color: #777777;
+.Bawah {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #777777;
 }
 
-.CheckOrCancelContainer{
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-top: 1px solid #8B8B8B;
-    border-bottom: 1px solid #8B8B8B;
+.CheckOrCancelContainer {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #8b8b8b;
+  border-bottom: 1px solid #8b8b8b;
 }
 
-.JamJadwal{
-    width: 30%;
-    font-size: 36px;
-    font-weight: 500;
-
+.JamJadwal {
+  width: 30%;
+  font-size: 36px;
+  font-weight: 500;
 }
 
-.CnC{
-    
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
+.CnC {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
 }
 
-.btnCheck{
-    font-weight: 700;
-    color: #278AFF;
-    height: 30px;
-    border-radius: 10px;
+.btnCheck {
+  font-weight: 700;
+  color: #278aff;
+  height: 30px;
+  border-radius: 10px;
 }
 
-.btnCancel{
-    color: rgba(236, 0, 0, 0.53);
-    border-radius: 10px;
-
-
+.btnCancel {
+  color: rgba(236, 0, 0, 0.53);
+  border-radius: 10px;
 }
 
-.DetailsContainer{
-    padding: 2vh;
-    display: flex;
-    justify-content: center;
-
-
+.DetailsContainer {
+  padding: 2vh;
+  display: flex;
+  justify-content: center;
 }
 
-.btnDetails{
-
-    font-weight: 500;
-font-size: 18px;
-
+.btnDetails {
+  font-weight: 500;
+  font-size: 18px;
 }
-
