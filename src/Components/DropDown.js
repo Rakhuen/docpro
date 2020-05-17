@@ -27,7 +27,7 @@ function Dropdown({ title, items = [], multiSelect = false }) {
     }
     return false;
   }
-}
+
 
 return (
   <div className="dd=wrapper">
@@ -59,5 +59,5 @@ return (
     )}
   </div>
 );
-
+        };        
 export default Dropdown;
