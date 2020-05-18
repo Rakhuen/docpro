@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const NewAppointment = (props) => {
   const { popup, setPopup } = props;
   const [nextForm, setNextForm] = useState(false);
+  
   const [namaPasien, setNamaPasien] = useState("");
   const [fotoPasien, setFotoPasien] = useState("");
   const [nomorHpPasien, setNomorHp] = useState("");

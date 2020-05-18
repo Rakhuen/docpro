@@ -1,5 +1,5 @@
 .HistoryTable {
-  height: 100vh;
+  
   background-color: white;
   margin: 20px 0;
   display: flex;
@@ -21,7 +21,7 @@
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  
 }
 
 .IsiKeterangan {
@@ -54,6 +54,8 @@
   font-weight: 500;
   font-size: 16px;
 }
+
+
 
 .IsiKeluhanHistory {
   font-weight: normal;

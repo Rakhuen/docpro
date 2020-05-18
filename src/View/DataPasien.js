@@ -178,6 +178,14 @@ const Isi = () => {
       nomorTlp: "08589sdf3243",
       tanggalAdd: "22/10/2020",
     },
+    {
+      deleteIcon: DeleteImage,
+      fotoPasien: Kurt,
+      nama: "Kurt cobain",
+      nomorTlp: "08589sdf3243",
+      tanggalAdd: "22/10/2020",
+    },
+    
   ];
 
 

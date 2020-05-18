@@ -22,10 +22,10 @@
 
 .CardContainer1 {
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-column-gap: 25px;
+  grid-row-gap: 20px;
 }
 
 .Header {

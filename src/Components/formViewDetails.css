@@ -1,6 +1,53 @@
 .formContainerAlamatdanTTD{
+    margin-top: 10vh;
     display: flex;
    justify-content: space-between;
 
 }
 
+.FotodanNamaDetails {
+    margin-top: 6vh;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+.Label{
+    font-weight: 500;
+    font-size: 18px;
+
+}
+
+.value{
+    margin-top: 1vh;
+}
+
+.formNikPasien{
+    margin-top: 2vh;
+
+}
+
+.judulTabel {
+    width: 30%;
+  }
+  
+  .judulTabelTanggal {
+    width: 10%;
+  }
+  
+  .judulTabelNama {
+    width: 20%;
+  }
+
+  .keteranganContainerLuar {
+    width: 100%;
+  }
+
+  .TableHistory {
+    
+    background-color: white;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
