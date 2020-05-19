@@ -1,10 +1,37 @@
-.HistoryTable {
+.TableTabs {
+  display: flex;
+}
+
+.TabsItem {
+  margin: 2px 50px 0 0;
+  padding: 0 0 5px 0;
+  color: #959595;
+  border-bottom: 3px solid white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.TabsItemActive {
+  margin: 2px 50px 0 0;
+  padding: 0 0 5px 0;
+  font-size: 20px;
+  color: #278aff;
+  border-bottom: 3px solid #278aff;
+  cursor: pointer;
+}
+
+.line {
+  border: 0.5px solid #278aff;
+}
+
+.TreatmentTable {
   height: 100vh;
   background-color: white;
   margin-left: 6px;
   margin-top: 2vh;
+  padding: 25px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
 .ContainerLuarHistory {
@@ -16,65 +43,43 @@
   margin-left: 50px;
 }
 
-.KeteranganContainer {
-  color: #808080;
-  width: 100%;
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+.NameData {
+  font-weight: bold;
 }
 
-.IsiKeterangan {
-  width: 100%;
-
-  display: flex;
-  justify-content: space-between;
-}
-
-.FormIsiContainer {
-  flex-wrap: wrap;
-}
-
-.ketContainer {
-  width: 93%;
-}
-
-.Item {
-  width: 30%;
-}
-
-.ItemTanggal {
-  width: 10%;
-}
-
-.ItemNama {
-  width: 20%;
-}
-
-.IsiNamaHistory {
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.IsiKeluhanHistory {
-  font-weight: normal;
-  font-size: 16px;
-  color: rgba(236, 0, 0, 0.53);
-}
-
-.IsiPenangananHistory {
-  font-weight: normal;
-  font-size: 16px;
+.PriceData {
+  font-weight: bold;
   color: #00ae07;
 }
 
-.IsiKeteranganContainer {
-  width: 100%;
-  border-top: 1px solid #e4e4e4;
-  border-bottom: 1px solid #e4e4e4;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
+.DeleteBtn {
+  width: 60%;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  background-color: #e80e0e;
+  border-radius: 50px 50px 50px 50px;
+  cursor: pointer;
+}
+
+.UpdateBtn {
+  width: 60%;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  background-color: #278aff;
+  border-radius: 50px 50px 50px 50px;
+  cursor: pointer;
+}
+
+th {
+  text-align: start;
+  height: 40px;
+  color: #808080;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+td {
+  height: 60px;
 }
