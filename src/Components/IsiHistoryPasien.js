@@ -22,6 +22,7 @@ const IsiHistory = (props) => {
       </div>
       <div className="ItemNama">
         <div className="IsiNamaHistory">{namaHistory}</div>
+
       </div>
     </div>
   );

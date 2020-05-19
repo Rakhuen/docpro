@@ -51,3 +51,9 @@
     display: flex;
     justify-content: center;
   }
+
+  .scrolling{
+    overflow-y: scroll;
+    max-height: 450px;
+
+  }
