@@ -5,7 +5,7 @@ import "../View/HistoryPasien.css"
 const IsiHistory = (props) => {
     const {
       tanggalHistory,
-      namaHistory,
+      biayaHistory,
       keluhanHistory,
       penangananHistory,
     } = props;
@@ -22,7 +22,7 @@ const IsiHistory = (props) => {
           <div className="IsiPenangananHistory">{penangananHistory}</div>
         </div>
         <div className="ItemNama">
-          <div className="IsiNamaHistory">{namaHistory}</div>
+          <div className="IsiNamaHistory">{biayaHistory}</div>
         </div>
       </div>
     );

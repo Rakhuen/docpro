@@ -7,6 +7,52 @@ const ViewDetailsContainer = (props) => {
     const { popupViewDetails, setPopupViewDetails } = props;
     const [nextForm, setNextForm] = useState(false);
   
+    const historyData = [
+      {
+        tanggal: "22/10/2020",
+        concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+        treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+        biaya: "2342342",
+      },
+      {
+        tanggal: "22/10/2020",
+        concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+        treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+        biaya: "2342342",
+      },
+      {
+        tanggal: "22/10/2020",
+        concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+        treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+        biaya: "2342342",
+      },
+      {
+        tanggal: "22/10/2020",
+        concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+        treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+        biaya: "2342342",
+      },
+      {
+        tanggal: "22/10/2020",
+        concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+        treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+        biaya: "2342342",
+      },
+      {
+        tanggal: "22/10/2020",
+        concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+        treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+        biaya: "2342342",
+      },
+      {
+        tanggal: "22/10/2020",
+        concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
+        treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+        biaya: "2342342",
+      },
+    ];
+
+
     const Isi =  (
         <div className="ContainerHistory">
           
@@ -28,23 +74,20 @@ const ViewDetailsContainer = (props) => {
                   <div className="NamaHistory">Biaya</div>
                 </div>
               </div>
-
+            
+            <div className="scrolling">
+              {historyData.map((data, index) => (
+            <div className="IsiKeteranganContainer">
               <IsiHistory
-                tanggalHistory="22/10/2020"
-                namaHistory="500.000"
-                keluhanHistory="Gigi graham copot, tetapi masih ada sebagian yang menempel"
-                penangananHistory="Gigi graham copot, tetapi masih ada sebagian yang menempel"
-              
+                key={index}
+                tanggalHistory={data.tanggal}
+                biayaHistory={data.biaya}
+                keluhanHistory={data.concern}
+                penangananHistory={data.treatment}
               />
-              
-              <IsiHistory
-                tanggalHistory="22/10/2020"
-                namaHistory="500.000"
-                keluhanHistory="Gigi graham copot, tetapi masih ada sebagian yang menempel"
-                penangananHistory="Gigi graham copot, tetapi masih ada sebagian yang menempel"
-              
-              />
-
+            </div>
+          ))}
+          </div>
             </div>
           </div>
         </div>

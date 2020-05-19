@@ -3,7 +3,9 @@ import React, { useState } from "react";
 const NewAppointment = (props) => {
   const { popup, setPopup } = props;
   const [nextForm, setNextForm] = useState(false);
-  
+  const [pilihOldPatient, setPilihOldPatient] = useState(false);
+  const [pilihNewPatient, setPilihNewPatient] = useState(false);
+
   const [namaPasien, setNamaPasien] = useState("");
   const [fotoPasien, setFotoPasien] = useState("");
   const [nomorHpPasien, setNomorHp] = useState("");
@@ -248,6 +250,24 @@ const NewAppointment = (props) => {
     </div>
   );
 
+  const OldPatientOrNewPatient = (
+      <div classname="Container">
+      
+        <div className="btnOldPatient">
+          <button className="btnBack" onClick={() => setPilihOldPatient(true)}>
+            Old Patient
+          </button>
+          <button className="btnNewPatient" onClick={() => setPilihNewPatient(true)}>
+            New patient
+          </button>
+        </div>
+
+      </div>
+    
+  );
+
+  
+
   const handlePopup = () => {
     setPopup(false);
     setNextForm(false);
@@ -267,6 +287,7 @@ const NewAppointment = (props) => {
           </div>
 
           {popupContent}
+          
         </div>
       </div>
     </div>
