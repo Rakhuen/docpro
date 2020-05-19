@@ -4,45 +4,24 @@ import NavigationContainer from "../Components/NavigationMenu.js";
 import HeaderMenu from "../Components/HeaderButton.js";
 import "./NewItem.css";
 
-const IsiItem = (props) => {
-  const { nomorItem, namaItem, keteranganItem, biayaItem } = props;
-  return (
-    <div className="IsiKeterangan">
-      <div className="ItemTanggal">
-        <div className="IsiTanggal"> {nomorItem}</div>
-      </div>
-      <div className="ItemNama">
-        <div className="IsiNamaHistory">{namaItem}</div>
-      </div>
-      <div className="Item">
-        <div className="IsiKeluhanHistory">{keteranganItem}</div>
-      </div>
-      <div className="Item">
-        <div className="IsiPenangananHistory">{biayaItem}</div>
-      </div>
-    </div>
-  );
-};
-
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
-
 
   const PatientForm = () => {
     const [namaItem, setNamaItem] = useState("");
     const [keteranganItem, setKeteranganItem] = useState("");
     const [biayaItem, setBiayaItem] = useState("");
-  
+
     const changeNamaItem = (text) => {
       setNamaItem(text.target.value);
       console.log(namaItem);
     };
-  
+
     const changeKeteranganItem = (text) => {
       setKeteranganItem(text.target.value);
       console.log(keteranganItem);
     };
-  
+
     const changeBiayaItem = (text) => {
       setBiayaItem(text.target.value);
       console.log(biayaItem);
@@ -52,14 +31,28 @@ const Isi = () => {
         <div className="namaItemContainer">
           <div className="formNamaItem">
             <div className="Label">Nama Item</div>
-            <input type="text" className="inputItem" name="namaItem" value={namaItem} onChange={changeNamaItem} onKeyUp={changeNamaItem} />
+            <input
+              type="text"
+              className="inputItem"
+              name="namaItem"
+              value={namaItem}
+              onChange={changeNamaItem}
+              onKeyUp={changeNamaItem}
+            />
           </div>
         </div>
 
         <div className="keteranganContainer">
           <div className="formKeterangan">
             <div className="Label">Keterangan</div>
-            <input type="text" className="inputKeterangan" name="keterangan" value={keteranganItem} onChange={changeKeteranganItem} onKeyUp={changeKeteranganItem} />
+            <input
+              type="text"
+              className="inputKeterangan"
+              name="keterangan"
+              value={keteranganItem}
+              onChange={changeKeteranganItem}
+              onKeyUp={changeKeteranganItem}
+            />
           </div>
         </div>
 
@@ -110,7 +103,7 @@ const Isi = () => {
     );
   };
 
-  const itemData = [
+  const treatmentData = [
     {
       nomor: "1",
       nama: "Cabut gigi graham",
@@ -129,31 +122,48 @@ const Isi = () => {
       keterangan: "melakukan pencabutan gigi dengan tang",
       biaya: "500.000",
     },
+  ];
+
+  const drugsData = [
+    {
+      nomor: "1",
+      nama: "Nama Obat",
+      keterangan: "Obat untuk lala lili",
+      kuantitas: "25",
+      biaya: "500.000",
+    },
+    {
+      nomor: "2",
+      nama: "Nama Obat",
+      keterangan: "Obat untuk lala lili",
+      kuantitas: "15",
+      biaya: "500.000",
+    },
+    {
+      nomor: "3",
+      nama: "Nama Obat",
+      keterangan: "Obat untuk lala lili",
+      kuantitas: "10",
+      biaya: "500.000",
+    },
     {
       nomor: "4",
-      nama: "Cabut gigi graham",
-      keterangan: "melakukan pencabutan gigi dengan tang",
+      nama: "Nama Obat",
+      keterangan: "Obat untuk lala lili",
+      kuantitas: "35",
       biaya: "500.000",
     },
     {
       nomor: "5",
-      nama: "Cabut gigi graham",
-      keterangan: "melakukan pencabutan gigi dengan tang",
-      biaya: "500.000",
-    },
-    {
-      nomor: "6",
-      nama: "Cabut gigi graham",
-      keterangan: "melakukan pencabutan gigi dengan tang",
-      biaya: "500.000",
-    },
-    {
-      nomor: "7",
-      nama: "Cabut gigi graham",
-      keterangan: "melakukan pencabutan gigi dengan tang",
+      nama: "Nama Obat",
+      keterangan: "Obat untuk lala lili",
+      kuantitas: "55",
       biaya: "500.000",
     },
   ];
+
+  const [table, setTable] = useState(treatmentData);
+  const [activeTab, setActiveTab] = useState("treatment");
 
   return (
     <div className="ContainerLuarHistory">
@@ -166,35 +176,59 @@ const Isi = () => {
         />
       </div>
 
-      <div className="HistoryTable">
-        <div className="ketContainer">
-          <div className="KeteranganContainer">
-            <div className="ItemTanggal">
-              <div className="Tanggal"> No.</div>
-            </div>
-            <div className="ItemNama">
-              <div className="NamaHistory">Nama</div>
-            </div>
-            <div className="Item">
-              <div className="KeluhanHistory">Keterangan</div>
-            </div>
-            <div className="Item">
-              <div className="PenangananHistory">Biaya</div>
-            </div>
+      <div className="TreatmentTable">
+        <div className="TableTabs">
+          <div
+            className={
+              activeTab === "treatment" ? "TabsItemActive" : "TabsItem"
+            }
+            onClick={() => {
+              setTable(treatmentData);
+              setActiveTab("treatment");
+            }}
+          >
+            Pengobatan
           </div>
-
-          {itemData.map((data, index) => (
-            <div className="IsiKeteranganContainer">
-              <IsiItem
-                key={index}
-                nomorItem={data.nomor}
-                namaItem={data.nama}
-                keteranganItem={data.keterangan}
-                biayaItem={data.biaya}
-              />
-            </div>
-          ))}
+          <div
+            className={activeTab === "drug" ? "TabsItemActive" : "TabsItem"}
+            onClick={() => {
+              setTable(drugsData);
+              setActiveTab("drug");
+            }}
+          >
+            Obat
+          </div>
         </div>
+        <div className="line"></div>
+
+        <table>
+          <tr>
+            <th>No.</th>
+            <th>Nama</th>
+            <th>Keterangan</th>
+            {activeTab === "drug" && <th>Kuantitas</th>}
+            <th>{activeTab === "drug" ? "Biaya/qty" : "Biaya"} </th>
+            <th>Hapus</th>
+            <th>Perbarui</th>
+          </tr>
+
+          {table &&
+            table.map((data, index) => (
+              <tr key={index}>
+                <td>{data.nomor} </td>
+                <td className="NameData">{data.nama} </td>
+                <td>{data.keterangan} </td>
+                {activeTab === "drug" && <td>{data.kuantitas} </td>}
+                <td className="PriceData">Rp. {data.biaya} </td>
+                <td>
+                  <div className="DeleteBtn">Hapus</div>
+                </td>
+                <td>
+                  <div className="UpdateBtn">Perbarui</div>
+                </td>
+              </tr>
+            ))}
+        </table>
       </div>
     </div>
   );
