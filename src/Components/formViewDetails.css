@@ -1,3 +1,14 @@
+.headerNavDetails{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+  border-bottom: 1px grey;
+}
+
+
+
+
 .formContainerAlamatdanTTD{
     margin-top: 10vh;
     display: flex;

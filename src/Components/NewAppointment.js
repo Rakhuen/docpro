@@ -273,7 +273,14 @@ const NewAppointment = (props) => {
     setNextForm(false);
   };
 
-  let popupContent = nextForm ? AppointmentForm : PatientForm;
+  let popupContent 
+  if (nextForm === true) {
+    popupContent = AppointmentForm
+  }
+  if (nextForm === false) {
+    popupContent = PatientForm
+  }
+
 
   return (
     <div className={popup ? "backgroundGelap" : "containerHidden"}>
@@ -285,6 +292,8 @@ const NewAppointment = (props) => {
               X
             </button>
           </div>
+    
+       
 
           {popupContent}
           

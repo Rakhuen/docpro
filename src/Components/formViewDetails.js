@@ -6,6 +6,8 @@ import IsiHistory from "./IsiHistoryPasien.js";
 const ViewDetailsContainer = (props) => {
     const { popupViewDetails, setPopupViewDetails } = props;
     const [nextForm, setNextForm] = useState(false);
+    
+
   
     const historyData = [
       {
@@ -53,7 +55,12 @@ const ViewDetailsContainer = (props) => {
     ];
 
 
-    const Isi =  (
+   
+
+   
+    const [activeTab, setActiveTab] = useState("Info");
+
+    const HistoryPasien =  (
         <div className="ContainerHistory">
           
     
@@ -94,7 +101,7 @@ const ViewDetailsContainer = (props) => {
   
     )
 
-    const AppointmentForm = (
+    const PhotosPasien = (
       <div classname="bookingContainer">
         <div className="formAtas">
           <div className="formKeperluan">
@@ -156,7 +163,7 @@ const ViewDetailsContainer = (props) => {
       </div>
     );
 
-    const PatientForm = (
+    const InfoDiriPasien = (
       <div className="viewDetailsForm">
           
           <div className="FotodanNamaDetails">
@@ -190,7 +197,18 @@ const ViewDetailsContainer = (props) => {
       </div>
     );
   
-    let popupContent = nextForm ? Isi : PatientForm;
+      
+   
+
+    let popupContent
+      if (activeTab === "Info") {
+        popupContent = InfoDiriPasien
+      }
+      if (activeTab === "History") {
+        popupContent = HistoryPasien
+      }
+
+
 
     return (
       <div className={popupViewDetails ? "backgroundGelap" : "containerHidden"}>
@@ -205,14 +223,40 @@ const ViewDetailsContainer = (props) => {
                 X
               </button>
             </div>
+              
+            <div className="headerNavDetails">
+            <button className = {activeTab === "Info" ? "TabsItemActive" : "TabsItem"}
+                   onClick={() => {
+                    
+                    setActiveTab("Info");
+                  }}
+            >
+                    Info
+            </button>
+            
+            <button className = {activeTab === "History" ? "TabsItemActive" : "TabsItem"}
+                     onClick={() => {
+                    
+                      setActiveTab("History");
+                    }}>
+                    History
+            </button>
 
-              <NavigationViewDetails
-                functionHistory={() => setNextForm(true)}
-                functionInfo={() => setNextForm(false)}
-                buttonInfo="Info"
-                buttonHistory="History"
-                buttonPhotos="Photos"
-              />
+            <button  className = {activeTab === "Photos" ? "TabsItemActive" : "TabsItem"}
+                      onClick={() => {
+                    
+                        setActiveTab("Photos");
+                      }}>
+            
+                    Photos
+            </button>
+
+                
+        </div>
+
+              
+
+               
 
             </div>
             {popupContent}
