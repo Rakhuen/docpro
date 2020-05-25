@@ -77,7 +77,7 @@ const NewAppointment = (props) => {
     <div className="pasienForm">
       <div className="form1">
         <div className="fotoProfile">
-          <div className="LabelProfile">Upload Photo</div>
+          <label className="LabelProfile">
           <input
             type="file"
             className="inputImage"
@@ -86,6 +86,12 @@ const NewAppointment = (props) => {
             onChange={changeFotoPasien}
             onKeyUp={changeFotoPasien}
           />
+          +
+          </label>
+
+          <div className="LabelNama">Upload Profile</div>
+
+
         </div>
 
         <div className="namadanHp">
@@ -227,6 +233,7 @@ const NewAppointment = (props) => {
 
         <div className="uploadPhotos">
           <div className="Label">Photo/File</div>
+          <label className="btnUploadPhotos">
           <input
             type="file"
             className="inputPhoto"
@@ -236,6 +243,9 @@ const NewAppointment = (props) => {
             onKeyUp={changeFotoPengobatanPasien}
             required
           />
+
+           +Upload photos here
+          </label>
         </div>
 
         <div className="backNsubmit">

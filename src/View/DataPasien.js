@@ -56,8 +56,20 @@ const Isi = () => {
       <div className="pasienForm">
         <div className="form1">
           <div className="fotoProfile">
-            <div className="LabelProfile">Upload Photo</div>
-            <input type="file" className="inputImage" name="fotoPasien" value={fotoPasien} onChange={changeFotoPasien} onKeyUp={changeFotoPasien}/>
+          <label className="LabelProfile">
+          <input
+            type="file"
+            className="inputImage"
+            name="fotoPasien"
+            value={fotoPasien}
+            onChange={changeFotoPasien}
+            onKeyUp={changeFotoPasien}
+          />
+          +
+          </label>
+
+          <div className="LabelNama">Upload Profile</div>
+
           </div>
 
           <div className="namadanHp">

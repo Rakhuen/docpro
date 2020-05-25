@@ -187,7 +187,7 @@
 .backNsubmit {
   display: flex;
   justify-content: space-between;
-  margin-top: 27vh;
+  margin-top: 13vh;
 }
 
 .btnBack {
@@ -219,4 +219,43 @@
 
   text-decoration: none;
   border-radius: 6px;
+}
+
+.LabelProfile{
+ 
+  
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9F9F9F;
+  font-size: 50px;
+  font-weight: normal;
+  background-color:#D8D8D8;
+  width: 104px;
+  height: 104px;
+  
+  
+  box-sizing: border-box;
+  border-radius: 100px;
+
+}
+
+.btnUploadPhotos{
+  margin-top: 2vh;
+  color: #777777;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 130px;
+  border-radius: 13px;
+  border: 1px dashed #A7A7A7;
+}
+
+.LabelNama{
+  margin-top: 1vh;
+  font-weight: 500;
+  color: #B5B5B5;
+
 }

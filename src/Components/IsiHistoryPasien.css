@@ -1,0 +1,12 @@
+.ItemTanggal{
+    width: 10%;
+    display: flex;
+    flex-wrap: wrap;
+
+
+}
+
+.infoIsiTanggal{
+    font-size: 12px;
+
+}

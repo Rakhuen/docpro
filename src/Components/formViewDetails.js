@@ -1,12 +1,96 @@
 import React, {useState} from "react"; 
-import NavigationViewDetails from "./NavigationViewDetails.js";
+
 import "./formViewDetails.css";
 import IsiHistory from "./IsiHistoryPasien.js";
+import Kurt from "../asset/MaskGroup.png";
+import cabutgigi from "../asset/cabutgigi.png";
+import gigi from "../asset/gigi.png";
+
+
+
+const DataPhotosPasien = (props) => {
+  
+
+  const{
+    image
+    
+
+  } = props;
+
+  return(
+    
+
+        
+        <img className="itemPhotos" src={image} />
+        
+          
+
+
+     
+
+  );
+
+};
+
+
+const IsiInfoPasien = (props) => {
+  const {
+    image,
+    infoNamaPasien,
+    infoNomorHpPasien,
+    infoAlamatPasien,
+    infoTanggalLahirPasien,
+    infoNikPasien
+  } = props;
+  return (
+    <div className="viewDetailsForm">
+          
+    <div className="FotodanNamaDetails">
+    <img className="infoFotoPasien" src={image} />
+          
+          <div className="namaDanNomor">
+              <div className="infoNama">{infoNamaPasien}</div>
+              <div className="infoNomorHp">{infoNomorHpPasien}</div>
+          </div>
+      </div>
+      
+      <div className="formContainerAlamatdanTTD">
+      <div className="formAlamat">
+    <div className="Label">Alamat</div>
+    <div className="value">{infoAlamatPasien}</div>
+  </div>
+
+  <div className="formTTD">
+    <div className="Label">Tanggal Lahir</div>
+    <div className="value">{infoTanggalLahirPasien}</div>
+  </div>
+  </div>
+
+  <div className="lineBorder"></div>
+
+  <div className="formNikPasien">
+    <div className="Label">NIK</div>
+     <div className="valueNIK">{infoNikPasien}</div>
+    
+  </div>
+
+
+</div>
+  );
+};
+
+
+
+
 
 const ViewDetailsContainer = (props) => {
     const { popupViewDetails, setPopupViewDetails } = props;
-    const [nextForm, setNextForm] = useState(false);
-    
+    const [activeTab, setActiveTab] = useState("Info");
+    const [fotoPengobatanPasien, setFotoPengobatan] = useState("");
+  const changeFotoPengobatanPasien = (photo) => {
+    setFotoPengobatan(photo.target.value);
+    console.log(fotoPengobatanPasien);
+  };
 
   
     const historyData = [
@@ -54,11 +138,35 @@ const ViewDetailsContainer = (props) => {
       },
     ];
 
+    const photoData = [
+      {
+       image : gigi
+      },
+      {
+        image : cabutgigi
+      },
+      {
+        image : gigi
+      },
+      {
+        image : cabutgigi
+      },
+      {
+        image : gigi
+      },
+      {
+        image : cabutgigi
+      },
+      {
+        image : gigi
+      },
+    ];
+
 
    
 
    
-    const [activeTab, setActiveTab] = useState("Info");
+  
 
     const HistoryPasien =  (
         <div className="ContainerHistory">
@@ -101,100 +209,78 @@ const ViewDetailsContainer = (props) => {
   
     )
 
+    
     const PhotosPasien = (
+
+      
       <div classname="bookingContainer">
-        <div className="formAtas">
-          <div className="formKeperluan">
-            <div className="Label">Keperluan</div>
-            <input
-              type="text"
-              className="inputTeks"
-              name="keperluan"
+     
+      <label className="btnAddPhotos">
+      <input
+             type="file" 
              
-              required
-            />
-          </div>
-  
-          <div className="formKeperluan">
-            <div className="Label">Tanggal</div>
-            <input
-              type="Date"
-              className="inputTeks"
-              name="tanggal"
+             className="fotoFilePasien"
+             name="fotoPengobatan"
+             value={fotoPengobatanPasien}
+             onChange={changeFotoPengobatanPasien}
+             onKeyUp={changeFotoPengobatanPasien}
+             
+           />
+           +Add Photos
+         </label>
+         <div className="scrolling">
+         <div className="photos">
+         {photoData.map((data, index) => (
             
-              required
-            />
-          </div>
-  
-          <div className="formKeperluan">
-            <div className="Label">Jam</div>
-            <input
-              type="time"
-              className="inputTeks"
-              name="jam"
-              
-              required
-            />
-          </div>
-        </div>
-  
-        <div className="formTengah">
-          <input
-            type="text"
-            className="inputKeluhan"
-            name="keluhan"
-            
-            placeholder="Keluhan"
+             <DataPhotosPasien
+             key={index}
+            image = {data.image}
+           
+    
           />
-  
-          <div className="uploadPhotos">
-            <div className="Label">Photo/File</div>
-            <input
-              type="file"
-              className="inputPhoto"
-              name="fotoPengobatan"
-         
-              required
-            />
-          </div>
-  
-          
-        </div>
-      </div>
+    
+    
+    
+               
+     
+             
+
+            
+          ))}
+</div>
+</div>
+ 
+       </div>
+     
+      
+   
+
     );
 
+
+    const infoDataPasien = [
+      {
+        
+        nama: "Kurt cobain",
+        nomorHp: "2345032480932",
+        alamat: "kebagusan",
+        tanggalLahir: "25-07-1998",
+        NikPasien: "2353453453",
+        
+      },
+     
+    ];
+
     const InfoDiriPasien = (
-      <div className="viewDetailsForm">
-          
-          <div className="FotodanNamaDetails">
-                <div className="Foto2" >foto</div>
-                
-                <div className="Nama">
-                    <div className="Atas">kurt cobain</div>
-                    <div className="Bawah">kontrol behel</div>
-                </div>
-            </div>
-            
-            <div className="formContainerAlamatdanTTD">
-            <div className="formAlamat">
-          <div className="Label">Alamat</div>
-          <div className="value">sasdasdas</div>
-        </div>
-
-        <div className="formTTD">
-          <div className="Label">Tanggal Lahir</div>
-          <div className="value">sasdasdas</div>
-        </div>
-        </div>
-
-        <div className="formNikPasien">
-          <div className="Label">NIK</div>
-          <div className="valueNIK">234234654665</div>
-          
-        </div>
-
-
-      </div>
+      <IsiInfoPasien 
+        image = {Kurt}
+        infoNamaPasien = "kurt cobain"
+        infoNomorHpPasien = "098408935409"
+        infoAlamatPasien = "kavling kebagusan kavling kebagusan kavling kebagusan"
+        infoTanggalLahirPasien = "25/12/1202"
+        infoNikPasien = "23213241234324532"
+      />
+    
     );
   
       
@@ -207,7 +293,10 @@ const ViewDetailsContainer = (props) => {
       if (activeTab === "History") {
         popupContent = HistoryPasien
       }
+      if(activeTab === "Photos"){
+        popupContent = PhotosPasien
 
+      }
 
 
     return (
@@ -218,7 +307,7 @@ const ViewDetailsContainer = (props) => {
             <div className="popupHeaderContainer">
 
             <div className="headerNewPatient">
-              <div className="judulForm">Finish</div>
+              <div className="judulForm">Details Patient</div>
               <button className="btnClose" onClick={() => setPopupViewDetails(false)}>
                 X
               </button>
@@ -253,7 +342,7 @@ const ViewDetailsContainer = (props) => {
 
                 
         </div>
-
+        <div className="line"></div>
               
 
                

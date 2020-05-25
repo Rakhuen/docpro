@@ -6,11 +6,15 @@
   border-bottom: 1px grey;
 }
 
+.infoFotoPasien {
+  width: 20%;
+  border-radius: 100%;
 
+}
 
 
 .formContainerAlamatdanTTD{
-    margin-top: 10vh;
+    margin-top: 6vh;
     display: flex;
    justify-content: space-between;
 
@@ -18,9 +22,8 @@
 
 .FotodanNamaDetails {
     margin-top: 6vh;
-    
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -34,8 +37,19 @@
     margin-top: 1vh;
 }
 
+.valueNIK{
+  width: 400px;
+  border-radius: 10px;
+  padding: 10px;
+  color: #606060;
+  font-size: 36px;
+  background: rgba(39, 138, 255, 0.13);
+  margin-top: 1vh;
+
+}
+
 .formNikPasien{
-    margin-top: 2vh;
+    margin-top: 6vh;
 
 }
 
@@ -68,3 +82,64 @@
     max-height: 450px;
 
   }
+
+
+  .infoNama {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  
+  .infoNomorHp {
+    margin-top: 1vh;
+    font-size: 20px;
+    font-weight: normal;
+    color: #00AE07;
+  }
+
+  .namaDanNomor {
+    
+    width: 70%;
+  }
+  .lineBorder{
+    margin-top: 6vh;
+    border: 1px solid #CDCDCD;
+
+  }
+
+  .photos{
+    
+    margin-top: 1vh;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+
+  }
+
+  .itemPhotos{
+    margin-top: 2vh;
+    width: 48%;
+    
+  }
+  .btnAddPhotos{
+    margin-top: 2vh;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #278AFF;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    width: 20%;
+    height: 5vw;
+    max-height: 40px;
+    border: 1px solid #278AFF;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+  }
+  
+  input[type="file"] {
+    display: none;
+}

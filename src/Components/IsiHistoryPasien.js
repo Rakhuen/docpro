@@ -1,17 +1,18 @@
 import React from "react";
 import "../View/HistoryPasien.css";
+import "./IsiHistoryPasien.css";
 
 const IsiHistory = (props) => {
   const {
     tanggalHistory,
-    namaHistory,
+    biayaHistory,
     keluhanHistory,
     penangananHistory,
   } = props;
   return (
     <div className="IsiKeterangan">
       <div className="ItemTanggal">
-        <div className="IsiTanggal"> {tanggalHistory}</div>
+        <div className="infoIsiTanggal"> {tanggalHistory}</div>
       </div>
 
       <div className="Item">
@@ -21,7 +22,7 @@ const IsiHistory = (props) => {
         <div className="IsiPenangananHistory">{penangananHistory}</div>
       </div>
       <div className="ItemNama">
-        <div className="IsiNamaHistory">{namaHistory}</div>
+        <div className="IsiNamaHistory">{biayaHistory}</div>
 
       </div>
     </div>
