@@ -238,14 +238,7 @@ const ViewDetailsContainer = (props) => {
            
     
           />
-    
-    
-    
-               
-     
-             
 
-            
           ))}
 </div>
 </div>
@@ -258,18 +251,7 @@ const ViewDetailsContainer = (props) => {
     );
 
 
-    const infoDataPasien = [
-      {
-        
-        nama: "Kurt cobain",
-        nomorHp: "2345032480932",
-        alamat: "kebagusan",
-        tanggalLahir: "25-07-1998",
-        NikPasien: "2353453453",
-        
-      },
-     
-    ];
+   
 
     const InfoDiriPasien = (
       <IsiInfoPasien 
@@ -284,7 +266,10 @@ const ViewDetailsContainer = (props) => {
     );
   
       
-   
+    const handlePopup = () => {
+      setActiveTab("Info")
+      setPopupViewDetails(false)
+    };
 
     let popupContent
       if (activeTab === "Info") {
@@ -308,7 +293,7 @@ const ViewDetailsContainer = (props) => {
 
             <div className="headerNewPatient">
               <div className="judulForm">Details Patient</div>
-              <button className="btnClose" onClick={() => setPopupViewDetails(false)}>
+              <button className="btnClose" onClick={() => handlePopup()}>
                 X
               </button>
             </div>

@@ -206,6 +206,35 @@
   border-radius: 6px;
 }
 
+.btnPilihanContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 450px;
+
+
+}
+
+
+.btnPilihan {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #278aff;
+  font-size: 24px;
+  font-weight: bold;
+  border-color: #278aff;
+  background-color: white;
+  width: 50%;
+  height: 66px;
+
+  text-decoration: none;
+  border-radius: 14px;
+}
+
+
 .btnSubmit {
   display: flex;
   justify-content: center;
@@ -258,4 +287,35 @@
   font-weight: 500;
   color: #B5B5B5;
 
+}
+
+.pembatas{
+  font-weight: 500;
+font-size: 24px;
+line-height: 28px;
+margin: 2vh;
+color: #595959;
+
+}
+
+.OldPatientTable {
+  height: 460px;
+  background-color: white;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.NikData{
+
+  color: #2B8CFF;
+
+
+}
+
+.backNNext {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4vh;
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import "./NewAppointment.css";
 
 const NewAppointment = (props) => {
   const { popup, setPopup } = props;
   const [nextForm, setNextForm] = useState(false);
-  const [pilihOldPatient, setPilihOldPatient] = useState(false);
-  const [pilihNewPatient, setPilihNewPatient] = useState(false);
+  const [pilihan, setPilihan] = useState("OldPatientOrNewPatient");
 
   const [namaPasien, setNamaPasien] = useState("");
   const [fotoPasien, setFotoPasien] = useState("");
@@ -166,14 +166,14 @@ const NewAppointment = (props) => {
         </div>
       </div>
 
-      <div className="form4">
-        <input
-          type="submit"
-          className="btnNext"
-          value="Next"
-          onClick={() => setNextForm(true)}
-        />
-      </div>
+      <div className="backNNext">
+          <button className="btnBack" onClick={() => setPilihan("OldPatientOrNewPatient")}>
+            back
+          </button>
+          <button className="btnSubmit" onClick={() => setNextForm(true)}>
+            Next
+          </button>
+        </div>
     </div>
   );
 
@@ -261,35 +261,172 @@ const NewAppointment = (props) => {
   );
 
   const OldPatientOrNewPatient = (
-      <div classname="Container">
       
-        <div className="btnOldPatient">
-          <button className="btnBack" onClick={() => setPilihOldPatient(true)}>
+      
+        <div className="btnPilihanContainer">
+          <button className="btnPilihan" onClick={() => setPilihan("OldPatient")}>
             Old Patient
           </button>
-          <button className="btnNewPatient" onClick={() => setPilihNewPatient(true)}>
-            New patient
-          </button>
-        </div>
 
-      </div>
+          <div className="pembatas">OR</div>
+
+          <button className="btnPilihan" onClick={() => setPilihan("NewPatient")}>
+            +New patient
+          </button>
+        </div>  
     
   );
 
+  const OldPatientData = [
+    {
+      nomor: "1",
+      nama: "Abdullah bin dhika",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "2",
+      nama: "bagus",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "3",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "4",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "5",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "6",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "7",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "8",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "9",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "10",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "11",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "12",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "13",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+    {
+      nomor: "14",
+      nama: "cahyo",
+      nomorHp: "0985680495",
+      nomorNIK: "23443543534",
+    },
+  ];
+
+
   
+const OldPatientForm = (
+  <div className="OldPatientTableContainer">
+  <div className="OldPatientTable">
+    
+  <table>
+    <tr>
+      <th>No.</th>
+      <th>Nama</th>
+      <th>No. Hp</th>
+      <th>NIK</th>
+      
+    </tr>
+    
+    {OldPatientData.map((data, index) => (
+        <tr key={index}>
+          <td>{data.nomor} </td>
+          <td className="NameData">{data.nama} </td>
+          
+          <td className="PriceData"> {data.nomorHp} </td>
+          <td className="NikData">{data.nomorNIK} </td>
+          
+        </tr>
+      ))}
+      
+  </table>
+  
+</div>
+
+<div className="backNNext">
+          <button className="btnBack" onClick={() => setPilihan("OldPatientOrNewPatient")}>
+            back
+          </button>
+          <button className="btnSubmit" onClick={() => setNextForm(true)}>
+            Next
+          </button>
+        </div>
+        </div>
+);
+
 
   const handlePopup = () => {
     setPopup(false);
     setNextForm(false);
+    setPilihan("OldPatientOrNewPatient");
   };
 
   let popupContent 
-  if (nextForm === true) {
-    popupContent = AppointmentForm
+  if (pilihan === "OldPatientOrNewPatient") {
+    popupContent = OldPatientOrNewPatient
   }
-  if (nextForm === false) {
+  if (pilihan === "OldPatient") {
+    popupContent = OldPatientForm
+  }
+  if (pilihan === "NewPatient") {
     popupContent = PatientForm
   }
+  if(nextForm === true){
+    popupContent = AppointmentForm
+
+  }
+  
 
 
   return (
@@ -297,7 +434,7 @@ const NewAppointment = (props) => {
       <div className="popupContainer">
         <div className="containerFormNewpatient">
           <div className="headerNewPatient">
-            <div className="judulForm">New Patient</div>
+            <div className="judulForm">New Appointment</div>
             <button className="btnClose" onClick={() => handlePopup()}>
               X
             </button>

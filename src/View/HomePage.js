@@ -132,7 +132,7 @@ const Isi = () => {
         <div className="Header">Jadwal Pasien</div>
 
         <HeaderMenu
-          functionKiri={() => setPopupShow(true)}
+          functionKiri={() => setPopupShow("OldPatientOrNewPatient")}
           btnKiri="+New Appointment"
           btnKanan="Today v"
         />
