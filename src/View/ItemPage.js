@@ -6,11 +6,29 @@ import "./NewItem.css";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
+  const [pilihan, setPilihan] = useState("NewServiceOrNewDrugs");
+  
+  const NewServiceOrNewDrugs = (
+      
+      
+    <div className="btnPilihanContainer">
+      <button className="btnPilihan" onClick={() => setPilihan("NewService")}>
+        +New Service
+      </button>
 
-  const PatientForm = () => {
+      <div className="pembatas">OR</div>
+
+      <button className="btnPilihan" onClick={() => setPilihan("NewDrugs")}>
+        +New Drugs
+      </button>
+    </div>  
+
+);
+
     const [namaItem, setNamaItem] = useState("");
     const [keteranganItem, setKeteranganItem] = useState("");
     const [biayaItem, setBiayaItem] = useState("");
+    const [kuantitasItem, setKuantitasItem] = useState("");
 
     const changeNamaItem = (text) => {
       setNamaItem(text.target.value);
@@ -22,15 +40,25 @@ const Isi = () => {
       console.log(keteranganItem);
     };
 
-    const changeBiayaItem = (text) => {
-      setBiayaItem(text.target.value);
+    const changeBiayaItem = (number) => {
+      setBiayaItem(number.target.value);
       console.log(biayaItem);
     };
-    return (
+   
+    const changeKuantitasItem = (number) => {
+      setKuantitasItem(number.target.value);
+      console.log(kuantitasItem);
+    };
+
+    
+
+  const NewServiceForm =  (
+    
+
       <div className="pasienForm">
         <div className="namaItemContainer">
           <div className="formNamaItem">
-            <div className="Label">Nama Item</div>
+            <div className="Label">Nama Pengobatan</div>
             <input
               type="text"
               className="inputItem"
@@ -72,17 +100,117 @@ const Isi = () => {
           </div>
         </div>
 
-        <div className="form4">
-          <input
-            type="submit"
-            className="btnNext"
-            value="Submit"
-            onClick={() => setPopupShow(false)}
-          />
+        <div className="backNsubmit">
+          <button className="btnBack" onClick={() => setPilihan("NewServiceOrNewDrugs")}>
+            back
+          </button>
+          <button className="btnSubmit" onClick={() => handlePopup()}>
+            submit
+          </button>
         </div>
       </div>
     );
-  };
+  
+
+    const NewDrugsForm =  (
+    
+
+      <div className="pasienForm">
+        <div className="namaItemContainer">
+          <div className="formNamaItem">
+            <div className="Label">Nama Obat</div>
+            <input
+              type="text"
+              className="inputItem"
+              name="namaItem"
+              value={namaItem}
+              onChange={changeNamaItem}
+              onKeyUp={changeNamaItem}
+            />
+          </div>
+        </div>
+
+        <div className="keteranganContainer">
+          <div className="formKeterangan">
+            <div className="Label">Keterangan</div>
+            <input
+              type="text"
+              className="inputKeterangan"
+              name="keterangan"
+              value={keteranganItem}
+              onChange={changeKeteranganItem}
+              onKeyUp={changeKeteranganItem}
+            />
+          </div>
+        </div>
+
+        <div className="biayaContainer">
+          <div className="formBiaya">
+            <div className="Label">Biaya</div>
+            <input
+              type="tel"
+              className="inputBiaya"
+              name="biayaItem"
+              pattern="[0-9]"
+              value={biayaItem}
+              onChange={changeBiayaItem}
+              onKeyUp={changeBiayaItem}
+              required
+            />
+          </div>
+
+          <div className="formKuantitas">
+            <div className="Label">Kuantitas</div>
+           
+            <input
+              type="number"
+              className="inputKuantitas"
+              name="kuantitas"
+              min="1"
+              max="99"
+              value={kuantitasItem}
+              onChange={changeKuantitasItem}
+              onKeyUp={changeKuantitasItem}
+              required
+            />
+          </div>
+
+        </div>
+
+        <div className="backNsubmit">
+          <button className="btnBack" onClick={() => setPilihan("NewServiceOrNewDrugs")}>
+            back
+          </button>
+          <button className="btnSubmit" onClick={() => handlePopup()}>
+            submit
+          </button>
+        </div>
+
+        
+      </div>
+    );
+
+
+
+    const handlePopup = () => {
+      setPopupShow(false);
+      setPilihan("NewServiceOrNewDrugs");
+    };
+
+
+let popupContent 
+if (pilihan === "NewServiceOrNewDrugs") {
+  popupContent = NewServiceOrNewDrugs
+}
+if (pilihan === "NewService") {
+  popupContent = NewServiceForm
+}
+if (pilihan === "NewDrugs") {
+  popupContent = NewDrugsForm
+}
+
+
+
 
   const NewItem = () => {
     return (
@@ -91,12 +219,12 @@ const Isi = () => {
           <div className="containerFormNewpatient">
             <div className="headerNewPatient">
               <div className="judulForm">New Item</div>
-              <button className="btnClose" onClick={() => setPopupShow(false)}>
+              <button className="btnClose" onClick={() => handlePopup()}>
                 X
               </button>
             </div>
-
-            <PatientForm />
+            {popupContent}
+            
           </div>
         </div>
       </div>
