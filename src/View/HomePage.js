@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import DeleteImage from "../asset/delete.png";
@@ -6,18 +6,20 @@ import HeaderMenu from "../Components/HeaderButton.js";
 import Card from "../Components/Content.js";
 import NewAppointment from "../Components/NewAppointment.js";
 import FinishContainer from "../Components/FinishForm.js";
-import ViewDetailsContainer from "../Components/formViewDetails.js"
+import ViewDetailsContainer from "../Components/formViewDetails.js";
 import Kurt from "../asset/MaskGroup.png";
 import Liam from "../asset/liam.png";
 import Alex from "../asset/alex.png";
 import Nuno from "../asset/nuno.png";
 import "../Components/NewAppointment.css";
 import "../Components/FinishForm.css";
+import axios from "axios";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupFinish, setPopupFinish] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
+  const [pasien, setPasien] = useState();
 
   const cardData = [
     {
@@ -122,12 +124,30 @@ const Isi = () => {
     },
   ];
 
+  const getPatientData = async () => {
+    const { data } = await axios.get(
+      "http://localhost:8000/api/doc-pro/v1/pasien"
+    );
+    await setPasien(data);
+  };
+
+  useEffect(() => {
+    getPatientData();
+    console.log(pasien);
+  }, [pasien]);
+
   return (
     <div className="ContainerLuar2">
-      <ViewDetailsContainer popupViewDetails={popupViewDetails} setPopupViewDetails={setPopupViewDetails}/>
-      <FinishContainer popupFinish={popupFinish} setPopupFinish={setPopupFinish}/>
+      <ViewDetailsContainer
+        popupViewDetails={popupViewDetails}
+        setPopupViewDetails={setPopupViewDetails}
+      />
+      <FinishContainer
+        popupFinish={popupFinish}
+        setPopupFinish={setPopupFinish}
+      />
       <NewAppointment popup={popupShow} setPopup={setPopupShow} />
-      
+
       <div className="ContainerDua">
         <div className="Header">Jadwal Pasien</div>
 
