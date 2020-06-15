@@ -9,10 +9,13 @@ import Alex from "../asset/alex.png";
 import Nuno from "../asset/nuno.png";
 import DeleteImage from "../asset/delete.png";
 import "../Components/NewAppointment.css";
+import ViewDetailsContainer from "../Components/formViewDetails.js";
+import axios from "axios";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
- 
+  const [popupViewDetails, setPopupViewDetails] = useState(false);
+
 
   const PatientForm = () => {
     const [namaPasien, setNamaPasien] = useState("");
@@ -22,6 +25,31 @@ const Isi = () => {
     const [tanggalLahirPasien, setTanggalLahir] = useState("");
     const [NikPasien, setNikPasien] = useState("");
   
+    const postPatientData = async () => {
+    
+      const PatientData = {
+        nama: namaPasien,
+        nik: NikPasien,
+        tanggal_lahir: tanggalLahirPasien,
+        alamat: alamatPasien,
+        phone: nomorHpPasien,
+        photoPasien: fotoPasien,
+       
+  
+      };
+  
+      try {
+        const result = await axios.post(
+          "http://localhost:8000/api/doc-pro/v1/pasien",
+          PatientData
+        );
+  
+        console.log(result);
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.data.message);
+      }
+    };
   
     const changeNamaPasien = (text) => {
       setNamaPasien(text.target.value);
@@ -142,6 +170,7 @@ const Isi = () => {
             className="btnNext"
             value="Submit"
             onClick={() => setPopupShow(false)}
+            onClick={() => postPatientData()}
           />
         </div>
       </div>
@@ -173,29 +202,33 @@ const Isi = () => {
       deleteIcon: DeleteImage,
       fotoPasien: Kurt,
       nama: "Kurt cobain",
-      nomorTlp: "08589sdf3243",
+      nomorTlp: "085891573243",
       tanggalAdd: "22/10/2020",
+      viewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
       fotoPasien: Liam,
       nama: "Kurt cobain",
-      nomorTlp: "08589sdf3243",
+      nomorTlp: "085891573243",
       tanggalAdd: "22/10/2020",
+      viewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
       fotoPasien: Alex,
       nama: "Kurt cobain",
-      nomorTlp: "08589sdf3243",
+      nomorTlp: "085891573243",
       tanggalAdd: "22/10/2020",
+      viewDetails: "View Details",
     },
     {
       deleteIcon: DeleteImage,
       fotoPasien: Nuno,
       nama: "Kurt cobain",
-      nomorTlp: "08589sdf3243",
+      nomorTlp: "085891573243",
       tanggalAdd: "22/10/2020",
+      viewDetails: "View Details",
     },
     
   ];
@@ -204,6 +237,10 @@ const Isi = () => {
 
   return (
     <div className="ContainerLuar2">
+      <ViewDetailsContainer
+        popupViewDetails={popupViewDetails}
+        setPopupViewDetails={setPopupViewDetails}
+      />
       <NewAppointment />
       <div className="ContainerDua">
         <div className="Header">Data Pasien</div>
@@ -224,6 +261,8 @@ const Isi = () => {
               nama={data.nama}
               nomorTlp={data.nomorTlp}
               tanggal={data.tanggalAdd}
+              btnViewDetails={data.viewDetails}
+              functionDetails={() => setPopupViewDetails(true)}
             />
           ))}
           

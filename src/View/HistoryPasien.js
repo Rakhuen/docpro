@@ -1,6 +1,8 @@
 import React from "react";
 import "./HistoryPasien.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
+import "../Components/IsiHistoryPasien.css"
+import "./ItemPage.css";
 
 const IsiHistory = (props) => {
   const {
@@ -34,42 +36,49 @@ const Isi = () => {
       name: "Nandhika Pratama Putra",
       concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+      biaya: "500.000",
     },
     {
       date: "22/10/2020",
       name: "Nandhika Pratama Putra",
       concern: "Gigi graham copot, tetapi masih ada ",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+      biaya: "500.000",
     },
     {
       date: "22/10/2020",
       name: "Nandhika Pratama Putra",
       concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+      biaya: "500.000",
     },
     {
       date: "22/10/2020",
       name: "Nandhika Pratama Putra",
       concern: "Gigi graham copot, tetapi masih yang menempel",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+      biaya: "500.000",
     },
     {
       date: "22/10/2020",
       name: "Nandhika Pratama Putra",
       concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+      biaya: "500.000",
     },
     {
       date: "22/10/2020",
       name: "Nandhika Pratama Putra",
       concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+      biaya: "500.000",
     },
     {
       date: "22/10/2020",
       name: "Nandhika Pratama Putra",
       concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
       treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
+      biaya: "500.000",
     },
   ];
 
@@ -79,36 +88,32 @@ const Isi = () => {
         <div className="Header">History</div>
       </div>
 
-      <div className="HistoryTable">
-        <div className="ketContainer">
-          <div className="KeteranganContainer">
-            <div className="ItemTanggal">
-              <div className="Tanggal"> Tanggal</div>
-            </div>
-            <div className="ItemNama">
-              <div className="NamaHistory">Nama</div>
-            </div>
-            <div className="Item">
-              <div className="KeluhanHistory">Keluhan</div>
-            </div>
-            <div className="Item">
-              <div className="PenangananHistory">Penanganan</div>
-            </div>
-          </div>
+
+      <div className="TreatmentTable">
+
+        <table>
+          <tr>
+            <th>Tanggal</th>
+            <th>Nama</th>
+            <th>Keluhan</th>
+            <th>Penanganan</th>
+            <th>Biaya</th>
+          </tr>
 
           {historyData.map((data, index) => (
-            <div className="IsiKeteranganContainer">
-              <IsiHistory
-                key={index}
-                tanggalHistory={data.date}
-                namaHistory={data.name}
-                keluhanHistory={data.concern}
-                penangananHistory={data.treatment}
-              />
-            </div>
-          ))}
-        </div>
+              <tr key={index}>
+                <td>{data.date} </td>
+                <td className="NameData">{data.name} </td>
+                <td>{data.concern} </td>
+          <td >{data.treatment} </td>
+          <td className="PriceData">Rp.{data.biaya} </td>
+              </tr>
+            ))}
+        </table>
       </div>
+
+
+      
     </div>
   );
 };

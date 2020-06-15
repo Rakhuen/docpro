@@ -89,6 +89,9 @@ const Form = () => {
           <NavLink to="/home" className="formBtn">
             <button onClick={() => postLoginData()}> Login</button>
           </NavLink>
+
+          <NavLink to="/signup" className="btnSignup">Don't have an account? Sign up</NavLink>
+
         </div>
       </div>
     </div>

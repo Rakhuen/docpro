@@ -6,6 +6,7 @@ import HomeContainer from "./View/HomePage.js";
 import PasienContainer from "./View/DataPasien.js";
 import HistoryContainer from "./View/HistoryPasien.js";
 import InputBiayaContainer from "./View/ItemPage.js";
+import SignupContainer from "./View/SignupPage.js";
 
 const Container = () => {
   return (
@@ -17,6 +18,7 @@ const Container = () => {
         <Route path="/pasien" component={PasienContainer} />
         <Route path="/history" component={HistoryContainer} />
         <Route path="/inputbiaya" component={InputBiayaContainer} />
+        <Route path="/signup" component={SignupContainer} />
       </Router>
     </div>
   );

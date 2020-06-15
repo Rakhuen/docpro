@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./NewAppointment.css";
+import axios from "axios";
 
 const NewAppointment = (props) => {
   const { popup, setPopup } = props;
@@ -72,6 +73,60 @@ const NewAppointment = (props) => {
     setFotoPengobatan(photo.target.value);
     console.log(fotoPengobatanPasien);
   };
+
+  const postPatientData = async () => {
+    
+    const PatientData = {
+      nama: namaPasien,
+      nik: NikPasien,
+      tanggal_lahir: tanggalLahirPasien,
+      alamat: alamatPasien,
+      phone: nomorHpPasien,
+      photoPasien: fotoPasien,
+     
+
+    };
+
+    try {
+      const result = await axios.post(
+        "http://localhost:8000/api/doc-pro/v1/pasien",
+        PatientData
+      );
+
+      console.log(result);
+    } catch (error) {
+      console.log(error.response);
+      alert(error.response.data.message);
+    }
+  };
+
+
+  const postAppointmentData = async () => {
+    
+    const AppointmentData = {
+      keperluan: keperluanPasien,
+      jam: jamBookingPasien,
+      tanggal: tanggalBookingPasien,
+      keluhan: keluhanPasien,
+      photoData: fotoPengobatanPasien,
+     
+
+    };
+
+    try {
+      const result = await axios.post(
+        "http://localhost:8000/api/doc-pro/v1/pasien",
+        AppointmentData
+      );
+
+      console.log(result);
+    } catch (error) {
+      console.log(error.response);
+      alert(error.response.data.message);
+    }
+  };
+
+
 
   const PatientForm = (
     <div className="pasienForm">
@@ -170,7 +225,7 @@ const NewAppointment = (props) => {
           <button className="btnBack" onClick={() => setPilihan("OldPatientOrNewPatient")}>
             back
           </button>
-          <button className="btnSubmit" onClick={() => setNextForm(true)}>
+          <button className="btnSubmit" onClick={() => setNextForm(true)} onClick={() => postPatientData()}>
             Next
           </button>
         </div>
@@ -249,10 +304,10 @@ const NewAppointment = (props) => {
         </div>
 
         <div className="backNsubmit">
-          <button className="btnBack" onClick={() => setNextForm(false)}>
+          <button className="btnBack" onClick={() => setNextForm(false)}  >
             back
           </button>
-          <button className="btnSubmit" onClick={() => handlePopup()}>
+          <button className="btnSubmit" onClick={() => handlePopup()} onClick={() => postAppointmentData()}>
             submit
           </button>
         </div>

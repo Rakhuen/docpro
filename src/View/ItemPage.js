@@ -3,6 +3,7 @@ import "./ItemPage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import HeaderMenu from "../Components/HeaderButton.js";
 import "./NewItem.css";
+import axios from "axios";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
@@ -30,6 +31,9 @@ const Isi = () => {
     const [biayaItem, setBiayaItem] = useState("");
     const [kuantitasItem, setKuantitasItem] = useState("");
 
+
+
+
     const changeNamaItem = (text) => {
       setNamaItem(text.target.value);
       console.log(namaItem);
@@ -50,7 +54,48 @@ const Isi = () => {
       console.log(kuantitasItem);
     };
 
+    const postServiceData = async () => {
     
+    const ServiceData = {
+      service_name: namaItem,
+      service_desc: keteranganItem,
+      service_price: biayaItem,
+    };
+
+    try {
+      const result = await axios.post(
+        "http://localhost:8000/api/doc-pro/v1/service",
+        ServiceData
+      );
+
+      console.log(result);
+    } catch (error) {
+      console.log(error.response);
+      alert(error.response.data.message);
+    }
+  };
+
+  const postDrugData = async () => {
+    
+    const DrugData = {
+      drug_name: namaItem,
+      drug_desc: keteranganItem,
+      drug_price: biayaItem,
+      drug_count: kuantitasItem
+    };
+
+    try {
+      const result = await axios.post(
+        "http://localhost:8000/api/doc-pro/v1/drug",
+        DrugData
+      );
+
+      console.log(result);
+    } catch (error) {
+      console.log(error.response);
+      alert(error.response.data.message);
+    }
+  };
 
   const NewServiceForm =  (
     
@@ -104,7 +149,7 @@ const Isi = () => {
           <button className="btnBack" onClick={() => setPilihan("NewServiceOrNewDrugs")}>
             back
           </button>
-          <button className="btnSubmit" onClick={() => handlePopup()}>
+          <button className="btnSubmit" onClick={() => handlePopup()} onClick={() => postServiceData()}>
             submit
           </button>
         </div>
@@ -181,7 +226,7 @@ const Isi = () => {
           <button className="btnBack" onClick={() => setPilihan("NewServiceOrNewDrugs")}>
             back
           </button>
-          <button className="btnSubmit" onClick={() => handlePopup()}>
+          <button className="btnSubmit" onClick={() => handlePopup()} onClick={() => postDrugData()}>
             submit
           </button>
         </div>

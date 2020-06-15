@@ -2,7 +2,7 @@ import React from "react";
 import "./ContentPasien.css";
 
 const CardPasien = (props) => {
-  const { nama, nomorTlp, tanggal, image, imageDelete } = props;
+  const { nama, nomorTlp, tanggal, image, imageDelete,btnViewDetails,functionDetails } = props;
   return (
     <div className="CardContainer">
       <div className="DeleteContainer">
@@ -21,7 +21,9 @@ const CardPasien = (props) => {
       </div>
 
       <div className="DetailsContainer">
-        <div className="btnDetails">View details</div>
+      <button className="btnDetails" onClick={functionDetails}>
+          {btnViewDetails}
+        </button>
       </div>
     </div>
   );

@@ -5,6 +5,16 @@
   justify-content: space-around;
   height: 100vh;
 }
+.mainContainer {
+  display: flex;
+
+  justify-content: center;
+  justify-content: space-around;
+  
+}
+
+
+
 
 .headerContainer {
   margin: 2vw;
