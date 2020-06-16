@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ItemPage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import HeaderMenu from "../Components/HeaderButton.js";
@@ -8,6 +8,7 @@ import axios from "axios";
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [pilihan, setPilihan] = useState("NewServiceOrNewDrugs");
+  const [service, setService] = useState();
   
   const NewServiceOrNewDrugs = (
       
@@ -54,8 +55,28 @@ const Isi = () => {
       console.log(kuantitasItem);
     };
 
-    const postServiceData = async () => {
+    const getServiceData = async () => {
+      let info =  JSON.parse(localStorage.getItem("userInfo")) 
+      console.log(info.token)
+      const { data } = await axios.get(
+        "http://localhost:8000/api/doc-pro/v1/service",{
+          headers: {
+            authorization: `Bearer ${info.token}`
+          } 
+        }
+      );
+      await setService(data);
+    };
     
+    useEffect(() => {
+      getServiceData();
+      console.log(service);
+    }, []);
+
+
+
+    const postServiceData = async () => {
+      let info =  JSON.parse(localStorage.getItem("userInfo"))
     const ServiceData = {
       service_name: namaItem,
       service_desc: keteranganItem,
@@ -65,7 +86,11 @@ const Isi = () => {
     try {
       const result = await axios.post(
         "http://localhost:8000/api/doc-pro/v1/service",
-        ServiceData
+        ServiceData,{
+          headers: {
+            authorization: `Bearer ${info.token}`
+          } 
+        }
       );
 
       console.log(result);
@@ -76,7 +101,7 @@ const Isi = () => {
   };
 
   const postDrugData = async () => {
-    
+    let info =  JSON.parse(localStorage.getItem("userInfo"))
     const DrugData = {
       drug_name: namaItem,
       drug_desc: keteranganItem,
@@ -87,7 +112,11 @@ const Isi = () => {
     try {
       const result = await axios.post(
         "http://localhost:8000/api/doc-pro/v1/drug",
-        DrugData
+        DrugData,{
+          headers: {
+            authorization: `Bearer ${info.token}`
+          } 
+        }
       );
 
       console.log(result);
@@ -96,6 +125,25 @@ const Isi = () => {
       alert(error.response.data.message);
     }
   };
+
+
+  const postService = () => {
+    handlePopup()
+    postServiceData()
+
+  }
+
+  const postDrug = () => {
+    handlePopup()
+    postDrugData()
+
+  }
+
+
+const handlePopup = () => {
+  setPopupShow(false);
+  setPilihan("NewServiceOrNewDrugs");
+};
 
   const NewServiceForm =  (
     
@@ -149,7 +197,7 @@ const Isi = () => {
           <button className="btnBack" onClick={() => setPilihan("NewServiceOrNewDrugs")}>
             back
           </button>
-          <button className="btnSubmit" onClick={() => handlePopup()} onClick={() => postServiceData()}>
+          <button className="btnSubmit" onClick={() => postService()}>
             submit
           </button>
         </div>
@@ -226,7 +274,7 @@ const Isi = () => {
           <button className="btnBack" onClick={() => setPilihan("NewServiceOrNewDrugs")}>
             back
           </button>
-          <button className="btnSubmit" onClick={() => handlePopup()} onClick={() => postDrugData()}>
+          <button className="btnSubmit" onClick={() => postDrug()}>
             submit
           </button>
         </div>
@@ -235,12 +283,7 @@ const Isi = () => {
       </div>
     );
 
-
-
-    const handlePopup = () => {
-      setPopupShow(false);
-      setPilihan("NewServiceOrNewDrugs");
-    };
+      
 
 
 let popupContent 

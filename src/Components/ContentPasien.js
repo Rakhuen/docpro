@@ -1,6 +1,7 @@
 import React from "react";
 import "./ContentPasien.css";
 
+
 const CardPasien = (props) => {
   const { nama, nomorTlp, tanggal, image, imageDelete,btnViewDetails,functionDetails } = props;
   return (
@@ -27,6 +28,6 @@ const CardPasien = (props) => {
       </div>
     </div>
   );
-};
+}; 
 
 export default CardPasien;

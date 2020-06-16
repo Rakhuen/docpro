@@ -17,6 +17,7 @@ const Form = () => {
   const [password, setPassword] = useState("");
 
   const postLoginData = async () => {
+    
     const LoginData = {
       username: username,
       password: password,
@@ -24,15 +25,18 @@ const Form = () => {
 
     try {
       const result = await axios.post(
+        
         "http://localhost:8000/api/doc-pro/v1/login",
         LoginData
       );
 
-      // const user = {
-      //   userId: result.data.userId,
-      //   username: result.data.userName,
-      //   poin: result.data.userPoints
-      // };
+      const user = {
+        doctorId: result.data.id_doctor,
+        token: result.data.token
+      };
+      console.log(user);
+      localStorage.setItem("userInfo", JSON.stringify(user));
+
       console.log(result);
     } catch (error) {
       setPassword("");

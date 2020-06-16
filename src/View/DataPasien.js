@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import HeaderMenu from "../Components/HeaderButton.js";
@@ -15,6 +15,29 @@ import axios from "axios";
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
+  const [pasien, setPasien] = useState();
+
+
+  const getPasienData = async () => {
+    let info =  JSON.parse(localStorage.getItem("userInfo")) 
+    console.log(info.token)
+    const { data } = await axios.get(
+      "http://localhost:8000/api/doc-pro/v1/pasien",{
+        headers: {
+          authorization: `Bearer ${info.token}`
+        } 
+      }
+    );
+
+    await setPasien(data);
+  };
+
+  useEffect(() => {
+    getPasienData();
+    console.log(pasien);
+  }, []);
+
+console.log(pasien)
 
 
   const PatientForm = () => {
@@ -24,33 +47,8 @@ const Isi = () => {
     const [alamatPasien, setAlamatPasien] = useState("");
     const [tanggalLahirPasien, setTanggalLahir] = useState("");
     const [NikPasien, setNikPasien] = useState("");
-  
-    const postPatientData = async () => {
     
-      const PatientData = {
-        nama: namaPasien,
-        nik: NikPasien,
-        tanggal_lahir: tanggalLahirPasien,
-        alamat: alamatPasien,
-        phone: nomorHpPasien,
-        photoPasien: fotoPasien,
-       
-  
-      };
-  
-      try {
-        const result = await axios.post(
-          "http://localhost:8000/api/doc-pro/v1/pasien",
-          PatientData
-        );
-  
-        console.log(result);
-      } catch (error) {
-        console.log(error.response);
-        alert(error.response.data.message);
-      }
-    };
-  
+
     const changeNamaPasien = (text) => {
       setNamaPasien(text.target.value);
       console.log(namaPasien);
@@ -80,6 +78,47 @@ const Isi = () => {
       setNikPasien(text.target.value);
       console.log(NikPasien);
     }
+
+    const postPasien = () => {
+      setPopupShow(false);
+      postPatientData();
+
+    }
+
+    const postPatientData = async () => {
+      let info =  JSON.parse(localStorage.getItem("userInfo"))
+
+      const PatientData = {
+        nama: namaPasien,
+        tanggal_lahir: tanggalLahirPasien,
+        nik: NikPasien,
+        
+        alamat: alamatPasien,
+        phone: nomorHpPasien,
+        
+       
+  
+      };
+  
+      try {
+        const result = await axios.post(
+          "http://localhost:8000/api/doc-pro/v1/pasien",
+          
+          PatientData,{
+            headers: {
+              authorization: `Bearer ${info.token}`
+            } 
+          }
+        );
+  
+        console.log(result);
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.data.message);
+      }
+    };
+
+
     return (
       <div className="pasienForm">
         <div className="form1">
@@ -169,13 +208,14 @@ const Isi = () => {
             type="submit"
             className="btnNext"
             value="Submit"
-            onClick={() => setPopupShow(false)}
-            onClick={() => postPatientData()}
+            onClick={() => postPasien()}
           />
         </div>
       </div>
     );
   };
+
+
 
   const NewAppointment = () => {
     return (
@@ -253,15 +293,16 @@ const Isi = () => {
 
         <div className="CardContainer1">
           
-        {cardDataPasien.map((data, index) => (
+        {pasien && pasien.map((data, index) => (
             <CardPasien
+              
               key={index}
               imageDelete={data.deleteIcon}
-              image={data.fotoPasien}
+              image={data.photo}
               nama={data.nama}
-              nomorTlp={data.nomorTlp}
-              tanggal={data.tanggalAdd}
-              btnViewDetails={data.viewDetails}
+              nomorTlp={data.phone}
+              tanggal={data.added_on}
+              btnViewDetails="View Details"
               functionDetails={() => setPopupViewDetails(true)}
             />
           ))}

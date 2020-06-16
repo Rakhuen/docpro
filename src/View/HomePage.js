@@ -15,11 +15,12 @@ import "../Components/NewAppointment.css";
 import "../Components/FinishForm.css";
 import axios from "axios";
 
+
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupFinish, setPopupFinish] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
-  const [pasien, setPasien] = useState();
+  const [appointment, setAppointment] = useState();
 
   const cardData = [
     {
@@ -124,17 +125,25 @@ const Isi = () => {
     },
   ];
 
-  const getPatientData = async () => {
+  const getAppointmentData = async () => {
+    let info =  JSON.parse(localStorage.getItem("userInfo")) 
+    console.log(info.token)
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/pasien"
+      "http://localhost:8000/api/doc-pro/v1/appointment",{
+        headers: {
+          authorization: `Bearer ${info.token}`
+        } 
+      }
     );
-    await setPasien(data);
+    await setAppointment(data);
   };
-
+  
   useEffect(() => {
-    getPatientData();
-    console.log(pasien);
-  }, [pasien]);
+    getAppointmentData();
+    console.log(appointment);
+  }, []);
+
+console.log(appointment)
 
   return (
     <div className="ContainerLuar2">
@@ -158,17 +167,17 @@ const Isi = () => {
         />
 
         <div className="CardContainer1">
-          {cardData.map((data, index) => (
+          {appointment && appointment.map((data, index) => (
             <Card
               key={index}
               imageDelete={data.deleteIcon}
               image={data.fotoPasien}
               nama={data.nama}
-              perawatan={data.treatment}
+              perawatan={data.keperluan}
               jam={data.jam}
-              btnFinish={data.btnFinish}
-              btnCancel={data.btnCancel}
-              btnViewDetails={data.btnViewDetails}
+              btnFinish="Finish"
+              btnCancel="Cancel"
+              btnViewDetails= "View Details"
               functionFinish={() => setPopupFinish(true)}
               functionDetails={() => setPopupViewDetails(true)}
             />
