@@ -53,7 +53,11 @@ const FinishContainer = (props) => {
 
       <div className="inputBiayaItem">
         <div className="Atas">Input Biaya</div>
-        <Dropdown title="Select Movie" items={items} multiSelect />
+        <Dropdown 
+        title="Select Movie" 
+        items={items} 
+        multiSelect 
+        />
       </div>
 
       <div className="formBawah">

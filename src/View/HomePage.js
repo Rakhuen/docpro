@@ -17,7 +17,6 @@ import axios from "axios";
 import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
 
-
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupFinish, setPopupFinish] = useState(false);
@@ -25,24 +24,25 @@ const Isi = () => {
   const [appointment, setAppointment] = useState();
 
   const getAppointmentData = async () => {
-    let info =  JSON.parse(localStorage.getItem("userInfo")) 
-    console.log(info.token)
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(info.token);
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/appointment",{
+      "http://localhost:8000/api/doc-pro/v1/appointment",
+      {
         headers: {
-          authorization: `Bearer ${info.token}`
-        } 
+          authorization: `Bearer ${info.token}`,
+        },
       }
     );
     await setAppointment(data);
   };
-  
+
   useEffect(() => {
     getAppointmentData();
     console.log(appointment);
   }, []);
 
-console.log(appointment)
+  console.log(appointment);
 
   return (
     <div className="ContainerLuar2">
@@ -66,21 +66,25 @@ console.log(appointment)
         />
 
         <div className="CardContainer1">
-          {appointment && appointment.map((data, index) => (
-            <Card
-              key={index}
-              imageDelete={data.deleteIcon}
-              image={data.fotoPasien}
-              nama={data.nama}
-              perawatan={data.keperluan}
-              jam={data.jam}
-              btnFinish="Finish"
-              btnCancel="Cancel"
-              btnViewDetails= "View Details"
-              functionFinish={() => setPopupFinish(true)}
-              functionDetails={() => setPopupViewDetails(true)}
-            />
-          ))}
+          {appointment ? (
+            appointment.map((data, index) => (
+              <Card
+                key={index}
+                imageDelete={data.deleteIcon}
+                image={data.fotoPasien}
+                nama={data.nama}
+                perawatan={data.keperluan}
+                jam={data.jam}
+                btnFinish="Finish"
+                btnCancel="Cancel"
+                btnViewDetails="View Details"
+                functionFinish={() => setPopupFinish(true)}
+                functionDetails={() => setPopupViewDetails(true)}
+              />
+            ))
+          ) : (
+            <div>no appointment</div>
+          )}
         </div>
       </div>
     </div>
@@ -88,14 +92,16 @@ console.log(appointment)
 };
 
 const HomeContainer = () => {
-  const app = useContext(AppContext)
+  const app = useContext(AppContext);
 
   return app.isLoggedIn ? (
     <div className="ContainerUtama">
       <NavigationContainer />
       <Isi />
     </div>
-  ) : <Redirect to="/login"></Redirect>
+  ) : (
+    <Redirect to="/login"></Redirect>
+  );
 };
 
 export default HomeContainer;

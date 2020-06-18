@@ -5,8 +5,6 @@ import Kurt from "../asset/MaskGroup.png";
 import cabutgigi from "../asset/cabutgigi.png";
 import gigi from "../asset/gigi.png";
 import axios from "axios";
-import {decryptNik} from "./decrypt.js";
-
 
 const IsiHistory = (props) => {
   const {
@@ -55,7 +53,7 @@ const IsiInfoPasien = (props) => {
   return (
     <div className="viewDetailsForm">
       <div className="FotodanNamaDetails">
-        <img className="infoFotoPasien" src={image} />
+        <img className="infoFotoPasien" src={image} alt="foto-pasien" />
 
         <div className="namaDanNomor">
           <div className="infoNama">{infoNamaPasien}</div>
@@ -86,38 +84,34 @@ const IsiInfoPasien = (props) => {
 };
 
 const ViewDetailsContainer = (props) => {
-  const { popupViewDetails, setPopupViewDetails } = props;
+  const { popupViewDetails, setPopupViewDetails, idPasien } = props;
   const [activeTab, setActiveTab] = useState("Info");
-  const [fotoPengobatanPasien, setFotoPengobatan] = useState("");
   const [viewDetails, setViewDetails] = useState();
+  const [fotoPengobatanPasien, setFotoPengobatan] = useState("");
   const changeFotoPengobatanPasien = (photo) => {
     setFotoPengobatan(photo.target.value);
     console.log(fotoPengobatanPasien);
   };
-  const [pasien, setPasien] = useState([]);
-  
 
   const getViewDetails = async () => {
-    let info =  JSON.parse(localStorage.getItem("userInfo")) 
-    console.log(info.token)
+    let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      
-      "http://localhost:8000/api/doc-pro/v1/pasien/detail?id=id_pasien",{
-        
+      `http://localhost:8000/api/doc-pro/v1/pasien/detail?id=${idPasien}`,
+      {
         headers: {
-          authorization: `Bearer ${info.token}`
-        } 
+          authorization: `Bearer ${info.token}`,
+        },
       }
     );
-      const decriptNik = decryptNik(data.nik);
-      data.nik = decriptNik;
+
     await setViewDetails(data);
   };
 
-  
-  
- 
+  useEffect(() => {
+    getViewDetails();
+  }, [idPasien]);
 
+  console.log(viewDetails);
 
   const historyData = [
     {
@@ -188,18 +182,6 @@ const ViewDetailsContainer = (props) => {
     },
   ];
 
-  const infoPasienData = [
-    {
-      image:gigi,
-      nama:"Drug cobain",
-      Hp:"098408935409",
-      Alamat:"kavling kebagusan kavling kebagusan kavling kebagusan",
-      TanggalLahir:"25/12/1202",
-      Nik:"23213241234324532",
-    },
-  ];
-
-
   const HistoryPasien = (
     <div className="ContainerHistory">
       <div className="TableHistory">
@@ -254,35 +236,26 @@ const ViewDetailsContainer = (props) => {
       <div className="scrolling">
         <div className="photos">
           {photoData.map((data, index) => (
-            <DataPhotosPasien 
-            key={index} 
-            image={data.image} />
+            <DataPhotosPasien key={index} image={data.image} />
           ))}
         </div>
       </div>
     </div>
   );
 
-
-
   const InfoDiriPasien = (
     <div className="scrolling">
-            {infoPasienData.map((data, index) => (
-              
-                <IsiInfoPasien
-                  key={index}
-                  image={Kurt}
-                  infoNamaPasien= {data.nama}
-                  infoNomorHpPasien={data.Hp}
-                  infoAlamatPasien={data.Alamat}
-                  infoTanggalLahirPasien={data.TanggalLahir}
-                  infoNikPasien={data.Nik}
-                />
-              
-            ))}
-          </div>
-    
-   
+      {viewDetails && (
+        <IsiInfoPasien
+          image={viewDetails.pasien.photo}
+          infoNamaPasien={viewDetails.pasien.phone}
+          infoNomorHpPasien={viewDetails.pasien.nama}
+          infoAlamatPasien={viewDetails.pasien.alamat}
+          infoTanggalLahirPasien={viewDetails.pasien.tanggal_lahir}
+          infoNikPasien={viewDetails.pasien.nik}
+        />
+      )}
+    </div>
   );
 
   const handlePopup = () => {

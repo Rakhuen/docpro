@@ -18,16 +18,17 @@ const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
   const [pasien, setPasien] = useState();
-
+  const [idPasien, setIdPasien] = useState();
+  const [viewDetails, setViewDetails] = useState();
 
   const getPasienData = async () => {
-    let info =  JSON.parse(localStorage.getItem("userInfo")) 
-    console.log(info.token)
+    let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/pasien",{
+      "http://localhost:8000/api/doc-pro/v1/pasien",
+      {
         headers: {
-          authorization: `Bearer ${info.token}`
-        } 
+          authorization: `Bearer ${info.token}`,
+        },
       }
     );
 
@@ -36,11 +37,9 @@ const Isi = () => {
 
   useEffect(() => {
     getPasienData();
-    console.log(pasien);
   }, []);
 
-console.log(pasien)
-
+  console.log(pasien);
 
   const PatientForm = () => {
     const [namaPasien, setNamaPasien] = useState("");
@@ -49,70 +48,66 @@ console.log(pasien)
     const [alamatPasien, setAlamatPasien] = useState("");
     const [tanggalLahirPasien, setTanggalLahir] = useState("");
     const [NikPasien, setNikPasien] = useState("");
-    
 
     const changeNamaPasien = (text) => {
       setNamaPasien(text.target.value);
       console.log(namaPasien);
     };
-  
+
     const changeFotoPasien = (photo) => {
       setFotoPasien(photo.target.value);
       console.log(fotoPasien);
-    }
-  
+    };
+
     const changeNomorHpPasien = (text) => {
       setNomorHp(text.target.value);
       console.log(nomorHpPasien);
-    }
-  
+    };
+
     const changeAlamatPasien = (text) => {
       setAlamatPasien(text.target.value);
       console.log(alamatPasien);
-    }
-  
+    };
+
     const changeTanggalLahirPasien = (tanggal) => {
       setTanggalLahir(tanggal.target.value);
       console.log(tanggalLahirPasien);
-    }
-  
+    };
+
     const changeNikPasien = (text) => {
       setNikPasien(text.target.value);
       console.log(NikPasien);
-    }
+    };
 
     const postPasien = () => {
       setPopupShow(false);
       postPatientData();
-
-    }
+    };
 
     const postPatientData = async () => {
-      let info =  JSON.parse(localStorage.getItem("userInfo"))
+      let info = JSON.parse(localStorage.getItem("userInfo"));
 
       const PatientData = {
         nama: namaPasien,
         tanggal_lahir: tanggalLahirPasien,
         nik: NikPasien,
-        
+
         alamat: alamatPasien,
         phone: nomorHpPasien,
-        
-       
-  
       };
-  
+
       try {
         const result = await axios.post(
           "http://localhost:8000/api/doc-pro/v1/pasien",
-          
-          PatientData,{
+
+          PatientData,
+          {
             headers: {
-              authorization: `Bearer ${info.token}`
-            } 
+              authorization: `Bearer ${info.token}`,
+            },
           }
         );
-  
+
         console.log(result);
       } catch (error) {
         console.log(error.response);
@@ -120,25 +115,23 @@ console.log(pasien)
       }
     };
 
-
     return (
       <div className="pasienForm">
         <div className="form1">
           <div className="fotoProfile">
-          <label className="LabelProfile">
-          <input
-            type="file"
-            className="inputImage"
-            name="fotoPasien"
-            value={fotoPasien}
-            onChange={changeFotoPasien}
-            onKeyUp={changeFotoPasien}
-          />
-          +
-          </label>
+            <label className="LabelProfile">
+              <input
+                type="file"
+                className="inputImage"
+                name="fotoPasien"
+                value={fotoPasien}
+                onChange={changeFotoPasien}
+                onKeyUp={changeFotoPasien}
+              />
+              +
+            </label>
 
-          <div className="LabelNama">Upload Profile</div>
-
+            <div className="LabelNama">Upload Profile</div>
           </div>
 
           <div className="namadanHp">
@@ -149,8 +142,8 @@ console.log(pasien)
                 className="inputTeks"
                 name="namaPasien"
                 value={namaPasien}
-              onChange={changeNamaPasien}
-              onKeyUp={changeNamaPasien}
+                onChange={changeNamaPasien}
+                onKeyUp={changeNamaPasien}
                 required
               />
             </div>
@@ -163,8 +156,8 @@ console.log(pasien)
                 name="nomorHp"
                 pattern="[0-9]{11}"
                 value={nomorHpPasien}
-              onChange={changeNomorHpPasien}
-              onKeyUp={changeNomorHpPasien}
+                onChange={changeNomorHpPasien}
+                onKeyUp={changeNomorHpPasien}
                 required
               />
             </div>
@@ -174,7 +167,14 @@ console.log(pasien)
         <div className="form2">
           <div className="formAlamat">
             <div className="Label">Alamat</div>
-            <input type="text" className="inputForm2" name="alamatPasien" value={alamatPasien} onChange={changeAlamatPasien} onKeyUp={changeAlamatPasien} />
+            <input
+              type="text"
+              className="inputForm2"
+              name="alamatPasien"
+              value={alamatPasien}
+              onChange={changeAlamatPasien}
+              onKeyUp={changeAlamatPasien}
+            />
           </div>
 
           <div className="formTTD">
@@ -183,7 +183,9 @@ console.log(pasien)
               type="date"
               className="inputForm2"
               name="TTDPasien"
-              value={tanggalLahirPasien} onChange={changeTanggalLahirPasien} onKeyUp={changeTanggalLahirPasien}
+              value={tanggalLahirPasien}
+              onChange={changeTanggalLahirPasien}
+              onKeyUp={changeTanggalLahirPasien}
               required
             />
           </div>
@@ -217,8 +219,6 @@ console.log(pasien)
     );
   };
 
-
-
   const NewAppointment = () => {
     return (
       <div className={popupShow ? "backgroundGelap" : "containerHidden"}>
@@ -237,49 +237,17 @@ console.log(pasien)
       </div>
     );
   };
-
-
-  const cardDataPasien = [
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Kurt,
-      nama: "Kurt cobain",
-      nomorTlp: "085891573243",
-      tanggalAdd: "22/10/2020",
-      viewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Liam,
-      nama: "Kurt cobain",
-      nomorTlp: "085891573243",
-      tanggalAdd: "22/10/2020",
-      viewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Alex,
-      nama: "Kurt cobain",
-      nomorTlp: "085891573243",
-      tanggalAdd: "22/10/2020",
-      viewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Nuno,
-      nama: "Kurt cobain",
-      nomorTlp: "085891573243",
-      tanggalAdd: "22/10/2020",
-      viewDetails: "View Details",
-    },
-    
-  ];
-
-
+  
+  const viewDetailHandler = async (e, index) => {
+    setIdPasien(index);
+    setPopupViewDetails(true);
+    console.log(index, viewDetails);
+  };
 
   return (
     <div className="ContainerLuar2">
       <ViewDetailsContainer
+        idPasien={idPasien}
         popupViewDetails={popupViewDetails}
         setPopupViewDetails={setPopupViewDetails}
       />
@@ -294,38 +262,35 @@ console.log(pasien)
         />
 
         <div className="CardContainer1">
-          
-        {pasien && pasien.map((data, index) => (
-            <CardPasien
-              
-              key={index}
-              imageDelete={data.deleteIcon}
-              image={data.photo}
-              nama={data.nama}
-              nomorTlp={data.phone}
-              tanggal={data.added_on}
-              btnViewDetails="View Details"
-              functionDetails={() => setPopupViewDetails(true)}
-            />
-          ))}
-          
-         
+          {pasien &&
+            pasien.map((data, index) => (
+              <CardPasien
+                key={index}
+                imageDelete={data.deleteIcon}
+                image={data.photo}
+                nama={data.nama}
+                nomorTlp={data.phone}
+                tanggal={data.added_on}
+                btnViewDetails="View Details"
+                functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
+              />
+            ))}
         </div>
-
-       
       </div>
     </div>
   );
 };
 
 const PasienContainer = () => {
-  const app = useContext(AppContext)
+  const app = useContext(AppContext);
   return app.isLoggedIn ? (
     <div className="ContainerUtama">
       <NavigationContainer />
       <Isi />
     </div>
-  ) : <Redirect to="/login"></Redirect>
+  ) : (
+    <Redirect to="/login"></Redirect>
+  );
 };
 
 export default PasienContainer;

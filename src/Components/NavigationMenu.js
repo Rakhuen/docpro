@@ -10,6 +10,8 @@ const NavigationMenu = () => {
   const historyActive = window.location.pathname === "/history";
   const inputbiayaActive = window.location.pathname === "/inputbiaya";
 
+  
+
   const Footer = (props) => {
     const { username } = props;
     const app = useContext(AppContext);

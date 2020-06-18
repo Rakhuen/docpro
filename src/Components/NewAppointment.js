@@ -26,8 +26,11 @@ const NewAppointment = (props) => {
   };
 
   const changeFotoPasien = (photo) => {
-    setFotoPasien(photo.target.value);
+    const url = photo.target.files[0];
+    const a= URL.createObjectURL(url)
+    setFotoPasien(photo.target.files[0])
     console.log(fotoPasien);
+    console.log("test", url, a)
   };
 
   const changeNomorHpPasien = (text) => {
@@ -80,6 +83,7 @@ const NewAppointment = (props) => {
 
   const postPatientData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
+    
     let inputData = new FormData();
     inputData.append("nama", namaPasien);
     inputData.append("nik", NikPasien);
@@ -96,27 +100,28 @@ const NewAppointment = (props) => {
       tanggal_lahir: tanggalLahirPasien,
       alamat: alamatPasien,
       phone: nomorHpPasien,
-      photoPasien: inputData.append("fotoPasien", File),
+      photoPasien: inputData.append("fotoPasien", File[0]),
       
 
     };
 
-    try {
-      const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/pasien",
-        PatientData,
-        {
-          headers: {
-             authorization: `Bearer ${info.token}`,
-            },
-          }
-      );
+    console.log(PatientData)
+    // try {
+    //   const result = await axios.post(
+    //     "http://localhost:8000/api/doc-pro/v1/pasien",
+    //     PatientData,
+    //     {
+    //       headers: {
+    //          authorization: `Bearer ${info.token}`,
+    //         },
+    //       }
+    //   );
 
-      console.log(result);
-    } catch (error) {
-      console.log(error.response);
-      alert(error.response.data.message);
-    }
+    //   console.log(result);
+    // } catch (error) {
+    //   console.log(error.response);
+    //   alert(error.response.data.message);
+    // }
   };
 
 
@@ -178,11 +183,11 @@ const NewAppointment = (props) => {
             type="file"
             className="inputImage"
             name="fotoPasien"
-            value={fotoPasien}
-            onChange={changeFotoPasien}
+            onChange={(event) =>changeFotoPasien(event)}
             onKeyUp={changeFotoPasien}
           />
           +
+          {fotoPasien && <img src={fotoPasien}></img>}
           </label>
 
           <div className="LabelNama">Upload Profile</div>
