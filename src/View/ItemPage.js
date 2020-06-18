@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ItemPage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import HeaderMenu from "../Components/HeaderButton.js";
 import "./NewItem.css";
 import axios from "axios";
+import { AppContext } from "../App";
+import { Redirect } from "react-router-dom";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [pilihan, setPilihan] = useState("NewServiceOrNewDrugs");
   const [service, setService] = useState([]);
-  const [drug, setDrug] = useState([]); //liat ini gue nambahin state
+  const [drug, setDrug] = useState([]); 
 
   const NewServiceOrNewDrugs = (
     <div className="btnPilihanContainer">
@@ -51,31 +53,31 @@ const Isi = () => {
   };
 
   const getDrugData = async () => {
-    // let info = JSON.parse(localStorage.getItem("userInfo"));
-    // console.log(info.token)
-    // const { data } = await axios.get(
-    //   "http://localhost:8000/api/doc-pro/v1/drug",
-    //   {
-    //     headers: {
-    //       authorization: `Bearer ${info.token}`,
-    //     },
-    //   }
-    // );
-    // await setDrug(data);
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(info.token)
+    const { data } = await axios.get(
+    "http://localhost:8000/api/doc-pro/v1/drug",
+     {
+      headers: {
+      authorization: `Bearer ${info.token}`,
+       },
+     }
+    );
+    await setDrug(data);
   };
 
   const getServiceData = async () => {
-    // let info = JSON.parse(localStorage.getItem("userInfo"));
-    // console.log(info.token)
-    // const { data } = await axios.get(
-    //   "http://localhost:8000/api/doc-pro/v1/service",
-    //   {
-    //     headers: {
-    //       authorization: `Bearer ${info.token}`,
-    //     },
-    //   }
-    // );
-    // await setService(data);
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(info.token)
+     const { data } = await axios.get(
+     "http://localhost:8000/api/doc-pro/v1/service",
+      {
+        headers: {
+       authorization: `Bearer ${info.token}`,
+        },
+      }
+     );
+     await setService(data);
   };
 
   useEffect(() => {
@@ -84,27 +86,27 @@ const Isi = () => {
   }, []);
 
   const postServiceData = async () => {
-    // let info = JSON.parse(localStorage.getItem("userInfo"));
-    // const ServiceData = {
-    //   service_name: namaItem,
-    //   service_desc: keteranganItem,
-    //   service_price: biayaItem,
-    // };
-    // try {
-    //   const result = await axios.post(
-    //     "http://localhost:8000/api/doc-pro/v1/service",
-    //     ServiceData,
-    //     {
-    //       headers: {
-    //         authorization: `Bearer ${info.token}`,
-    //       },
-    //     }
-    //   );
-    //   console.log(result);
-    // } catch (error) {
-    //   console.log(error.response);
-    //   alert(error.response.data.message);
-    // }
+     let info = JSON.parse(localStorage.getItem("userInfo"));
+     const ServiceData = {
+      service_name: namaItem,
+      service_desc: keteranganItem,
+      service_price: biayaItem,
+    };
+    try {
+      const result = await axios.post(
+      "http://localhost:8000/api/doc-pro/v1/service",
+      ServiceData,
+       {
+        headers: {
+           authorization: `Bearer ${info.token}`,
+          },
+        }
+      );
+      console.log(result);
+    } catch (error) {
+      console.log(error.response);
+      alert(error.response.data.message);
+     }
   };
 
   const postDrugData = async () => {
@@ -134,6 +136,11 @@ const Isi = () => {
     }
   };
 
+  const handlePopup = () => {
+    setPopupShow(false);
+    setPilihan("NewServiceOrNewDrugs");
+  };
+
   const postService = () => {
     handlePopup();
     postServiceData();
@@ -144,10 +151,7 @@ const Isi = () => {
     postDrugData();
   };
 
-  const handlePopup = () => {
-    setPopupShow(false);
-    setPilihan("NewServiceOrNewDrugs");
-  };
+ 
 
   const NewServiceForm = (
     <div className="pasienForm">
@@ -314,68 +318,7 @@ const Isi = () => {
     );
   };
 
-  // const treatmentData = [
-  //   {
-  //     nomor: "1",
-  //     nama: "Cabut gigi graham",
-  //     keterangan: "melakukan pencabutan gigi dengan tang",
-  //     biaya: "500.000",
-  //   },
-  //   {
-  //     nomor: "2",
-  //     nama: "Cabut gigi graham",
-  //     keterangan: "melakukan pencabutan gigi dengan tang",
-  //     biaya: "500.000",
-  //   },
-  //   {
-  //     nomor: "3",
-  //     nama: "Cabut gigi graham",
-  //     keterangan: "melakukan pencabutan gigi dengan tang",
-  //     biaya: "500.000",
-  //   },
-  // ];
-
-  // const drugsData = [
-  //   {
-  //     nomor: "1",
-  //     nama: "Nama Obat",
-  //     keterangan: "Obat untuk lala lili",
-  //     kuantitas: "25",
-  //     biaya: "500.000",
-  //   },
-  //   {
-  //     nomor: "2",
-  //     nama: "Nama Obat",
-  //     keterangan: "Obat untuk lala lili",
-  //     kuantitas: "15",
-  //     biaya: "500.000",
-  //   },
-  //   {
-  //     nomor: "3",
-  //     nama: "Nama Obat",
-  //     keterangan: "Obat untuk lala lili",
-  //     kuantitas: "10",
-  //     biaya: "500.000",
-  //   },
-  //   {
-  //     nomor: "4",
-  //     nama: "Nama Obat",
-  //     keterangan: "Obat untuk lala lili",
-  //     kuantitas: "35",
-  //     biaya: "500.000",
-  //   },
-  //   {
-  //     nomor: "5",
-  //     nama: "Nama Obat",
-  //     keterangan: "Obat untuk lala lili",
-  //     kuantitas: "55",
-  //     biaya: "500.000",
-  //   },
-  // ];
-
-  // const [table, setTable] = useState(treatmentData);
-  // DI ATAS INI GUE COMMAND KARNA KITA UDAH GA BUTUH, KARNA TERNYATA RESPONSE DARI BACKEND PROPERTYNYA BEDA BEDA JADI HARUS SATU SATU
-  //CERNA SENDIRI MAKSUDNYA GIMANA
+ 
 
   const [activeTab, setActiveTab] = useState("service");
 
@@ -462,15 +405,16 @@ const Isi = () => {
   );
 };
 
-//itu isi table gue jadiin ada dua, jadi kalo bacanya activeTabnya si service berarti isinya gitu, kalo activeTabnya drug ya isinya gitu. cek bener bener
 
 const InputBiayaContainer = () => {
-  return (
+  const app = useContext(AppContext)
+
+  return app.isLoggedIn ? (
     <div className="ContainerUtama">
       <NavigationContainer />
       <Isi />
     </div>
-  );
+  ) : <Redirect to="/login" ></Redirect>
 };
 
 export default InputBiayaContainer;

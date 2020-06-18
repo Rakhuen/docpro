@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./navigation.css";
 import { NavLink } from "react-router-dom";
 import Courage from "../asset/courage.jpg";
+import { AppContext } from "../App";
 
 const NavigationMenu = () => {
   const homeActive = window.location.pathname === "/home";
@@ -11,9 +12,11 @@ const NavigationMenu = () => {
 
   const Footer = (props) => {
     const { username } = props;
+    const app = useContext(AppContext);
 
     const handleLogout = () => {
-      alert("logout");
+      app.setIsLoggedIn(false);
+      localStorage.clear();
     };
 
     return (
@@ -29,11 +32,9 @@ const NavigationMenu = () => {
           </div>
           <div className="signoutContainer">
             <div className="username">{username} </div>
-            <NavLink to="/">
-              <button className="btnSignout" onClick={() => handleLogout}>
-                Sign out
-              </button>
-            </NavLink>
+            <button className="btnSignout" onClick={() => handleLogout()}>
+              Sign out
+            </button>
           </div>
         </div>
       </div>

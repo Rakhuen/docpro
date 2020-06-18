@@ -19,6 +19,7 @@ const NewAppointment = (props) => {
   const [keluhanPasien, setKeluhanPasien] = useState("");
   const [fotoPengobatanPasien, setFotoPengobatan] = useState("");
 
+
   const changeNamaPasien = (text) => {
     setNamaPasien(text.target.value);
     console.log(namaPasien);
@@ -74,7 +75,20 @@ const NewAppointment = (props) => {
     console.log(fotoPengobatanPasien);
   };
 
+  
+
+
   const postPatientData = async () => {
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    let inputData = new FormData();
+    inputData.append("nama", namaPasien);
+    inputData.append("nik", NikPasien);
+    inputData.append("tanggal_lahir", tanggalLahirPasien);
+    inputData.append("alamat", alamatPasien);
+    inputData.append("phone", nomorHpPasien);
+    inputData.append("photoPasien", File);
+
+
     
     const PatientData = {
       nama: namaPasien,
@@ -82,15 +96,20 @@ const NewAppointment = (props) => {
       tanggal_lahir: tanggalLahirPasien,
       alamat: alamatPasien,
       phone: nomorHpPasien,
-      photoPasien: fotoPasien,
-     
+      photoPasien: inputData.append("fotoPasien", File),
+      
 
     };
 
     try {
       const result = await axios.post(
         "http://localhost:8000/api/doc-pro/v1/pasien",
-        PatientData
+        PatientData,
+        {
+          headers: {
+             authorization: `Bearer ${info.token}`,
+            },
+          }
       );
 
       console.log(result);
@@ -102,21 +121,29 @@ const NewAppointment = (props) => {
 
 
   const postAppointmentData = async () => {
-    
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    let inputData = new FormData();
+   
+
     const AppointmentData = {
       keperluan: keperluanPasien,
       jam: jamBookingPasien,
       tanggal: tanggalBookingPasien,
       keluhan: keluhanPasien,
-      photoData: fotoPengobatanPasien,
+      photoData: inputData.append("photoData", File),
      
 
     };
 
     try {
       const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/pasien",
-        AppointmentData
+        "http://localhost:8000/api/doc-pro/v1/appointment",
+        AppointmentData,
+        {
+          headers: {
+             authorization: `Bearer ${info.token}`,
+            },
+          }
       );
 
       console.log(result);
@@ -126,7 +153,21 @@ const NewAppointment = (props) => {
     }
   };
 
+  const postPasien = () => {
+    setNextForm(true);
+    postPatientData();
+  };
 
+  const postAppointment = () => {
+    handlePopup();
+    postAppointmentData();
+  };
+
+  const handlePopup = () => {
+    setPopup(false);
+    setNextForm(false);
+    setPilihan("OldPatientOrNewPatient");
+  };
 
   const PatientForm = (
     <div className="pasienForm">
@@ -225,7 +266,7 @@ const NewAppointment = (props) => {
           <button className="btnBack" onClick={() => setPilihan("OldPatientOrNewPatient")}>
             back
           </button>
-          <button className="btnSubmit" onClick={() => setNextForm(true)} onClick={() => postPatientData()}>
+          <button className="btnSubmit" onClick={() => postPasien()}>
             Next
           </button>
         </div>
@@ -233,7 +274,7 @@ const NewAppointment = (props) => {
   );
 
   const AppointmentForm = (
-    <div classname="bookingContainer">
+    <div className="bookingContainer">
       <div className="formAtas">
         <div className="formKeperluan">
           <div className="Label">Keperluan</div>
@@ -307,7 +348,7 @@ const NewAppointment = (props) => {
           <button className="btnBack" onClick={() => setNextForm(false)}  >
             back
           </button>
-          <button className="btnSubmit" onClick={() => handlePopup()} onClick={() => postAppointmentData()}>
+          <button className="btnSubmit" onClick={() =>postAppointment()}>
             submit
           </button>
         </div>
@@ -461,11 +502,7 @@ const OldPatientForm = (
 );
 
 
-  const handlePopup = () => {
-    setPopup(false);
-    setNextForm(false);
-    setPilihan("OldPatientOrNewPatient");
-  };
+
 
   let popupContent 
   if (pilihan === "OldPatientOrNewPatient") {

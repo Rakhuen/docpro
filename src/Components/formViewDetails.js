@@ -1,13 +1,41 @@
 import React, { useState, useEffect } from "react";
 
 import "./formViewDetails.css";
-import IsiHistory from "./IsiHistoryPasien.js";
 import Kurt from "../asset/MaskGroup.png";
 import cabutgigi from "../asset/cabutgigi.png";
 import gigi from "../asset/gigi.png";
 import axios from "axios";
 import {decryptNik} from "./decrypt.js";
 
+
+const IsiHistory = (props) => {
+  const {
+    tanggalHistory,
+    namaHistory,
+    keluhanHistory,
+    penangananHistory,
+    biayaHistory,
+  } = props;
+  return (
+    <div className="IsiKeterangan">
+      <div className="ItemTanggal">
+        <div className="IsiTanggal"> {tanggalHistory}</div>
+      </div>
+      <div className="ItemNama">
+        <div className="IsiNamaHistory">{namaHistory}</div>
+      </div>
+      <div className="Item">
+        <div className="IsiKeluhanHistory">{keluhanHistory}</div>
+      </div>
+      <div className="Item">
+        <div className="IsiPenangananHistory">{penangananHistory}</div>
+      </div>
+      <div className="Item">
+        <div className="IsiBiayaHistory">{biayaHistory}</div>
+      </div>
+    </div>
+  );
+};
 
 const DataPhotosPasien = (props) => {
   const { image } = props;

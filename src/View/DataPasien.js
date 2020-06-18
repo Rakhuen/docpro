@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./HomePage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import HeaderMenu from "../Components/HeaderButton.js";
@@ -11,6 +11,8 @@ import DeleteImage from "../asset/delete.png";
 import "../Components/NewAppointment.css";
 import ViewDetailsContainer from "../Components/formViewDetails.js";
 import axios from "axios";
+import { AppContext } from "../App";
+import { Redirect } from "react-router-dom";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
@@ -317,12 +319,13 @@ console.log(pasien)
 };
 
 const PasienContainer = () => {
-  return (
+  const app = useContext(AppContext)
+  return app.isLoggedIn ? (
     <div className="ContainerUtama">
       <NavigationContainer />
       <Isi />
     </div>
-  );
+  ) : <Redirect to="/login"></Redirect>
 };
 
 export default PasienContainer;

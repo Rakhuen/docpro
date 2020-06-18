@@ -1,86 +1,36 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./HistoryPasien.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import "../Components/IsiHistoryPasien.css"
 import "./ItemPage.css";
+import axios from "axios";
+import { AppContext } from "../App";
+import { Redirect } from "react-router-dom";
 
-const IsiHistory = (props) => {
-  const {
-    tanggalHistory,
-    namaHistory,
-    keluhanHistory,
-    penangananHistory,
-  } = props;
-  return (
-    <div className="IsiKeterangan">
-      <div className="ItemTanggal">
-        <div className="IsiTanggal"> {tanggalHistory}</div>
-      </div>
-      <div className="ItemNama">
-        <div className="IsiNamaHistory">{namaHistory}</div>
-      </div>
-      <div className="Item">
-        <div className="IsiKeluhanHistory">{keluhanHistory}</div>
-      </div>
-      <div className="Item">
-        <div className="IsiPenangananHistory">{penangananHistory}</div>
-      </div>
-    </div>
-  );
-};
 
 const Isi = () => {
-  const historyData = [
-    {
-      date: "22/10/2020",
-      name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "500.000",
-    },
-    {
-      date: "22/10/2020",
-      name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih ada ",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "500.000",
-    },
-    {
-      date: "22/10/2020",
-      name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "500.000",
-    },
-    {
-      date: "22/10/2020",
-      name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "500.000",
-    },
-    {
-      date: "22/10/2020",
-      name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "500.000",
-    },
-    {
-      date: "22/10/2020",
-      name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "500.000",
-    },
-    {
-      date: "22/10/2020",
-      name: "Nandhika Pratama Putra",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "500.000",
-    },
-  ];
+  const [historyData, setHistoryData] = useState([]);
+
+  const getHistoryData = async () => {
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(info.token)
+     const { data } = await axios.get(
+     "http://localhost:8000/api/doc-pro/v1/history",
+      {
+        headers: {
+       authorization: `Bearer ${info.token}`,
+        },
+      }
+     );
+     await setHistoryData(data);
+  };
+
+  useEffect(() => {
+    getHistoryData();
+    console.log(historyData);
+  }, []);
+
+ console.log(historyData);
 
   return (
     <div className="ContainerLuarHistory">
@@ -100,15 +50,25 @@ const Isi = () => {
             <th>Biaya</th>
           </tr>
 
-          {historyData.map((data, index) => (
-              <tr key={index}>
-                <td>{data.date} </td>
-                <td className="NameData">{data.name} </td>
-                <td>{data.concern} </td>
-          <td >{data.treatment} </td>
-          <td className="PriceData">Rp.{data.biaya} </td>
-              </tr>
-            ))}
+          {historyData && historyData.map ((data, index) => { 
+console.log(data)
+return(
+
+<tr key={index}>
+          <td>{data.appointmet.tanggal} </td>
+          <td className="NameData">{data.pasien.nama} </td>
+          <td>{data.appointmet.keluhan} </td>
+    <td >{data.diagnosa.penanganan} </td>
+    <td className="PriceData">Rp.{data.diagnosa.total_biaya} </td>
+        </tr>
+)
+})}
+              
+            
+
+
+         
+            
         </table>
       </div>
 
@@ -119,12 +79,13 @@ const Isi = () => {
 };
 
 const HistoryContainer = () => {
-  return (
+  const app = useContext(AppContext)
+  return app.isLoggedIn ? (
     <div className="ContainerUtama">
       <NavigationContainer />
       <Isi />
     </div>
-  );
+  ) : <Redirect to="/login"></Redirect>
 };
 
 export default HistoryContainer;

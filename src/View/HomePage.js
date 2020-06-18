@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./HomePage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import DeleteImage from "../asset/delete.png";
@@ -14,6 +14,8 @@ import Nuno from "../asset/nuno.png";
 import "../Components/NewAppointment.css";
 import "../Components/FinishForm.css";
 import axios from "axios";
+import { AppContext } from "../App";
+import { Redirect } from "react-router-dom";
 
 
 const Isi = () => {
@@ -21,109 +23,6 @@ const Isi = () => {
   const [popupFinish, setPopupFinish] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
   const [appointment, setAppointment] = useState();
-
-  const cardData = [
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Kurt,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Liam,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Alex,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Nuno,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Kurt,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Kurt,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Kurt,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Kurt,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Kurt,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-    {
-      deleteIcon: DeleteImage,
-      fotoPasien: Kurt,
-      nama: "Kurt cobain",
-      treatment: "Kontrol behel",
-      jam: "11:00",
-      btnFinish: "Finish",
-      btnCancel: "Cancel",
-      btnViewDetails: "View Details",
-    },
-  ];
 
   const getAppointmentData = async () => {
     let info =  JSON.parse(localStorage.getItem("userInfo")) 
@@ -189,12 +88,14 @@ console.log(appointment)
 };
 
 const HomeContainer = () => {
-  return (
+  const app = useContext(AppContext)
+
+  return app.isLoggedIn ? (
     <div className="ContainerUtama">
       <NavigationContainer />
       <Isi />
     </div>
-  );
+  ) : <Redirect to="/login"></Redirect>
 };
 
 export default HomeContainer;

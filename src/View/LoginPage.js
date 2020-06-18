@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./LoginPage.css";
 import foto from "../asset/image2.png";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { AppContext } from "../App";
 
 const Header = () => {
   return (
@@ -15,6 +16,7 @@ const Header = () => {
 const Form = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const app = useContext(AppContext)
 
   const postLoginData = async () => {
     
@@ -36,7 +38,7 @@ const Form = () => {
       };
       console.log(user);
       localStorage.setItem("userInfo", JSON.stringify(user));
-
+      app.setIsLoggedIn(true)
       console.log(result);
     } catch (error) {
       setPassword("");
