@@ -30,7 +30,7 @@ function Dropdown({ title, items = [], multiSelect = false }) {
 
 
 return (
-  <div className="dd=wrapper">
+  <div className="dd-wrapper">
     <div
       tabIndex={0}
       className="dd-header"
@@ -45,11 +45,12 @@ return (
         <p>{open ? "Close" : "Open"}</p>
       </div>
     </div>
+    
     {open && (
       <ul className="dd-list">
         {items.map((item) => (
           <li className="dd-list-item" key={item.id}>
-            <button type="button" onClick={() => handleOnClick(item)}>
+            <button type="button" className="dropDownOptions" onClick={() => handleOnClick(item)}>
               <span>{item.value}</span>
               <span>{isItemInSelection(item) && "Selected"} </span>
             </button>

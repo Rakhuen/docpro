@@ -113,50 +113,7 @@ const ViewDetailsContainer = (props) => {
 
   console.log(viewDetails);
 
-  const historyData = [
-    {
-      tanggal: "22/10/2020",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "2342342",
-    },
-    {
-      tanggal: "22/10/2020",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "2342342",
-    },
-    {
-      tanggal: "22/10/2020",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "2342342",
-    },
-    {
-      tanggal: "22/10/2020",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "2342342",
-    },
-    {
-      tanggal: "22/10/2020",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "2342342",
-    },
-    {
-      tanggal: "22/10/2020",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "2342342",
-    },
-    {
-      tanggal: "22/10/2020",
-      concern: "Gigi graham copot, tetapi masih ada sebagian yang menempel",
-      treatment: "Melakukan pencabutan untuk gigi yang masih menempel",
-      biaya: "2342342",
-    },
-  ];
+ 
 
   const photoData = [
     {
@@ -203,14 +160,14 @@ const ViewDetailsContainer = (props) => {
           </div>
 
           <div className="scrolling">
-            {historyData.map((data, index) => (
+            {viewDetails && viewDetails.historys.map((data, index) => (
               <div className="IsiKeteranganContainer" key={index}>
                 <IsiHistory
                   key={index}
-                  tanggalHistory={data.tanggal}
-                  biayaHistory={data.biaya}
-                  keluhanHistory={data.concern}
-                  penangananHistory={data.treatment}
+                  tanggalHistory={data.appointment.tanggal}
+                  biayaHistory={data.diagnosa.total_biaya}
+                  keluhanHistory={data.appointment.keluhan}
+                  penangananHistory={data.diagnosa.penanganan}
                 />
               </div>
             ))}
@@ -235,8 +192,10 @@ const ViewDetailsContainer = (props) => {
       </label>
       <div className="scrolling">
         <div className="photos">
-          {photoData.map((data, index) => (
-            <DataPhotosPasien key={index} image={data.image} />
+          {viewDetails && viewDetails.photos.map((data, index) => (
+            <DataPhotosPasien 
+            key={index} 
+            image={data.photo.image} />
           ))}
         </div>
       </div>
@@ -248,8 +207,8 @@ const ViewDetailsContainer = (props) => {
       {viewDetails && (
         <IsiInfoPasien
           image={viewDetails.pasien.photo}
-          infoNamaPasien={viewDetails.pasien.phone}
-          infoNomorHpPasien={viewDetails.pasien.nama}
+          infoNamaPasien={viewDetails.pasien.nama}
+          infoNomorHpPasien={viewDetails.pasien.phone}
           infoAlamatPasien={viewDetails.pasien.alamat}
           infoTanggalLahirPasien={viewDetails.pasien.tanggal_lahir}
           infoNikPasien={viewDetails.pasien.nik}

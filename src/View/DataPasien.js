@@ -3,23 +3,37 @@ import "./HomePage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
 import HeaderMenu from "../Components/HeaderButton.js";
 import CardPasien from "../Components/ContentPasien.js";
-import Kurt from "../asset/MaskGroup.png";
-import Liam from "../asset/liam.png";
-import Alex from "../asset/alex.png";
-import Nuno from "../asset/nuno.png";
-import DeleteImage from "../asset/delete.png";
 import "../Components/NewAppointment.css";
 import ViewDetailsContainer from "../Components/formViewDetails.js";
 import axios from "axios";
 import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
+import Dropdown from "../Components/DropDown.js";
+import  "../Components/DropDown.css";
+import { Multiselect } from 'multiselect-react-dropdown';
 
+const items = [
+    {
+      id: 1,
+      value: "nesia",
+    },
+    {
+      id: 2,
+      value: "shafira",
+    },
+    {
+      id: 3,
+      value: "yunindya",
+    },
+  ];
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
   const [pasien, setPasien] = useState();
   const [idPasien, setIdPasien] = useState();
   const [viewDetails, setViewDetails] = useState();
+  const [drug, setDrug] = useState([]); 
+  const [selectedObat, setSelectedObat] = useState([]); 
 
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -37,9 +51,25 @@ const Isi = () => {
 
   useEffect(() => {
     getPasienData();
+    getDrugData();
   }, []);
-
+ 
   console.log(pasien);
+
+
+  const getDrugData = async () => {
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(info.token)
+    const { data } = await axios.get(
+    "http://localhost:8000/api/doc-pro/v1/drug",
+     {
+      headers: {
+      authorization: `Bearer ${info.token}`,
+       },
+     }
+    );
+    await setDrug(data);
+  };
 
   const PatientForm = () => {
     const [namaPasien, setNamaPasien] = useState("");
@@ -48,6 +78,8 @@ const Isi = () => {
     const [alamatPasien, setAlamatPasien] = useState("");
     const [tanggalLahirPasien, setTanggalLahir] = useState("");
     const [NikPasien, setNikPasien] = useState("");
+
+    
 
     const changeNamaPasien = (text) => {
       setNamaPasien(text.target.value);
@@ -237,7 +269,7 @@ const Isi = () => {
       </div>
     );
   };
-  
+
   const viewDetailHandler = async (e, index) => {
     setIdPasien(index);
     setPopupViewDetails(true);
@@ -262,7 +294,7 @@ const Isi = () => {
         />
 
         <div className="CardContainer1">
-          {pasien &&
+          {/* {pasien &&
             pasien.map((data, index) => (
               <CardPasien
                 key={index}
@@ -274,7 +306,22 @@ const Isi = () => {
                 btnViewDetails="View Details"
                 functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
               />
-            ))}
+            ))} */}
+
+     
+       
+        
+          
+          <Multiselect
+           options={drug}
+           displayValue="drug_name"
+           selectedValues={selectedObat}
+       />
+        
+        
+      
+
+
         </div>
       </div>
     </div>

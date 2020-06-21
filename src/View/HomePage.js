@@ -7,10 +7,6 @@ import Card from "../Components/Content.js";
 import NewAppointment from "../Components/NewAppointment.js";
 import FinishContainer from "../Components/FinishForm.js";
 import ViewDetailsContainer from "../Components/formViewDetails.js";
-import Kurt from "../asset/MaskGroup.png";
-import Liam from "../asset/liam.png";
-import Alex from "../asset/alex.png";
-import Nuno from "../asset/nuno.png";
 import "../Components/NewAppointment.css";
 import "../Components/FinishForm.css";
 import axios from "axios";
@@ -22,6 +18,7 @@ const Isi = () => {
   const [popupFinish, setPopupFinish] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
   const [appointment, setAppointment] = useState();
+  const [idPasien, setIdPasien] = useState();
 
   const getAppointmentData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -44,13 +41,27 @@ const Isi = () => {
 
   console.log(appointment);
 
+  const finishFormHandler = async (e, index) => {
+    setIdPasien(index);
+    setPopupFinish(true);
+    console.log(index);
+  };
+
+  const viewDetailHandler = async (e, index) => {
+    setIdPasien(index);
+    setPopupViewDetails(true);
+    console.log(index);
+  };
+
   return (
     <div className="ContainerLuar2">
       <ViewDetailsContainer
+      idPasien={idPasien}
         popupViewDetails={popupViewDetails}
         setPopupViewDetails={setPopupViewDetails}
       />
       <FinishContainer
+        idPasien={idPasien}
         popupFinish={popupFinish}
         setPopupFinish={setPopupFinish}
       />
@@ -78,8 +89,8 @@ const Isi = () => {
                 btnFinish="Finish"
                 btnCancel="Cancel"
                 btnViewDetails="View Details"
-                functionFinish={() => setPopupFinish(true)}
-                functionDetails={() => setPopupViewDetails(true)}
+                functionFinish={(e) => finishFormHandler(e, data.id_pasien)}
+                functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
               />
             ))
           ) : (
@@ -90,6 +101,8 @@ const Isi = () => {
     </div>
   );
 };
+
+
 
 const HomeContainer = () => {
   const app = useContext(AppContext);
