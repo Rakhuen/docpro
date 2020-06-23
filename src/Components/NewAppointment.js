@@ -3,7 +3,7 @@ import "./NewAppointment.css";
 import axios from "axios";
 
 const NewAppointment = (props) => {
-  const { popup, setPopup } = props;
+  const { popup, setPopup,  } = props;
   const [nextForm, setNextForm] = useState(false);
   const [pilihan, setPilihan] = useState("OldPatientOrNewPatient");
 
@@ -21,13 +21,9 @@ const NewAppointment = (props) => {
   const [preview, setPreview] = useState();
   const [idPasien, setIdPasien] = useState();
 
-  const setFile = (event) => {
-    let file = event.target.files[0];
-    const show = URL.createObjectURL(file);
-    setPreview(show);
-    console.log(file);
-    fotoPasien(file);
-  };
+
+  
+
 
   const changeNamaPasien = (text) => {
     setNamaPasien(text.target.value);
@@ -35,12 +31,13 @@ const NewAppointment = (props) => {
   };
 
   const changeFotoPasien = (photo) => {
+    
     const file = photo.target.files[0];
-    const a = URL.createObjectURL(file);
+    const a = URL.createObjectURL(file)
     setPreview(a);
-    setFotoPasien(file);
+    setFotoPasien(file)
     console.log(fotoPasien);
-    console.log("test", file, a);
+    console.log("test", file, a)
   };
 
   const changeNomorHpPasien = (text) => {
@@ -88,25 +85,28 @@ const NewAppointment = (props) => {
     console.log(fotoPengobatanPasien);
   };
 
+
   const postPatientData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
-
+    
     let inputData = new FormData();
+   
     inputData.append("nama", namaPasien);
     inputData.append("nik", NikPasien);
     inputData.append("tanggal_lahir", tanggalLahirPasien);
     inputData.append("alamat", alamatPasien);
     inputData.append("phone", nomorHpPasien);
-    inputData.append("photoPasien", fotoPasien);
+    inputData.append("photoPasien", fotoPasien);    
     try {
       const result = await axios.post(
         "http://localhost:8000/api/doc-pro/v1/pasien",
         inputData,
         {
           headers: {
-            authorization: `Bearer ${info.token}`,
-          },
-        }
+             authorization: `Bearer ${info.token}`,
+            
+            },
+          }
       );
 
       console.log(result, "test");
@@ -117,9 +117,11 @@ const NewAppointment = (props) => {
     }
   };
 
+  console.log(idPasien);
+
   const postAppointmentData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
-
+    
     let inputData = new FormData();
     inputData.append("id_pasien", idPasien);
     inputData.append("keperluan", keperluanPasien);
@@ -128,15 +130,17 @@ const NewAppointment = (props) => {
     inputData.append("keluhan", keluhanPasien);
     inputData.append("photoData", fotoPengobatanPasien);
 
+
+
     try {
       const result = await axios.post(
         "http://localhost:8000/api/doc-pro/v1/appointment",
         inputData,
         {
           headers: {
-            authorization: `Bearer ${info.token}`,
-          },
-        }
+             authorization: `Bearer ${info.token}`,
+            },
+          }
       );
 
       console.log(result);
@@ -146,12 +150,14 @@ const NewAppointment = (props) => {
     }
   };
 
-  const postPasien = () => {
+  const postPasien = async (e, index)  => {
+    
     setNextForm(true);
     postPatientData();
   };
 
-  const postAppointment = () => {
+  const postAppointment =  () => {
+    
     handlePopup();
     postAppointmentData();
   };
@@ -167,18 +173,20 @@ const NewAppointment = (props) => {
       <div className="form1">
         <div className="fotoProfile">
           <label className="LabelProfile">
-            <input
-              type="file"
-              className="inputImage"
-              name="fotoPasien"
-              onChange={(event) => changeFotoPasien(event)}
-              onKeyUp={changeFotoPasien}
-            />
-            {!fotoPasien && <p>+</p>}
-            {fotoPasien && <img src={preview} className="LabelProfile"></img>}
+          <input
+            type="file"
+            className="inputImage"
+            name="fotoPasien"
+            onChange={(event) =>changeFotoPasien(event)}
+            onKeyUp={changeFotoPasien}
+          />
+          {!fotoPasien && <p>+</p>}
+          {fotoPasien && <img src={preview} className="LabelProfile"></img>}
           </label>
 
           <div className="LabelNama">Upload Profile</div>
+
+
         </div>
 
         <div className="namadanHp">
@@ -254,20 +262,18 @@ const NewAppointment = (props) => {
       </div>
 
       <div className="backNNext">
-        <button
-          className="btnBack"
-          onClick={() => setPilihan("OldPatientOrNewPatient")}
-        >
-          back
-        </button>
-        <button className="btnSubmit" onClick={() => postPasien()}>
-          Next
-        </button>
-      </div>
+          <button className="btnBack" onClick={() => setPilihan("OldPatientOrNewPatient")}>
+            back
+          </button>
+          <button className="btnSubmit" onClick={(e) => postPasien()}>
+            Next
+          </button>
+        </div>
     </div>
   );
 
   const AppointmentForm = (
+
     <div className="bookingContainer">
       <div className="formAtas">
         <div className="formKeperluan">
@@ -324,24 +330,25 @@ const NewAppointment = (props) => {
         <div className="uploadPhotos">
           <div className="Label">Photo/File</div>
           <label className="btnUploadPhotos">
-            <input
-              type="file"
-              className="inputPhoto"
-              name="fotoPengobatan"
-              value={fotoPengobatanPasien}
-              onChange={changeFotoPengobatanPasien}
-              onKeyUp={changeFotoPengobatanPasien}
-              required
-            />
-            +Upload photos here
+          <input
+            type="file"
+            className="inputPhoto"
+            name="fotoPengobatan"
+            value={fotoPengobatanPasien}
+            onChange={changeFotoPengobatanPasien}
+            onKeyUp={changeFotoPengobatanPasien}
+            required
+          />
+
+           +Upload photos here
           </label>
         </div>
 
         <div className="backNsubmit">
-          <button className="btnBack" onClick={() => setNextForm(false)}>
+          <button className="btnBack" onClick={() => setNextForm(false)}  >
             back
           </button>
-          <button className="btnSubmit" onClick={() => postAppointment()}>
+          <button className="btnSubmit" onClick={() =>postAppointment()}>
             submit
           </button>
         </div>
@@ -350,17 +357,20 @@ const NewAppointment = (props) => {
   );
 
   const OldPatientOrNewPatient = (
-    <div className="btnPilihanContainer">
-      <button className="btnPilihan" onClick={() => setPilihan("OldPatient")}>
-        Old Patient
-      </button>
+      
+      
+        <div className="btnPilihanContainer">
+          <button className="btnPilihan" onClick={() => setPilihan("OldPatient")}>
+            Old Patient
+          </button>
 
-      <div className="pembatas">OR</div>
+          <div className="pembatas">OR</div>
 
-      <button className="btnPilihan" onClick={() => setPilihan("NewPatient")}>
-        +New patient
-      </button>
-    </div>
+          <button className="btnPilihan" onClick={() => setPilihan("NewPatient")}>
+            +New patient
+          </button>
+        </div>  
+    
   );
 
   const OldPatientData = [
@@ -450,56 +460,66 @@ const NewAppointment = (props) => {
     },
   ];
 
-  const OldPatientForm = (
-    <div className="OldPatientTableContainer">
-      <div className="OldPatientTable">
-        <table>
-          <tr>
-            <th>No.</th>
-            <th>Nama</th>
-            <th>No. Hp</th>
-            <th>NIK</th>
-          </tr>
 
-          {OldPatientData.map((data, index) => (
-            <tr key={index}>
-              <td>{data.nomor} </td>
-              <td className="NameData">{data.nama} </td>
+  
+const OldPatientForm = (
+  <div className="OldPatientTableContainer">
+  <div className="OldPatientTable">
+    
+  <table>
+    <tr>
+      <th>No.</th>
+      <th>Nama</th>
+      <th>No. Hp</th>
+      <th>NIK</th>
+      
+    </tr>
+    
+    {OldPatientData.map((data, index) => (
+        <tr key={index}>
+          <td>{data.nomor} </td>
+          <td className="NameData">{data.nama} </td>
+          
+          <td className="PriceData"> {data.nomorHp} </td>
+          <td className="NikData">{data.nomorNIK} </td>
+          
+        </tr>
+      ))}
+      
+  </table>
+  
+</div>
 
-              <td className="PriceData"> {data.nomorHp} </td>
-              <td className="NikData">{data.nomorNIK} </td>
-            </tr>
-          ))}
-        </table>
-      </div>
+<div className="backNNext">
+          <button className="btnBack" onClick={() => setPilihan("OldPatientOrNewPatient")}>
+            back
+          </button>
+          <button className="btnSubmit" onClick={() => setNextForm(true)}>
+            Next
+          </button>
+        </div>
+        </div>
+);
 
-      <div className="backNNext">
-        <button
-          className="btnBack"
-          onClick={() => setPilihan("OldPatientOrNewPatient")}
-        >
-          back
-        </button>
-        <button className="btnSubmit" onClick={() => setNextForm(true)}>
-          Next
-        </button>
-      </div>
-    </div>
-  );
 
-  let popupContent;
+
+
+  let popupContent 
   if (pilihan === "OldPatientOrNewPatient") {
-    popupContent = OldPatientOrNewPatient;
+    popupContent = OldPatientOrNewPatient
   }
   if (pilihan === "OldPatient") {
-    popupContent = OldPatientForm;
+    popupContent = OldPatientForm
   }
   if (pilihan === "NewPatient") {
-    popupContent = PatientForm;
+    popupContent = PatientForm
   }
-  if (nextForm === true) {
-    popupContent = AppointmentForm;
+  if(nextForm === true){
+    popupContent = AppointmentForm
+
   }
+  
+
 
   return (
     <div className={popup ? "backgroundGelap" : "containerHidden"}>
@@ -511,8 +531,11 @@ const NewAppointment = (props) => {
               X
             </button>
           </div>
+    
+       
 
           {popupContent}
+          
         </div>
       </div>
     </div>
