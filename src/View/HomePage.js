@@ -20,10 +20,6 @@ const Isi = () => {
   const [appointment, setAppointment] = useState();
   const [idPasien, setIdPasien] = useState();
 
-
-
- 
-
   const getAppointmentData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     console.log(info.token);
@@ -60,7 +56,7 @@ const Isi = () => {
   return (
     <div className="ContainerLuar2">
       <ViewDetailsContainer
-      idPasien={idPasien}
+        idPasien={idPasien}
         popupViewDetails={popupViewDetails}
         setPopupViewDetails={setPopupViewDetails}
       />
@@ -69,13 +65,9 @@ const Isi = () => {
         popupFinish={popupFinish}
         setPopupFinish={setPopupFinish}
       />
-      <NewAppointment 
-       
-        popup={popupShow} 
-        setPopup={setPopupShow} 
-      />
+      <NewAppointment popup={popupShow} setPopup={setPopupShow} />
 
-        <div className="ContainerDua">
+      <div className="ContainerDua">
         <div className="Header">Jadwal Pasien</div>
 
         <HeaderMenu
@@ -89,7 +81,6 @@ const Isi = () => {
             appointment.map((data, index) => (
               <Card
                 key={index}
-                
                 image={data.photoPasien}
                 nama={data.nama}
                 perawatan={data.keperluan}
@@ -109,8 +100,6 @@ const Isi = () => {
     </div>
   );
 };
-
-
 
 const HomeContainer = () => {
   const app = useContext(AppContext);
