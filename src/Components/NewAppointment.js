@@ -103,7 +103,7 @@ const NewAppointment = (props) => {
       );
 
       console.log(result, "test");
-      setIdPasien(result.id_pasien);
+      setIdPasien(result.data.id_pasien);
     } catch (error) {
       console.log(error.response);
       alert(error.response.message);
