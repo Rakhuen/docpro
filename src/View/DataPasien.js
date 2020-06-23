@@ -294,7 +294,7 @@ const Isi = () => {
         />
 
         <div className="CardContainer1">
-          {/* {pasien &&
+          {pasien &&
             pasien.map((data, index) => (
               <CardPasien
                 key={index}
@@ -306,7 +306,7 @@ const Isi = () => {
                 btnViewDetails="View Details"
                 functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
               />
-            ))} */}
+            ))}
 
      
        

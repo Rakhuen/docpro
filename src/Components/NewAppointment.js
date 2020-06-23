@@ -3,7 +3,7 @@ import "./NewAppointment.css";
 import axios from "axios";
 
 const NewAppointment = (props) => {
-  const { popup, setPopup } = props;
+  const { popup, setPopup,  } = props;
   const [nextForm, setNextForm] = useState(false);
   const [pilihan, setPilihan] = useState("OldPatientOrNewPatient");
 
@@ -18,6 +18,19 @@ const NewAppointment = (props) => {
   const [jamBookingPasien, setJamBooking] = useState("");
   const [keluhanPasien, setKeluhanPasien] = useState("");
   const [fotoPengobatanPasien, setFotoPengobatan] = useState("");
+  const [preview, setPreview] = useState();
+  const [idPasien, setIdPasien] = useState();
+
+
+  const setFile = event => {
+    let file = event.target.files[0];
+    const show = URL.createObjectURL(file);
+    setPreview(show);
+    console.log(file);
+    fotoPasien(file);
+
+
+}
 
 
   const changeNamaPasien = (text) => {
@@ -26,11 +39,13 @@ const NewAppointment = (props) => {
   };
 
   const changeFotoPasien = (photo) => {
-    const url = photo.target.files[0];
-    const a= URL.createObjectURL(url)
-    setFotoPasien(photo.target.files[0])
+    
+    const file = photo.target.files[0];
+    const a = URL.createObjectURL(file)
+    setPreview(a);
+    setFotoPasien(file)
     console.log(fotoPasien);
-    console.log("test", url, a)
+    console.log("test", file, a)
   };
 
   const changeNomorHpPasien = (text) => {
@@ -78,8 +93,6 @@ const NewAppointment = (props) => {
     console.log(fotoPengobatanPasien);
   };
 
-  
-
 
   const postPatientData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -90,60 +103,44 @@ const NewAppointment = (props) => {
     inputData.append("tanggal_lahir", tanggalLahirPasien);
     inputData.append("alamat", alamatPasien);
     inputData.append("phone", nomorHpPasien);
-    inputData.append("photoPasien", File);
+    inputData.append("photoPasien", fotoPasien);    
+    try {
+      const result = await axios.post(
+        "http://localhost:8000/api/doc-pro/v1/pasien",
+        inputData,
+        {
+          headers: {
+             authorization: `Bearer ${info.token}`,
+            //  'Content-Type': 'multipart/form-data'
+            },
+          }
+      );
 
-
-    
-    const PatientData = {
-      nama: namaPasien,
-      nik: NikPasien,
-      tanggal_lahir: tanggalLahirPasien,
-      alamat: alamatPasien,
-      phone: nomorHpPasien,
-      photoPasien: inputData.append("fotoPasien", File[0]),
-      
-
-    };
-
-    console.log(PatientData)
-    // try {
-    //   const result = await axios.post(
-    //     "http://localhost:8000/api/doc-pro/v1/pasien",
-    //     PatientData,
-    //     {
-    //       headers: {
-    //          authorization: `Bearer ${info.token}`,
-    //         },
-    //       }
-    //   );
-
-    //   console.log(result);
-    // } catch (error) {
-    //   console.log(error.response);
-    //   alert(error.response.data.message);
-    // }
+      console.log(result, "test");
+    } catch (error) {
+      console.log(error.response);
+      alert(error.response.message);
+    }
   };
 
 
   const postAppointmentData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
+    
     let inputData = new FormData();
-   
+    inputData.append("id_pasien", idPasien);
+    inputData.append("keperluan", keperluanPasien);
+    inputData.append("jam", jamBookingPasien);
+    inputData.append("tanggal", tanggalBookingPasien);
+    inputData.append("keluhan", keluhanPasien);
+    inputData.append("photoData", fotoPengobatanPasien);
 
-    const AppointmentData = {
-      keperluan: keperluanPasien,
-      jam: jamBookingPasien,
-      tanggal: tanggalBookingPasien,
-      keluhan: keluhanPasien,
-      photoData: inputData.append("photoData", File),
-     
 
-    };
 
     try {
       const result = await axios.post(
         "http://localhost:8000/api/doc-pro/v1/appointment",
-        AppointmentData,
+        inputData,
         {
           headers: {
              authorization: `Bearer ${info.token}`,
@@ -154,16 +151,17 @@ const NewAppointment = (props) => {
       console.log(result);
     } catch (error) {
       console.log(error.response);
-      alert(error.response.data.message);
+      alert(error.response.message);
     }
   };
 
-  const postPasien = () => {
+  const postPasien = async (e, index) => {
+    setIdPasien(index);
     setNextForm(true);
     postPatientData();
   };
 
-  const postAppointment = () => {
+  const postAppointment = ()  => {
     handlePopup();
     postAppointmentData();
   };
@@ -186,8 +184,8 @@ const NewAppointment = (props) => {
             onChange={(event) =>changeFotoPasien(event)}
             onKeyUp={changeFotoPasien}
           />
-          +
-          {fotoPasien && <img src={fotoPasien}></img>}
+          {!fotoPasien && <p>+</p>}
+          {fotoPasien && <img src={preview} className="LabelProfile"></img>}
           </label>
 
           <div className="LabelNama">Upload Profile</div>
@@ -271,7 +269,7 @@ const NewAppointment = (props) => {
           <button className="btnBack" onClick={() => setPilihan("OldPatientOrNewPatient")}>
             back
           </button>
-          <button className="btnSubmit" onClick={() => postPasien()}>
+          <button className="btnSubmit" onClick={(e) => postPasien(e, idPasien)}>
             Next
           </button>
         </div>
