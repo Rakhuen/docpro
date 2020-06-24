@@ -9,31 +9,32 @@ import axios from "axios";
 import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
 import Dropdown from "../Components/DropDown.js";
-import  "../Components/DropDown.css";
-import { Multiselect } from 'multiselect-react-dropdown';
+import "../Components/DropDown.css";
+import { Multiselect } from "multiselect-react-dropdown";
+import ReactLoading from "react-loading";
 
 const items = [
-    {
-      id: 1,
-      value: "nesia",
-    },
-    {
-      id: 2,
-      value: "shafira",
-    },
-    {
-      id: 3,
-      value: "yunindya",
-    },
-  ];
+  {
+    id: 1,
+    value: "nesia",
+  },
+  {
+    id: 2,
+    value: "shafira",
+  },
+  {
+    id: 3,
+    value: "yunindya",
+  },
+];
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
   const [pasien, setPasien] = useState();
   const [idPasien, setIdPasien] = useState();
   const [viewDetails, setViewDetails] = useState();
-  const [drug, setDrug] = useState([]); 
-  const [selectedObat, setSelectedObat] = useState([]); 
+  const [drug, setDrug] = useState([]);
+  const [selectedObat, setSelectedObat] = useState([]);
 
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -53,20 +54,19 @@ const Isi = () => {
     getPasienData();
     getDrugData();
   }, []);
- 
-  console.log(pasien);
 
+  console.log(pasien);
 
   const getDrugData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(info.token)
+    console.log(info.token);
     const { data } = await axios.get(
-    "http://localhost:8000/api/doc-pro/v1/drug",
-     {
-      headers: {
-      authorization: `Bearer ${info.token}`,
-       },
-     }
+      "http://localhost:8000/api/doc-pro/v1/drug",
+      {
+        headers: {
+          authorization: `Bearer ${info.token}`,
+        },
+      }
     );
     await setDrug(data);
   };
@@ -78,8 +78,6 @@ const Isi = () => {
     const [alamatPasien, setAlamatPasien] = useState("");
     const [tanggalLahirPasien, setTanggalLahir] = useState("");
     const [NikPasien, setNikPasien] = useState("");
-
-    
 
     const changeNamaPasien = (text) => {
       setNamaPasien(text.target.value);
@@ -292,14 +290,13 @@ const Isi = () => {
           btnKiri="+New Patient"
           btnKanan="Today v"
         />
-
-        <div className="CardContainer1">
-          {pasien &&
-            pasien.map((data, index) => (
+        {pasien ? (
+          <div className="CardContainer1">
+            {pasien.map((data, index) => (
               <CardPasien
                 key={index}
                 imageDelete={data.deleteIcon}
-                image={data.photo}
+                image={data.url_photo}
                 nama={data.nama}
                 nomorTlp={data.phone}
                 tanggal={data.added_on}
@@ -307,22 +304,17 @@ const Isi = () => {
                 functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
               />
             ))}
-
-     
-       
-        
-          
-          <Multiselect
-           options={drug}
-           displayValue="drug_name"
-           selectedValues={selectedObat}
-       />
-        
-        
-      
-
-
-        </div>
+          </div>
+        ) : (
+          <div className="pageLoad">
+            <ReactLoading
+              type="bubbles"
+              color="#278aff"
+              height={"15%"}
+              width={"15%"}
+            ></ReactLoading>
+          </div>
+        )}
       </div>
     </div>
   );

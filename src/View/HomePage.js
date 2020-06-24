@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./HomePage.css";
 import NavigationContainer from "../Components/NavigationMenu.js";
-import DeleteImage from "../asset/delete.png";
+import ReactLoading from "react-loading";
 import HeaderMenu from "../Components/HeaderButton.js";
 import Card from "../Components/Content.js";
 import NewAppointment from "../Components/NewAppointment.js";
@@ -22,7 +22,6 @@ const Isi = () => {
 
   const getAppointmentData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(info.token);
     const { data } = await axios.get(
       "http://localhost:8000/api/doc-pro/v1/appointment",
       {
@@ -35,9 +34,9 @@ const Isi = () => {
   };
 
   useEffect(() => {
-    getAppointmentData();
-    console.log(appointment);
-  }, []);
+    setTimeout(() => getAppointmentData(), 2000);
+    console.log("useEffect");
+  }, [popupShow]);
 
   console.log(appointment);
 
@@ -76,12 +75,12 @@ const Isi = () => {
           btnKanan="Today v"
         />
 
-        <div className="CardContainer1">
-          {appointment ? (
-            appointment.map((data, index) => (
+        {appointment ? (
+          <div className="CardContainer1">
+            {appointment.map((data, index) => (
               <Card
                 key={index}
-                image={data.photoPasien}
+                image={data.photo}
                 nama={data.nama}
                 perawatan={data.keperluan}
                 jam={data.jam}
@@ -91,11 +90,13 @@ const Isi = () => {
                 functionFinish={(e) => finishFormHandler(e, data.id_pasien)}
                 functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
               />
-            ))
-          ) : (
-            <div>no appointment</div>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="pageLoad">
+            <ReactLoading type="bubbles" color="#278aff" height={"15%"} width={"15%"}></ReactLoading>
+          </div>
+        )}
       </div>
     </div>
   );

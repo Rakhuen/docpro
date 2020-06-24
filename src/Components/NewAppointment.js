@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./NewAppointment.css";
 import axios from "axios";
 
@@ -20,10 +20,10 @@ const NewAppointment = (props) => {
   const [fotoPengobatanPasien, setFotoPengobatan] = useState("");
   const [preview, setPreview] = useState();
   const [idPasien, setIdPasien] = useState();
+  const [pasien, setPasien] = useState();
 
   const changeNamaPasien = (text) => {
     setNamaPasien(text.target.value);
-    console.log(namaPasien);
   };
 
   const changeFotoPasien = (photo) => {
@@ -31,54 +31,61 @@ const NewAppointment = (props) => {
     const a = URL.createObjectURL(file);
     setPreview(a);
     setFotoPasien(file);
-    console.log(fotoPasien);
-    console.log("test", file, a);
   };
 
   const changeNomorHpPasien = (text) => {
     setNomorHp(text.target.value);
-    console.log(nomorHpPasien);
   };
 
   const changeAlamatPasien = (text) => {
     setAlamatPasien(text.target.value);
-    console.log(alamatPasien);
   };
 
   const changeTanggalLahirPasien = (tanggal) => {
     setTanggalLahir(tanggal.target.value);
-    console.log(tanggalLahirPasien);
   };
 
   const changeNikPasien = (text) => {
     setNikPasien(text.target.value);
-    console.log(NikPasien);
   };
 
   const changeKeperluanPasien = (text) => {
     setKeperluanPasien(text.target.value);
-    console.log(keperluanPasien);
   };
 
   const changeTanggalBookingPasien = (tanggal) => {
     setTanggalBooking(tanggal.target.value);
-    console.log(tanggalBookingPasien);
   };
 
   const changeJamBookingPasien = (jam) => {
     setJamBooking(jam.target.value);
-    console.log(jamBookingPasien);
   };
 
   const changeKeluhanPasien = (text) => {
     setKeluhanPasien(text.target.value);
-    console.log(keluhanPasien);
   };
 
   const changeFotoPengobatanPasien = (photo) => {
     setFotoPengobatan(photo.target.value);
-    console.log(fotoPengobatanPasien);
   };
+
+  const getPasienData = async () => {
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    const { data } = await axios.get(
+      "http://localhost:8000/api/doc-pro/v1/pasien",
+      {
+        headers: {
+          authorization: `Bearer ${info.token}`,
+        },
+      }
+    );
+
+    await setPasien(data);
+  };
+
+  useEffect(() => {
+    getPasienData();
+  }, []);
 
   const postPatientData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -102,15 +109,11 @@ const NewAppointment = (props) => {
         }
       );
 
-      console.log(result, "test");
       setIdPasien(result.data.id_pasien);
     } catch (error) {
-      console.log(error.response);
-      alert(error.response.message);
+      alert(error.data.response.message);
     }
   };
-
-  console.log("ini id pasien", idPasien);
 
   const postAppointmentData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -133,15 +136,12 @@ const NewAppointment = (props) => {
           },
         }
       );
-
-      console.log(result);
     } catch (error) {
-      console.log(error.response);
-      alert(error.response.message);
+      alert(error.data.response.message);
     }
   };
 
-  const postPasien = async (e, index) => {
+  const postPasien = () => {
     setNextForm(true);
     postPatientData();
   };
@@ -149,6 +149,12 @@ const NewAppointment = (props) => {
   const postAppointment = () => {
     handlePopup();
     postAppointmentData();
+  };
+
+  const handleOldPasien = (e, index) => {
+    setIdPasien(index);
+    setNextForm(true);
+    alert(index);
   };
 
   const handlePopup = () => {
@@ -358,93 +364,6 @@ const NewAppointment = (props) => {
     </div>
   );
 
-  const OldPatientData = [
-    {
-      nomor: "1",
-      nama: "Abdullah bin dhika",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "2",
-      nama: "bagus",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "3",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "4",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "5",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "6",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "7",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "8",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "9",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "10",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "11",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "12",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "13",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-    {
-      nomor: "14",
-      nama: "cahyo",
-      nomorHp: "0985680495",
-      nomorNIK: "23443543534",
-    },
-  ];
-
   const OldPatientForm = (
     <div className="OldPatientTableContainer">
       <div className="OldPatientTable">
@@ -456,15 +375,20 @@ const NewAppointment = (props) => {
             <th>NIK</th>
           </tr>
 
-          {OldPatientData.map((data, index) => (
-            <tr key={index}>
-              <td>{data.nomor} </td>
-              <td className="NameData">{data.nama} </td>
+          {pasien &&
+            pasien.map((data, index) => (
+              <tr
+                key={index}
+                onClick={(e) => handleOldPasien(e, data.id_pasien)}
+                className="pasienItem"
+              >
+                <td>{index + 1} </td>
+                <td className="NameData">{data.nama} </td>
 
-              <td className="PriceData"> {data.nomorHp} </td>
-              <td className="NikData">{data.nomorNIK} </td>
-            </tr>
-          ))}
+                <td className="PriceData"> {data.phone} </td>
+                <td className="NikData">{data.nik} </td>
+              </tr>
+            ))}
         </table>
       </div>
 

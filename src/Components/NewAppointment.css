@@ -206,19 +206,15 @@
   border-radius: 6px;
 }
 
-.btnPilihanContainer{
+.btnPilihanContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 450px;
-
-
 }
 
-
 .btnPilihan {
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,7 +229,6 @@
   text-decoration: none;
   border-radius: 14px;
 }
-
 
 .btnSubmit {
   display: flex;
@@ -250,27 +245,23 @@
   border-radius: 6px;
 }
 
-.LabelProfile{
- 
-  
+.LabelProfile {
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #9F9F9F;
+  color: #9f9f9f;
   font-size: 50px;
   font-weight: normal;
-  background-color:#D8D8D8;
+  background-color: #d8d8d8;
   width: 104px;
   height: 104px;
-  
-  
+
   box-sizing: border-box;
   border-radius: 100px;
-
 }
 
-.btnUploadPhotos{
+.btnUploadPhotos {
   margin-top: 2vh;
   color: #777777;
   cursor: pointer;
@@ -279,23 +270,21 @@
   align-items: center;
   height: 130px;
   border-radius: 13px;
-  border: 1px dashed #A7A7A7;
+  border: 1px dashed #a7a7a7;
 }
 
-.LabelNama{
+.LabelNama {
   margin-top: 1vh;
   font-weight: 500;
-  color: #B5B5B5;
-
+  color: #b5b5b5;
 }
 
-.pembatas{
+.pembatas {
   font-weight: 500;
-font-size: 24px;
-line-height: 28px;
-margin: 2vh;
-color: #595959;
-
+  font-size: 24px;
+  line-height: 28px;
+  margin: 2vh;
+  color: #595959;
 }
 
 .OldPatientTable {
@@ -307,15 +296,20 @@ color: #595959;
   overflow-y: scroll;
 }
 
-.NikData{
-
-  color: #2B8CFF;
-
-
+.NikData {
+  color: #2b8cff;
 }
 
 .backNNext {
   display: flex;
   justify-content: space-between;
   margin-top: 4vh;
+}
+
+.pasienItem {
+  cursor: pointer;
+}
+
+.pasienItem:hover{
+  background-color: thistle;
 }
