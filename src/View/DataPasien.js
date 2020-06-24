@@ -10,31 +10,16 @@ import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
 import Dropdown from "../Components/DropDown.js";
 import "../Components/DropDown.css";
-import { Multiselect } from "multiselect-react-dropdown";
+
 import ReactLoading from "react-loading";
 
-const items = [
-  {
-    id: 1,
-    value: "nesia",
-  },
-  {
-    id: 2,
-    value: "shafira",
-  },
-  {
-    id: 3,
-    value: "yunindya",
-  },
-];
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
   const [pasien, setPasien] = useState();
   const [idPasien, setIdPasien] = useState();
   const [viewDetails, setViewDetails] = useState();
-  const [drug, setDrug] = useState([]);
-  const [selectedObat, setSelectedObat] = useState([]);
+  
 
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -52,24 +37,12 @@ const Isi = () => {
 
   useEffect(() => {
     getPasienData();
-    getDrugData();
+    
   }, []);
 
   console.log(pasien);
 
-  const getDrugData = async () => {
-    let info = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(info.token);
-    const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/drug",
-      {
-        headers: {
-          authorization: `Bearer ${info.token}`,
-        },
-      }
-    );
-    await setDrug(data);
-  };
+
 
   const PatientForm = () => {
     const [namaPasien, setNamaPasien] = useState("");

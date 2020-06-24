@@ -19,6 +19,7 @@ const Isi = () => {
   const [popupViewDetails, setPopupViewDetails] = useState(false);
   const [appointment, setAppointment] = useState();
   const [idPasien, setIdPasien] = useState();
+  const [appointmentDetail, setAppointmentDetail] = useState();
 
   const getAppointmentData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -40,11 +41,12 @@ const Isi = () => {
 
   console.log(appointment);
 
-  const finishFormHandler = async (e, index) => {
-    setIdPasien(index);
+  const finishFormHandler = async (e, data) => {
+    setAppointmentDetail(data);
     setPopupFinish(true);
-    console.log(index);
+    console.log(data);
   };
+
 
   const viewDetailHandler = async (e, index) => {
     setIdPasien(index);
@@ -60,7 +62,7 @@ const Isi = () => {
         setPopupViewDetails={setPopupViewDetails}
       />
       <FinishContainer
-        idPasien={idPasien}
+        finishDetail={appointmentDetail}
         popupFinish={popupFinish}
         setPopupFinish={setPopupFinish}
       />
@@ -87,14 +89,19 @@ const Isi = () => {
                 btnFinish="Finish"
                 btnCancel="Cancel"
                 btnViewDetails="View Details"
-                functionFinish={(e) => finishFormHandler(e, data.id_pasien)}
+                functionFinish={(e) => finishFormHandler(e, data)}
                 functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
               />
             ))}
           </div>
         ) : (
           <div className="pageLoad">
-            <ReactLoading type="bubbles" color="#278aff" height={"15%"} width={"15%"}></ReactLoading>
+            <ReactLoading
+              type="bubbles"
+              color="#278aff"
+              height={"15%"}
+              width={"15%"}
+            ></ReactLoading>
           </div>
         )}
       </div>

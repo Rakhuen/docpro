@@ -1,119 +1,97 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Dropdown from "./DropDown.js";
-import  "../Components/DropDown.css";
+import "../Components/DropDown.css";
+import "../Components/FinishForm.css";
 import axios from "axios";
+import { Multiselect } from "multiselect-react-dropdown";
 
-const infoPasienFinishForm = (props) => {
-  const {foto,nama, keperluan,jam,tanggal} = props;
+const InfoPasien = (props) => {
+  const { foto, nama, keperluan, jam, tanggal } = props;
 
-  return(
+  return (
     <div className="formInfoBooking">
-    <div className="fotoNamadanKeperluanPasien">
-  <div className="fotoPasien">{foto}</div>
+      <div className="fotoNamadanKeperluanPasien">
+        <img className="fotoPasien" src={foto}></img>
 
-      <div className="namaDanKeperluanPasien">
-  <div className="Atas">{nama}</div>
-  <div className="Bawah">{keperluan}</div>
+        <div className="namaDanKeperluanPasien">
+          <div className="Atas">{nama}</div>
+          <div className="Bawah">{keperluan}</div>
+        </div>
+      </div>
+
+      <div className="jamFinish">
+        <div className="Atas">Jam</div>
+        <div className="Bawah">{jam}</div>
+      </div>
+
+      <div className="tanggalFinish">
+        <div className="Atas">Tanggal</div>
+        <div className="Bawah">{tanggal}</div>
       </div>
     </div>
-
-    <div className="jamFinish">
-      <div className="Atas">Jam</div>
-  <div className="Bawah">{jam}</div>
-    </div>
-
-    <div className="tanggalFinish">
-      <div className="Atas">Tanggal</div>
-  <div className="Bawah">{tanggal}}</div>
-    </div>
-  </div>
-
   );
 };
 
-
-
 const FinishContainer = (props) => {
-  const { popupFinish, setPopupFinish,idAppointment } = props;
-  const [finishFormDetails, setFinishFormDetails] = useState();
+  const { popupFinish, setPopupFinish, finishDetail } = props;
+  const [drug, setDrug] = useState();
+  const id_appointment = finishDetail && finishDetail.id_appointment;
+  const [penangananPasien, setPenangananPasien] = useState("");
 
-  const getFinishFormDetails = async () => {
+  const changePenangananPasien = (text) => {
+    setPenangananPasien(text.target.value);
+    console.log(penangananPasien);
+  };
+
+  const getDrugData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(info.token);
     const { data } = await axios.get(
-      `http://localhost:8000/api/doc-pro/v1/appointment/detail?id=${idAppointment}`,
+      "http://localhost:8000/api/doc-pro/v1/drug",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
         },
-      } 
+      }
     );
-
-    await setFinishFormDetails(data);
+    await setDrug(data);
   };
 
   useEffect(() => {
-    getFinishFormDetails();
-  }, [idAppointment]);
+    getDrugData();
+  }, []);
 
-  console.log(finishFormDetails);
+  const handleDrug = (drug) => {
+    console.log(drug);
+  };
 
+  const postDiagnosaData = async () => {
+    let info = JSON.parse(localStorage.getItem("userInfo"));
 
-  
+    const DiagnosaData = {
+      id_appointment: id_appointment,
+      penanganan: penangananPasien,
+      total_biaya: {},
+    };
 
+    try {
+      const result = await axios.post(
+        "http://localhost:8000/api/doc-pro/v1/pasien",
 
-  const items = [
-    {
-      id: 1,
-      value: "Pulp Fiction",
-    },
-    {
-      id: 2,
-      value: "Pulp Fiction",
-    },
-    {
-      id: 3,
-      value: "Pulp Fiction",
-    },
-  ];
+        DiagnosaData,
+        {
+          headers: {
+            authorization: `Bearer ${info.token}`,
+          },
+        }
+      );
 
-  const PatientForm = (
-    <div className="finishForm">
-       {finishFormDetails && finishFormDetails.map((data, index) => (
-              
-               <infoPasienFinishForm 
-                foto="dfb"
-                nama="fdbdf"
-                keperluan="dfbvfd"
-                jam="dfbdf"
-                tanggal="6456"
-               
-               />
-              
-            ))}
-
-      <div className="formPenanganan">
-        <input
-          type="text"
-          className="inputForm2"
-          name="alamatPasien"
-          placeholder="Penanganan"
-        />
-      </div>
-
-      <div className="inputBiayaItem">
-        <div className="Atas">Input Biaya</div>
-        <Dropdown 
-        title="Select Movie" 
-        items={items} 
-        multiSelect 
-        />
-      </div>
-
-      <div className="formBawah">
-        <input type="submit" className="btnFinish" value="Finish" />
-      </div>
-    </div>
-  );
+      console.log(result);
+    } catch (error) {
+      console.log(error.response);
+      alert(error.response.data.message);
+    }
+  };
 
   return (
     <div className={popupFinish ? "backgroundGelap" : "containerHidden"}>
@@ -126,7 +104,39 @@ const FinishContainer = (props) => {
             </button>
           </div>
 
-          {PatientForm}
+          <div className="finishForm">
+            <InfoPasien
+              foto={finishDetail && finishDetail.photo}
+              nama={finishDetail && finishDetail.nama}
+              keperluan={finishDetail && finishDetail.keperluan}
+              jam={finishDetail && finishDetail.jam}
+              tanggal={finishDetail && finishDetail.tanggal}
+            />
+
+            <div className="formPenanganan">
+              <input
+                type="text"
+                className="inputForm2"
+                name="alamatPasien"
+                placeholder="Penanganan"
+                value={penangananPasien}
+                onChange={changePenangananPasien}
+                onKeyUp={changePenangananPasien}
+              />
+            </div>
+            <div className="inputBiayaItem">
+              <div className="Atas">Input Biaya</div>
+              <Multiselect
+                options={drug}
+                displayValue="drug_name"
+                showCheckbox={true}
+                onSelect={(e) => handleDrug(e, drug)}
+              />
+            </div>
+            <div className="formBawah">
+              <input type="submit" className="btnFinish" value="Finish" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
