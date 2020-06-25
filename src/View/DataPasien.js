@@ -8,8 +8,8 @@ import ViewDetailsContainer from "../Components/formViewDetails.js";
 import axios from "axios";
 import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
-import Dropdown from "../Components/DropDown.js";
 import "../Components/DropDown.css";
+import DeleteIcon from "../asset/delete.png";
 
 import ReactLoading from "react-loading";
 
@@ -18,13 +18,13 @@ const Isi = () => {
   const [popupViewDetails, setPopupViewDetails] = useState(false);
   const [pasien, setPasien] = useState();
   const [idPasien, setIdPasien] = useState();
+  const [refresh, setRefresh] = useState();
   const [viewDetails, setViewDetails] = useState();
-  
 
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/pasien",
+      "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -37,12 +37,9 @@ const Isi = () => {
 
   useEffect(() => {
     getPasienData();
-    
   }, []);
 
   console.log(pasien);
-
-
 
   const PatientForm = () => {
     const [namaPasien, setNamaPasien] = useState("");
@@ -247,6 +244,23 @@ const Isi = () => {
     console.log(index, viewDetails);
   };
 
+  const deletePasien = async (e, index) => {
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    const { data } = await axios.delete(
+      `http://192.168.100.3:8000/api/doc-pro/v1/pasien?id=${index}`,
+      {
+        headers: {
+          authorization: `Bearer ${info.token}`,
+        },
+      }
+    );
+    setRefresh(true);
+  };
+
+  useEffect(() => {
+    setTimeout(() => getPasienData(), 1000);
+  }, [refresh]);
+
   return (
     <div className="ContainerLuar2">
       <ViewDetailsContainer
@@ -261,20 +275,20 @@ const Isi = () => {
         <HeaderMenu
           functionKiri={() => setPopupShow(true)}
           btnKiri="+New Patient"
-          btnKanan="Today v"
         />
         {pasien ? (
           <div className="CardContainer1">
             {pasien.map((data, index) => (
               <CardPasien
                 key={index}
-                imageDelete={data.deleteIcon}
+                imageDelete={DeleteIcon}
                 image={data.url_photo}
                 nama={data.nama}
                 nomorTlp={data.phone}
                 tanggal={data.added_on}
                 btnViewDetails="View Details"
                 functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
+                functionDelete={(e) => deletePasien(e, data.id_pasien)}
               />
             ))}
           </div>

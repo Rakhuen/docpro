@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Dropdown from "./DropDown.js";
 import "../Components/DropDown.css";
 import "../Components/FinishForm.css";
 import axios from "axios";
@@ -35,6 +34,7 @@ const InfoPasien = (props) => {
 const FinishContainer = (props) => {
   const { popupFinish, setPopupFinish, finishDetail } = props;
   const [drug, setDrug] = useState();
+  const [service, setService] = useState();
   const id_appointment = finishDetail && finishDetail.id_appointment;
   const [penangananPasien, setPenangananPasien] = useState("");
 
@@ -47,7 +47,7 @@ const FinishContainer = (props) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     console.log(info.token);
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/drug",
+      "http://192.168.100.3:8000/api/doc-pro/v1/drug",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -57,8 +57,23 @@ const FinishContainer = (props) => {
     await setDrug(data);
   };
 
+  const getServiceData = async () => {
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(info.token);
+    const { data } = await axios.get(
+      "http://192.168.100.3:8000/api/doc-pro/v1/service",
+      {
+        headers: {
+          authorization: `Bearer ${info.token}`,
+        },
+      }
+    );
+    await setService(data);
+  };
+
   useEffect(() => {
     getDrugData();
+    getServiceData();
   }, []);
 
   const handleDrug = (drug) => {
@@ -76,7 +91,7 @@ const FinishContainer = (props) => {
 
     try {
       const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/pasien",
+        "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
 
         DiagnosaData,
         {
@@ -126,6 +141,16 @@ const FinishContainer = (props) => {
             </div>
             <div className="inputBiayaItem">
               <div className="Atas">Input Biaya</div>
+
+              <p>Pengobatan</p>
+              <Multiselect
+                options={service}
+                displayValue="service_name"
+                showCheckbox={true}
+                onSelect={(e) => handleDrug(e, service)}
+              />
+
+              <p>Obat</p>
               <Multiselect
                 options={drug}
                 displayValue="drug_name"

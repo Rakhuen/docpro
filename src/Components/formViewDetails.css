@@ -1,4 +1,4 @@
-.headerNavDetails{
+.headerNavDetails {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -7,37 +7,34 @@
 }
 
 .infoFotoPasien {
-  width: 20%;
+  width: 100px;
+  height: 100px;
   border-radius: 100%;
-
 }
 
-
-.formContainerAlamatdanTTD{
-    margin-top: 6vh;
-    display: flex;
-   justify-content: space-between;
-
+.formContainerAlamatdanTTD {
+  margin-top: 6vh;
+  display: flex;
+  justify-content: space-between;
 }
 
 .FotodanNamaDetails {
-    margin-top: 6vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-.Label{
-    font-weight: 500;
-    font-size: 18px;
-
+  margin-top: 6vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.value{
-    margin-top: 1vh;
+.Label {
+  font-weight: 500;
+  font-size: 18px;
 }
 
-.valueNIK{
+.value {
+  margin-top: 1vh;
+}
+
+.valueNIK {
   width: 400px;
   border-radius: 10px;
   padding: 10px;
@@ -45,102 +42,89 @@
   font-size: 36px;
   background: rgba(39, 138, 255, 0.13);
   margin-top: 1vh;
-
 }
 
-.formNikPasien{
-    margin-top: 6vh;
-
+.formNikPasien {
+  margin-top: 6vh;
 }
 
 .judulTabel {
-    width: 30%;
-  }
-  
-  .judulTabelTanggal {
-    width: 10%;
-  }
-  
-  .judulTabelNama {
-    width: 20%;
-  }
+  width: 30%;
+}
 
-  .keteranganContainerLuar {
-    width: 100%;
-  }
+.judulTabelTanggal {
+  width: 10%;
+}
 
-  .TableHistory {
-    
-    background-color: white;
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-  }
+.judulTabelNama {
+  width: 20%;
+}
 
-  .scrolling{
-    overflow-y: scroll;
-    max-height: 450px;
+.keteranganContainerLuar {
+  width: 100%;
+}
 
-  }
+.TableHistory {
+  background-color: white;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
 
+.scrolling {
+  overflow-y: scroll;
+  max-height: 450px;
+}
 
-  .infoNama {
-    font-size: 24px;
-    font-weight: 500;
-  }
-  
-  .infoNomorHp {
-    margin-top: 1vh;
-    font-size: 20px;
-    font-weight: normal;
-    color: #00AE07;
-  }
+.infoNama {
+  font-size: 24px;
+  font-weight: 500;
+}
 
-  .namaDanNomor {
-    
-    width: 70%;
-  }
-  .lineBorder{
-    margin-top: 6vh;
-    border: 1px solid #CDCDCD;
+.infoNomorHp {
+  margin-top: 1vh;
+  font-size: 20px;
+  font-weight: normal;
+  color: #00ae07;
+}
 
-  }
+.namaDanNomor {
+  width: 70%;
+}
+.lineBorder {
+  margin-top: 6vh;
+  border: 1px solid #cdcdcd;
+}
 
-  .photos{
-    
-    
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    
+.photos {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
-  }
+.itemPhotos {
+  margin-top: 2vh;
+  width: 48%;
+}
+.btnAddPhotos {
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #278aff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  width: 20%;
+  height: 5vw;
+  max-height: 40px;
+  border: 1px solid #278aff;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
 
-  .itemPhotos{
-    margin-top: 2vh;
-    width: 48%;
-    
-  }
-  .btnAddPhotos{
-    margin-top: 2vh;
-    margin-bottom: 1vh;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #278AFF;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: rgb(255, 255, 255);
-    width: 20%;
-    height: 5vw;
-    max-height: 40px;
-    border: 1px solid #278AFF;
-    box-sizing: border-box;
-    border-radius: 10px;
-
-  }
-  
-  input[type="file"] {
-    display: none;
+input[type="file"] {
+  display: none;
 }

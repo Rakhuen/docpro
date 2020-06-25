@@ -19,6 +19,7 @@ const NewAppointment = (props) => {
   const [keluhanPasien, setKeluhanPasien] = useState("");
   const [fotoPengobatanPasien, setFotoPengobatan] = useState("");
   const [preview, setPreview] = useState();
+  const [previewPengobatan, setPreviewPengobatan] = useState();
   const [idPasien, setIdPasien] = useState();
   const [pasien, setPasien] = useState();
 
@@ -66,13 +67,16 @@ const NewAppointment = (props) => {
   };
 
   const changeFotoPengobatanPasien = (photo) => {
-    setFotoPengobatan(photo.target.value);
+    const file = photo.target.files[0];
+    const urlPreview = URL.createObjectURL(file);
+    setPreviewPengobatan(urlPreview);
+    setFotoPengobatan(file);
   };
 
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/pasien",
+      "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -98,9 +102,10 @@ const NewAppointment = (props) => {
     inputData.append("alamat", alamatPasien);
     inputData.append("phone", nomorHpPasien);
     inputData.append("photoPasien", fotoPasien);
+
     try {
       const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/pasien",
+        "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
         inputData,
         {
           headers: {
@@ -126,9 +131,11 @@ const NewAppointment = (props) => {
     inputData.append("keluhan", keluhanPasien);
     inputData.append("photoData", fotoPengobatanPasien);
 
+    console.log(inputData);
+
     try {
       const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/appointment",
+        "http://192.168.100.3:8000/api/doc-pro/v1/appointment",
         inputData,
         {
           headers: {
@@ -136,6 +143,7 @@ const NewAppointment = (props) => {
           },
         }
       );
+      console.log(result);
     } catch (error) {
       alert(error.data.response.message);
     }
@@ -154,7 +162,6 @@ const NewAppointment = (props) => {
   const handleOldPasien = (e, index) => {
     setIdPasien(index);
     setNextForm(true);
-    alert(index);
   };
 
   const handlePopup = () => {
@@ -329,12 +336,14 @@ const NewAppointment = (props) => {
               type="file"
               className="inputPhoto"
               name="fotoPengobatan"
-              value={fotoPengobatanPasien}
               onChange={changeFotoPengobatanPasien}
               onKeyUp={changeFotoPengobatanPasien}
               required
             />
-            +Upload photos here
+            {!fotoPengobatanPasien && <p>+Upload photos here</p>}
+            {fotoPengobatanPasien && (
+              <img src={previewPengobatan} className="inputPhoto"></img>
+            )}
           </label>
         </div>
 

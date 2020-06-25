@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-
 import "./formViewDetails.css";
-import Kurt from "../asset/MaskGroup.png";
 import cabutgigi from "../asset/cabutgigi.png";
 import gigi from "../asset/gigi.png";
 import axios from "axios";
@@ -96,7 +94,7 @@ const ViewDetailsContainer = (props) => {
   const getViewDetails = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      `http://localhost:8000/api/doc-pro/v1/pasien/detail?id=${idPasien}`,
+      `http://192.168.100.3:8000/api/doc-pro/v1/pasien/detail?id=${idPasien}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -112,32 +110,6 @@ const ViewDetailsContainer = (props) => {
   }, [idPasien]);
 
   console.log(viewDetails);
-
- 
-
-  const photoData = [
-    {
-      image: gigi,
-    },
-    {
-      image: cabutgigi,
-    },
-    {
-      image: gigi,
-    },
-    {
-      image: cabutgigi,
-    },
-    {
-      image: gigi,
-    },
-    {
-      image: cabutgigi,
-    },
-    {
-      image: gigi,
-    },
-  ];
 
   const HistoryPasien = (
     <div className="ContainerHistory">
@@ -160,17 +132,18 @@ const ViewDetailsContainer = (props) => {
           </div>
 
           <div className="scrolling">
-            {viewDetails && viewDetails.historys.map((data, index) => (
-              <div className="IsiKeteranganContainer" key={index}>
-                <IsiHistory
-                  key={index}
-                  tanggalHistory={data.appointment.tanggal}
-                  biayaHistory={data.diagnosa.total_biaya}
-                  keluhanHistory={data.appointment.keluhan}
-                  penangananHistory={data.diagnosa.penanganan}
-                />
-              </div>
-            ))}
+            {viewDetails &&
+              viewDetails.historys.map((data, index) => (
+                <div className="IsiKeteranganContainer" key={index}>
+                  <IsiHistory
+                    key={index}
+                    tanggalHistory={data.appointment.tanggal}
+                    biayaHistory={data.diagnosa.total_biaya}
+                    keluhanHistory={data.appointment.keluhan}
+                    penangananHistory={data.diagnosa.penanganan}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </div>
@@ -192,11 +165,10 @@ const ViewDetailsContainer = (props) => {
       </label>
       <div className="scrolling">
         <div className="photos">
-          {viewDetails && viewDetails.photos.map((data, index) => (
-            <DataPhotosPasien 
-            key={index} 
-            image={data.photo.image} />
-          ))}
+          {viewDetails &&
+            viewDetails.photos.map((data, index) => (
+              <DataPhotosPasien key={index} image={data.photo.image} />
+            ))}
         </div>
       </div>
     </div>
@@ -206,7 +178,7 @@ const ViewDetailsContainer = (props) => {
     <div className="scrolling">
       {viewDetails && (
         <IsiInfoPasien
-          image={viewDetails.pasien.photo}
+          image={viewDetails.pasien.url_photo}
           infoNamaPasien={viewDetails.pasien.nama}
           infoNomorHpPasien={viewDetails.pasien.phone}
           infoAlamatPasien={viewDetails.pasien.alamat}
