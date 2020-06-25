@@ -18,10 +18,10 @@ const Card = (props) => {
   return (
     <div className="CardContainer">
       <div className="DeleteContainer">
-        <img className="Delete" src={imageDelete} />
+        <img className="Delete" src={imageDelete} alt="delete icon" />
       </div>
       <div className="FotodanNama">
-        <img className="Foto2" src={image} />
+        <img className="Foto2" src={image} alt="foto pasien" />
 
         <div className="Nama">
           <div className="Atas">{nama}</div>

@@ -15,7 +15,7 @@ const NavigationMenu = () => {
   const getDoctor = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      `http://192.168.100.3:8000/api/doc-pro/v1/doctor`,
+      `http://localhost:8000/api/doc-pro/v1/doctor`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,

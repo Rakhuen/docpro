@@ -76,7 +76,7 @@ const NewAppointment = (props) => {
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
+      "http://localhost:8000/api/doc-pro/v1/pasien",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -105,7 +105,7 @@ const NewAppointment = (props) => {
 
     try {
       const result = await axios.post(
-        "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
+        "http://localhost:8000/api/doc-pro/v1/pasien",
         inputData,
         {
           headers: {
@@ -135,7 +135,7 @@ const NewAppointment = (props) => {
 
     try {
       const result = await axios.post(
-        "http://192.168.100.3:8000/api/doc-pro/v1/appointment",
+        "http://localhost:8000/api/doc-pro/v1/appointment",
         inputData,
         {
           headers: {
@@ -183,7 +183,13 @@ const NewAppointment = (props) => {
               onKeyUp={changeFotoPasien}
             />
             {!fotoPasien && <p>+</p>}
-            {fotoPasien && <img src={preview} className="LabelProfile"></img>}
+            {fotoPasien && (
+              <img
+                src={preview}
+                className="LabelProfile"
+                alt="foto pasien"
+              ></img>
+            )}
           </label>
 
           <div className="LabelNama">Upload Profile</div>
@@ -342,7 +348,11 @@ const NewAppointment = (props) => {
             />
             {!fotoPengobatanPasien && <p>+Upload photos here</p>}
             {fotoPengobatanPasien && (
-              <img src={previewPengobatan} className="inputPhoto"></img>
+              <img
+                src={previewPengobatan}
+                className="inputPhoto"
+                alt="foto pengobatan"
+              ></img>
             )}
           </label>
         </div>

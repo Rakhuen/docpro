@@ -10,7 +10,7 @@ const InfoPasien = (props) => {
   return (
     <div className="formInfoBooking">
       <div className="fotoNamadanKeperluanPasien">
-        <img className="fotoPasien" src={foto}></img>
+        <img className="fotoPasien" src={foto} alt="foto pasien"></img>
 
         <div className="namaDanKeperluanPasien">
           <div className="Atas">{nama}</div>
@@ -48,7 +48,7 @@ const FinishContainer = (props) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     console.log(info.token);
     const { data } = await axios.get(
-      "http://192.168.100.3:8000/api/doc-pro/v1/drug",
+      "http://localhost:8000/api/doc-pro/v1/drug",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -62,7 +62,7 @@ const FinishContainer = (props) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     console.log(info.token);
     const { data } = await axios.get(
-      "http://192.168.100.3:8000/api/doc-pro/v1/service",
+      "http://localhost:8000/api/doc-pro/v1/service",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -100,7 +100,7 @@ const FinishContainer = (props) => {
 
     try {
       const result = await axios.post(
-        "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
+        "http://localhost:8000/api/doc-pro/v1/pasien",
 
         DiagnosaData,
         {

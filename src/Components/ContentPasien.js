@@ -15,11 +15,11 @@ const CardPasien = (props) => {
   return (
     <div className="CardContainer">
       <div className="DeleteContainer" onClick={functionDelete}>
-        <img className="Delete" src={imageDelete} />
+        <img className="Delete" src={imageDelete} alt="delete icon" />
       </div>
       <div className="FotodanNamaPasien">
         <div className="NamaPasien">
-          <img className="FotoPasien" src={image} />
+          <img className="FotoPasien" src={image} alt="foto pasien" />
           <div className="AtasPasien">{nama}</div>
           <div className="NomorPasien">{nomorTlp}</div>
         </div>

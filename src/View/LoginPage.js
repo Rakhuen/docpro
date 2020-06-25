@@ -26,7 +26,7 @@ const Form = () => {
 
     try {
       const result = await axios.post(
-        "http://192.168.100.3:8000/api/doc-pro/v1/login",
+        "http://localhost:8000/api/doc-pro/v1/login",
         LoginData
       );
 

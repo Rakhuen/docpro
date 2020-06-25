@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./formViewDetails.css";
-import cabutgigi from "../asset/cabutgigi.png";
-import gigi from "../asset/gigi.png";
 import axios from "axios";
 
 const IsiHistory = (props) => {
@@ -36,7 +34,7 @@ const IsiHistory = (props) => {
 const DataPhotosPasien = (props) => {
   const { image } = props;
 
-  return <img className="itemPhotos" src={image} />;
+  return <img className="itemPhotos" src={image} alt="item" />;
 };
 
 const IsiInfoPasien = (props) => {
@@ -94,7 +92,7 @@ const ViewDetailsContainer = (props) => {
   const getViewDetails = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      `http://192.168.100.3:8000/api/doc-pro/v1/pasien/detail?id=${idPasien}`,
+      `http://localhost:8000/api/doc-pro/v1/pasien/detail?id=${idPasien}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,

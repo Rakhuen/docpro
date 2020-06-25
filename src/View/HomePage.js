@@ -27,8 +27,8 @@ const Isi = () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const appointmentList = date ? date : "";
     const urlGet = date
-      ? `http://192.168.100.3:8000/api/doc-pro/v1/appointment/filter?tanggal=${appointmentList}`
-      : "http://192.168.100.3:8000/api/doc-pro/v1/appointment";
+      ? `http://localhost:8000/api/doc-pro/v1/appointment/filter?tanggal=${appointmentList}`
+      : "http://localhost:8000/api/doc-pro/v1/appointment";
 
     const { data } = await axios.get(urlGet, {
       headers: {
@@ -60,7 +60,7 @@ const Isi = () => {
   const cancelAppointment = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
-      `http://192.168.100.3:8000/api/doc-pro/v1/appointment?id=${index}`,
+      `http://localhost:8000/api/doc-pro/v1/appointment?id=${index}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,

@@ -27,7 +27,6 @@ const Isi = () => {
 
   useEffect(() => {
     getHistoryData();
-    console.log(historyData);
   }, []);
 
   console.log(historyData);

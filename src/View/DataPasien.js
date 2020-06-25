@@ -19,12 +19,11 @@ const Isi = () => {
   const [pasien, setPasien] = useState();
   const [idPasien, setIdPasien] = useState();
   const [refresh, setRefresh] = useState();
-  const [viewDetails, setViewDetails] = useState();
 
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
+      "http://localhost:8000/api/doc-pro/v1/pasien",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -241,13 +240,13 @@ const Isi = () => {
   const viewDetailHandler = async (e, index) => {
     setIdPasien(index);
     setPopupViewDetails(true);
-    console.log(index, viewDetails);
+    console.log(index);
   };
 
   const deletePasien = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
-      `http://192.168.100.3:8000/api/doc-pro/v1/pasien?id=${index}`,
+      `http://localhost:8000/api/doc-pro/v1/pasien?id=${index}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,

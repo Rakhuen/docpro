@@ -323,7 +323,7 @@ const Isi = () => {
   const deleteService = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
-      `http://192.168.100.3:8000/api/doc-pro/v1/service?id=${index}`,
+      `http://localhost:8000/api/doc-pro/v1/service?id=${index}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -336,7 +336,7 @@ const Isi = () => {
   const deleteDrug = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
-      `http://192.168.100.3:8000/api/doc-pro/v1/drug?id=${index}`,
+      `http://localhost:8000/api/doc-pro/v1/drug?id=${index}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,
