@@ -182,12 +182,15 @@
 
 .inputPhoto {
   margin-top: 1vh;
+  width: auto;
+  height: 150px;
+  margin: 20px;
 }
 
 .backNsubmit {
   display: flex;
   justify-content: space-between;
-  margin-top: 13vh;
+  margin-top: 50px;
 }
 
 .btnBack {
@@ -268,7 +271,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 130px;
+  height: 180px;
   border-radius: 13px;
   border: 1px dashed #a7a7a7;
 }
@@ -310,6 +313,6 @@
   cursor: pointer;
 }
 
-.pasienItem:hover{
+.pasienItem:hover {
   background-color: thistle;
 }

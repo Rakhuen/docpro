@@ -10,11 +10,7 @@
 
   justify-content: center;
   justify-content: space-around;
-  
 }
-
-
-
 
 .headerContainer {
   margin: 2vw;
@@ -95,4 +91,11 @@
   max-height: 40px;
   text-decoration: none;
   border-radius: 6px;
+}
+
+.formInsideBtn {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: 600;
 }

@@ -8,7 +8,6 @@ import ViewDetailsContainer from "../Components/formViewDetails.js";
 import axios from "axios";
 import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
-import Dropdown from "../Components/DropDown.js";
 import "../Components/DropDown.css";
 
 import ReactLoading from "react-loading";
@@ -19,12 +18,11 @@ const Isi = () => {
   const [pasien, setPasien] = useState();
   const [idPasien, setIdPasien] = useState();
   const [viewDetails, setViewDetails] = useState();
-  
 
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/pasien",
+      "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -37,12 +35,9 @@ const Isi = () => {
 
   useEffect(() => {
     getPasienData();
-    
   }, []);
 
   console.log(pasien);
-
-
 
   const PatientForm = () => {
     const [namaPasien, setNamaPasien] = useState("");
@@ -261,7 +256,6 @@ const Isi = () => {
         <HeaderMenu
           functionKiri={() => setPopupShow(true)}
           btnKiri="+New Patient"
-          btnKanan="Today v"
         />
         {pasien ? (
           <div className="CardContainer1">

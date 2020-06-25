@@ -16,10 +16,9 @@ const Header = () => {
 const Form = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const app = useContext(AppContext)
+  const app = useContext(AppContext);
 
   const postLoginData = async () => {
-    
     const LoginData = {
       username: username,
       password: password,
@@ -27,18 +26,17 @@ const Form = () => {
 
     try {
       const result = await axios.post(
-        
-        "http://localhost:8000/api/doc-pro/v1/login",
+        "http://192.168.100.3:8000/api/doc-pro/v1/login",
         LoginData
       );
 
       const user = {
         doctorId: result.data.id_doctor,
-        token: result.data.token
+        token: result.data.token,
       };
       console.log(user);
       localStorage.setItem("userInfo", JSON.stringify(user));
-      app.setIsLoggedIn(true)
+      app.setIsLoggedIn(true);
       console.log(result);
     } catch (error) {
       setPassword("");
@@ -93,11 +91,14 @@ const Form = () => {
           </div>
 
           <NavLink to="/home" className="formBtn">
-            <button onClick={() => postLoginData()}> Login</button>
+            <button onClick={() => postLoginData()} className="formInsideBtn">
+              Login
+            </button>
           </NavLink>
 
-          <NavLink to="/signup" className="btnSignup">Don't have an account? Sign up</NavLink>
-
+          <NavLink to="/signup" className="btnSignup">
+            Don't have an account? Sign up
+          </NavLink>
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./navigation.css";
 import { NavLink } from "react-router-dom";
 import Courage from "../asset/courage.jpg";
+import axios from "axios";
 import { AppContext } from "../App";
 
 const NavigationMenu = () => {
@@ -9,8 +10,27 @@ const NavigationMenu = () => {
   const patientActive = window.location.pathname === "/pasien";
   const historyActive = window.location.pathname === "/history";
   const inputbiayaActive = window.location.pathname === "/inputbiaya";
+  const [doctor, setDoctor] = useState();
 
-  
+  const getDoctor = async () => {
+    let info = JSON.parse(localStorage.getItem("userInfo"));
+    const { data } = await axios.get(
+      `http://192.168.100.3:8000/api/doc-pro/v1/doctor`,
+      {
+        headers: {
+          authorization: `Bearer ${info.token}`,
+        },
+      }
+    );
+
+    await setDoctor(data);
+  };
+
+  useEffect(() => {
+    getDoctor();
+  }, []);
+
+  console.log(doctor);
 
   const Footer = (props) => {
     const { username } = props;
@@ -33,7 +53,7 @@ const NavigationMenu = () => {
             ></img>
           </div>
           <div className="signoutContainer">
-            <div className="username">{username} </div>
+            <div className="username">Drg. {username} </div>
             <button className="btnSignout" onClick={() => handleLogout()}>
               Sign out
             </button>
@@ -81,7 +101,7 @@ const NavigationMenu = () => {
         </div>
       </div>
 
-      <Footer username="Drg. Siapa siapa"></Footer>
+      <Footer username={doctor && doctor.nama}></Footer>
     </div>
   );
 };
