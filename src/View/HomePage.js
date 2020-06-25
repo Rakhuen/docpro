@@ -21,17 +21,20 @@ const Isi = () => {
   const [idPasien, setIdPasien] = useState();
   const [refresh, setRefresh] = useState();
   const [appointmentDetail, setAppointmentDetail] = useState();
+  const [appointmentDate, setAppointmentDate] = useState();
 
-  const getAppointmentData = async () => {
+  const getAppointmentData = async (date) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
-    const { data } = await axios.get(
-      "http://192.168.100.3:8000/api/doc-pro/v1/appointment",
-      {
-        headers: {
-          authorization: `Bearer ${info.token}`,
-        },
-      }
-    );
+    const appointmentList = date ? date : "";
+    const urlGet = date
+      ? `http://192.168.100.3:8000/api/doc-pro/v1/appointment/filter?tanggal=${appointmentList}`
+      : "http://192.168.100.3:8000/api/doc-pro/v1/appointment";
+
+    const { data } = await axios.get(urlGet, {
+      headers: {
+        authorization: `Bearer ${info.token}`,
+      },
+    });
     await setAppointment(data);
   };
 
@@ -67,9 +70,26 @@ const Isi = () => {
     setRefresh(true);
   };
 
+  const appointmentFilter = async (event) => {
+    const newDate = await event.target.value.split("-").reverse().join("/");
+    await setAppointmentDate(newDate);
+    await getAppointmentData(appointmentDate);
+  };
+
+  console.log(appointmentDate);
+
   useEffect(() => {
     setTimeout(() => getAppointmentData(), 1000);
   }, [refresh]);
+
+  const appointmentDateFilter = (
+    <input
+      type="date"
+      value={appointmentDate}
+      onChange={(e) => appointmentFilter(e)}
+      onKeyUp={(e) => appointmentFilter(e)}
+    ></input>
+  );
 
   return (
     <div className="ContainerLuar2">
@@ -91,7 +111,7 @@ const Isi = () => {
         <HeaderMenu
           functionKiri={() => setPopupShow("OldPatientOrNewPatient")}
           btnKiri="+ New Appointment"
-          btnKanan="Today v"
+          btnKanan={appointmentDateFilter}
         />
 
         {appointment ? (
