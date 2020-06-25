@@ -57,8 +57,8 @@ const Isi = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => getServiceData(), 2000);
-    setTimeout(() => getDrugData(), 2000);
+    setTimeout(() => getServiceData(), 1000);
+    setTimeout(() => getDrugData(), 1000);
   }, [popupShow]);
 
   const NewItem = () => {
@@ -318,9 +318,9 @@ const Isi = () => {
   };
 
   const [activeTab, setActiveTab] = useState("service");
-  const [refresh, setRefresh] = useState()
+  const [refresh, setRefresh] = useState();
 
-  const deleteService = (e, index) => {
+  const deleteService = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
       `http://192.168.100.3:8000/api/doc-pro/v1/service?id=${index}`,
@@ -331,9 +331,9 @@ const Isi = () => {
       }
     );
     setRefresh(true);
-  }
+  };
 
-  const deleteDrug = (e, index) => {
+  const deleteDrug = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
       `http://192.168.100.3:8000/api/doc-pro/v1/drug?id=${index}`,
@@ -344,10 +344,11 @@ const Isi = () => {
       }
     );
     setRefresh(true);
-  }
+  };
 
   useEffect(() => {
-    setTimeout(() => getPasienData(), 1000);
+    setTimeout(() => getServiceData, 1000);
+    setTimeout(() => getDrugData, 1000);
   }, [refresh]);
 
   return (
@@ -402,7 +403,12 @@ const Isi = () => {
                   <td>{data.service_desc} </td>
                   <td className="PriceData">Rp. {data.service_price} </td>
                   <td>
-                    <div className="DeleteBtn" onClick={(e) => deleteService(e, data.id_service)}>Hapus</div>
+                    <div
+                      className="DeleteBtn"
+                      onClick={(e) => deleteService(e, data.id_service)}
+                    >
+                      Hapus
+                    </div>
                   </td>
                   <td>
                     <div className="UpdateBtn">Perbarui</div>
@@ -420,7 +426,12 @@ const Isi = () => {
                   {activeTab === "drug" && <td>{data.drug_count} </td>}
                   <td className="PriceData">Rp. {data.drug_price} </td>
                   <td>
-                    <div className="DeleteBtn" onClick={(e) => deleteDrug(e, data.id_drug)}>Hapus</div>
+                    <div
+                      className="DeleteBtn"
+                      onClick={(e) => deleteDrug(e, data.id_drug)}
+                    >
+                      Hapus
+                    </div>
                   </td>
                   <td>
                     <div className="UpdateBtn">Perbarui</div>
