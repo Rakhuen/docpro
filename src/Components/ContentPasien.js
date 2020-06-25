@@ -1,12 +1,20 @@
 import React from "react";
 import "./ContentPasien.css";
 
-
 const CardPasien = (props) => {
-  const { nama, nomorTlp, tanggal, image, imageDelete,btnViewDetails,functionDetails } = props;
+  const {
+    nama,
+    nomorTlp,
+    tanggal,
+    image,
+    imageDelete,
+    btnViewDetails,
+    functionDetails,
+    functionDelete,
+  } = props;
   return (
     <div className="CardContainer">
-      <div className="DeleteContainer">
+      <div className="DeleteContainer" onClick={functionDelete}>
         <img className="Delete" src={imageDelete} />
       </div>
       <div className="FotodanNamaPasien">
@@ -22,12 +30,12 @@ const CardPasien = (props) => {
       </div>
 
       <div className="DetailsContainer">
-      <button className="btnDetails" onClick={functionDetails}>
+        <button className="btnDetails" onClick={functionDetails}>
           {btnViewDetails}
         </button>
       </div>
     </div>
   );
-}; 
+};
 
 export default CardPasien;

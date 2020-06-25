@@ -1,42 +1,37 @@
-.Header2Container{
-    margin-top: 4vh;
-    display: flex;
-    justify-content: space-between;
-
+.Header2Container {
+  margin-top: 4vh;
+  display: flex;
+  justify-content: space-between;
 }
 
 .buttonKiri {
- 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #278AFF;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: rgb(255, 255, 255);
-    width: 20%;
-    height: 5vw;
-    max-height: 40px;
-    border: 1px solid #278AFF;
-    box-sizing: border-box;
-    border-radius: 10px;
-    
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #278aff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  width: 20%;
+  height: 5vw;
+  max-height: 40px;
+  border: 1px solid #278aff;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
 
-  .buttonKanan {
- 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #278AFF;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: rgb(255, 255, 255);
-    width: 10%;
-    height: 5vw;
-    max-height: 40px;
-    border: 1px solid #278AFF;
-    box-sizing: border-box;
-    border-radius: 10px;
-    
-  }
+.buttonKanan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #278aff;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  width: 200px;
+  height: 5vw;
+  max-height: 40px;
+  border: 1px solid #278aff;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
