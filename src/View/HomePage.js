@@ -85,9 +85,10 @@ const Isi = () => {
   const appointmentDateFilter = (
     <input
       type="date"
-      value={appointmentDate}
+      value={appointment && appointmentDate}
       onChange={(e) => appointmentFilter(e)}
       onKeyUp={(e) => appointmentFilter(e)}
+      className="dropdownDate"
     ></input>
   );
 

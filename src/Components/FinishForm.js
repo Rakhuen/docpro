@@ -37,6 +37,7 @@ const FinishContainer = (props) => {
   const [service, setService] = useState();
   const id_appointment = finishDetail && finishDetail.id_appointment;
   const [penangananPasien, setPenangananPasien] = useState("");
+  const [totalBiaya, setTotalBiaya] = useState("");
 
   const changePenangananPasien = (text) => {
     setPenangananPasien(text.target.value);
@@ -76,8 +77,16 @@ const FinishContainer = (props) => {
     getServiceData();
   }, []);
 
-  const handleDrug = (drug) => {
-    console.log(drug);
+  const handleItem = (e, drug) => {
+    const biayaObat = [];
+
+    for (let biaya of drug) {
+      biayaObat.push(biaya.drug_price);
+    }
+
+    const totalObat = biayaObat.reduce((a, b) => Number(a) + Number(b));
+
+    console.log("total harga: ", totalObat);
   };
 
   const postDiagnosaData = async () => {
@@ -147,7 +156,7 @@ const FinishContainer = (props) => {
                 options={service}
                 displayValue="service_name"
                 showCheckbox={true}
-                onSelect={(e) => handleDrug(e, service)}
+                onSelect={(e) => handleItem(e, service)}
               />
 
               <p>Obat</p>
@@ -155,11 +164,11 @@ const FinishContainer = (props) => {
                 options={drug}
                 displayValue="drug_name"
                 showCheckbox={true}
-                onSelect={(e) => handleDrug(e, drug)}
+                onSelect={(e) => handleItem(e, drug)}
               />
             </div>
             <div className="formBawah">
-              <input type="submit" className="btnFinish" value="Finish" />
+              <button type="submit" className="btnFinish" value="Finish" />
             </div>
           </div>
         </div>
