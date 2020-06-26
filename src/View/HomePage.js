@@ -13,6 +13,7 @@ import axios from "axios";
 import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
 
+
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupFinish, setPopupFinish] = useState(false);
@@ -120,6 +121,7 @@ const Isi = () => {
             {appointment.map((data, index) => (
               <Card
                 key={index}
+              
                 image={data.photo}
                 nama={data.nama}
                 perawatan={data.keperluan}

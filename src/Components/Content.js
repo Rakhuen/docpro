@@ -7,7 +7,6 @@ const Card = (props) => {
     perawatan,
     jam,
     image,
-    imageDelete,
     btnFinish,
     btnCancel,
     functionFinish,
@@ -17,9 +16,6 @@ const Card = (props) => {
   } = props;
   return (
     <div className="CardContainer">
-      <div className="DeleteContainer">
-        <img className="Delete" src={imageDelete} alt="delete icon" />
-      </div>
       <div className="FotodanNama">
         <img className="Foto2" src={image} alt="foto pasien" />
 

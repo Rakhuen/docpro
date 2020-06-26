@@ -87,7 +87,37 @@ const FinishContainer = (props) => {
     const totalObat = biayaObat.reduce((a, b) => Number(a) + Number(b));
 
     console.log("total harga: ", totalObat);
+    console.log("apa aja",drug);
   };
+
+  const handleService = (e, service) => {
+    const biayaPengobatan = [];
+
+    // for (let biaya of service) {
+    //   biayaPengobatan.push(biaya.service_price);
+    // }
+
+    // const totalPengobatan = biayaPengobatan.reduce(
+    //   (a, b) => Number(a) + Number(b)
+    // );
+
+    // console.log("total harga pengobatan: ", totalPengobatan);
+  };
+
+  const handleDrug = (e, drug) => {
+    const biayaObat = [];
+
+    // for (let biaya of drug) {
+    //   biayaObat.push(biaya.drug_price);
+    // }
+
+    // const totalObat = biayaObat.reduce((a, b) => Number(a) + Number(b));
+
+    // console.log("total harga obat: ", totalObat);
+  };
+
+  console.log(service)
+  console.log(drug)
 
   const postDiagnosaData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -150,13 +180,20 @@ const FinishContainer = (props) => {
             </div>
             <div className="inputBiayaItem">
               <div className="Atas">Input Biaya</div>
-
+{/* 
               <p>Pengobatan</p>
               <Multiselect
                 options={service}
                 displayValue="service_name"
                 showCheckbox={true}
                 onSelect={(e) => handleItem(e, service)}
+              /> */}
+
+              <Multiselect
+                options={service}
+                displayValue="service_name"
+                showCheckbox={true}
+                onSelect={handleService(service)}
               />
 
               <p>Obat</p>
@@ -164,7 +201,7 @@ const FinishContainer = (props) => {
                 options={drug}
                 displayValue="drug_name"
                 showCheckbox={true}
-                onSelect={(e) => handleItem(e, drug)}
+                onSelect={handleDrug(drug)}
               />
             </div>
             <div className="formBawah">
