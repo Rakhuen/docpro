@@ -38,6 +38,8 @@ const FinishContainer = (props) => {
   const id_appointment = finishDetail && finishDetail.id_appointment;
   const [penangananPasien, setPenangananPasien] = useState("");
   const [totalBiaya, setTotalBiaya] = useState("");
+  const serviceSelectRef = React.createRef();
+  const drugSelectRef = React.createRef();
 
   const changePenangananPasien = (text) => {
     setPenangananPasien(text.target.value);
@@ -77,47 +79,33 @@ const FinishContainer = (props) => {
     getServiceData();
   }, []);
 
-  const handleItem = (e, drug) => {
-    const biayaObat = [];
+  const handleService = () => {
+    const biayaPengobatan = [];
+    const selectedService = serviceSelectRef.current.getSelectedItem();
 
-    for (let biaya of drug) {
+    for (let biaya of selectedService) {
+      biayaPengobatan.push(biaya.service_price);
+    }
+
+    const totalPengobatan = biayaPengobatan.reduce(
+      (a, b) => Number(a) + Number(b)
+    );
+
+    console.log("total harga pengobatan: ", totalPengobatan);
+  };
+
+  const handleDrug = () => {
+    const biayaObat = [];
+    const selectedDrug = drugSelectRef.current.getSelectedItem();
+
+    for (let biaya of selectedDrug) {
       biayaObat.push(biaya.drug_price);
     }
 
     const totalObat = biayaObat.reduce((a, b) => Number(a) + Number(b));
 
-    console.log("total harga: ", totalObat);
-    console.log("apa aja",drug);
+    console.log("total harga obat: ", totalObat);
   };
-
-  const handleService = (e, service) => {
-    const biayaPengobatan = [];
-
-    // for (let biaya of service) {
-    //   biayaPengobatan.push(biaya.service_price);
-    // }
-
-    // const totalPengobatan = biayaPengobatan.reduce(
-    //   (a, b) => Number(a) + Number(b)
-    // );
-
-    // console.log("total harga pengobatan: ", totalPengobatan);
-  };
-
-  const handleDrug = (e, drug) => {
-    const biayaObat = [];
-
-    // for (let biaya of drug) {
-    //   biayaObat.push(biaya.drug_price);
-    // }
-
-    // const totalObat = biayaObat.reduce((a, b) => Number(a) + Number(b));
-
-    // console.log("total harga obat: ", totalObat);
-  };
-
-  console.log(service)
-  console.log(drug)
 
   const postDiagnosaData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -180,20 +168,14 @@ const FinishContainer = (props) => {
             </div>
             <div className="inputBiayaItem">
               <div className="Atas">Input Biaya</div>
-{/* 
+
               <p>Pengobatan</p>
               <Multiselect
                 options={service}
                 displayValue="service_name"
                 showCheckbox={true}
-                onSelect={(e) => handleItem(e, service)}
-              /> */}
-
-              <Multiselect
-                options={service}
-                displayValue="service_name"
-                showCheckbox={true}
-                onSelect={handleService(service)}
+                onSelect={handleService()}
+                ref={serviceSelectRef}
               />
 
               <p>Obat</p>
@@ -201,7 +183,8 @@ const FinishContainer = (props) => {
                 options={drug}
                 displayValue="drug_name"
                 showCheckbox={true}
-                onSelect={handleDrug(drug)}
+                onSelect={handleDrug()}
+                ref={drugSelectRef}
               />
             </div>
             <div className="formBawah">
