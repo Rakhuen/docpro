@@ -129,7 +129,7 @@ const Isi = () => {
               width={"15%"}
             ></ReactLoading>
           </div>
-        ) : appointment.length == 0 ? (
+        ) : appointment.length === 0 ? (
           <div>Tidak ada jadwal</div>
         ) : (
           <div className="CardContainer1">

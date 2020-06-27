@@ -25,13 +25,11 @@ const Isi = () => {
   const editServiceHandler = async (e, data) => {
     setEditService(data);
     setPopupEditService(true);
-    console.log(data);
   };
 
   const editDrugHandler = async (e, data) => {
     setEditDrug(data);
     setPopupEditDrug(true);
-    console.log(data);
   };
 
   const NewServiceOrNewDrugs = (
@@ -121,8 +119,6 @@ const Isi = () => {
             },
           }
         );
-
-        console.log(result);
       } catch (error) {
         console.log(error.response);
       }
@@ -150,25 +146,19 @@ const Isi = () => {
 
     const changeNamaItem = (text) => {
       setNamaItem(text.target.value);
-      console.log(namaItem);
     };
 
     const changeKeteranganItem = (text) => {
       setKeteranganItem(text.target.value);
-      console.log(keteranganItem);
     };
 
     const changeBiayaItem = (number) => {
       setBiayaItem(number.target.value);
-      console.log(biayaItem);
     };
 
     const changeKuantitasItem = (number) => {
       setKuantitasItem(number.target.value);
-      console.log(kuantitasItem);
     };
-
-    console.log(refresh);
 
     const NewServiceForm = (
       <div className="pasienForm">
@@ -336,29 +326,27 @@ const Isi = () => {
 
   const EditServiceItem = () => {
     const [namaItem, setNamaItem] = useState(
-      editService && editService.service_name
+      editService && `${editService.service_name}`
     );
     const [keteranganItem, setKeteranganItem] = useState(
-      editService && editService.service_desc
+      editService && `${editService.service_desc}`
     );
     const [biayaItem, setBiayaItem] = useState(
-      editService && editService.service_price
+      editService && `${editService.service_price}`
     );
 
     const changeNamaItem = (text) => {
       setNamaItem(text.target.value);
-      console.log(namaItem);
     };
 
     const changeKeteranganItem = (text) => {
       setKeteranganItem(text.target.value);
-      console.log(keteranganItem);
     };
 
     const changeBiayaItem = (number) => {
       setBiayaItem(number.target.value);
-      console.log(biayaItem);
     };
+
     const postUpdateServiceData = async () => {
       let info = JSON.parse(localStorage.getItem("userInfo"));
       const ServiceData = {
@@ -377,10 +365,8 @@ const Isi = () => {
           }
         );
         setRefresh(true);
-        console.log(result);
       } catch (error) {
         console.log(error.response);
-        alert(error.response.data.message);
       }
     };
 
@@ -479,6 +465,7 @@ const Isi = () => {
         drug_price: biayaItem,
         drug_count: kuantitasItem,
       };
+
       try {
         const result = await axios.post(
           `http://192.168.100.3:8000/api/doc-pro/v1/drug/update?id=${idDrug}`,
@@ -493,7 +480,6 @@ const Isi = () => {
         console.log(result);
       } catch (error) {
         console.log(error.response);
-        alert(error.response.data.message);
       }
     };
 
@@ -507,34 +493,35 @@ const Isi = () => {
       postUpdateDrugData();
     };
 
-    const [namaItem, setNamaItem] = useState(editDrug && editDrug.drug_name);
-    const [keteranganItem, setKeteranganItem] = useState(
-      editDrug && editDrug.drug_desc
+    const [namaItem, setNamaItem] = useState(
+      editDrug && `${editDrug.drug_name}`
     );
-    const [biayaItem, setBiayaItem] = useState(editDrug && editDrug.drug_price);
+    const [keteranganItem, setKeteranganItem] = useState(
+      editDrug && `${editDrug.drug_desc}`
+    );
+    const [biayaItem, setBiayaItem] = useState(
+      editDrug && `${editDrug.drug_price}`
+    );
     const [kuantitasItem, setKuantitasItem] = useState(
-      editDrug && editDrug.drug_count
+      editDrug && `${editDrug.drug_count}`
     );
 
     const changeNamaItem = (text) => {
       setNamaItem(text.target.value);
-      console.log(namaItem);
     };
 
     const changeKeteranganItem = (text) => {
       setKeteranganItem(text.target.value);
-      console.log(keteranganItem);
     };
 
     const changeBiayaItem = (number) => {
       setBiayaItem(number.target.value);
-      console.log(biayaItem);
     };
 
     const changeKuantitasItem = (number) => {
       setKuantitasItem(number.target.value);
-      console.log(kuantitasItem);
     };
+
     const EditServiceForm = (
       <div className="pasienForm">
         <div className="namaItemContainer">
