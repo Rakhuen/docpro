@@ -76,7 +76,7 @@ const NewAppointment = (props) => {
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/pasien",
+      "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -105,7 +105,7 @@ const NewAppointment = (props) => {
 
     try {
       const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/pasien",
+        "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
         inputData,
         {
           headers: {
@@ -135,7 +135,7 @@ const NewAppointment = (props) => {
 
     try {
       const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/appointment",
+        "http://192.168.100.3:8000/api/doc-pro/v1/appointment",
         inputData,
         {
           headers: {

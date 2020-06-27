@@ -11,8 +11,9 @@ import { Redirect } from "react-router-dom";
 import "../Components/DropDown.css";
 import DeleteIcon from "../asset/delete.png";
 import UpdateIcon from "../asset/edit.png";
+import DefaultPhoto from "../asset/male.png";
 import ReactLoading from "react-loading";
-import EditPatientData from "../Components/EditPatientForm.js"
+import EditPatientData from "../Components/EditPatientForm.js";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
@@ -25,7 +26,7 @@ const Isi = () => {
   const getPasienData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/pasien",
+      "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -99,7 +100,7 @@ const Isi = () => {
 
       try {
         const result = await axios.post(
-          "http://localhost:8000/api/doc-pro/v1/pasien",
+          "http://192.168.100.3:8000/api/doc-pro/v1/pasien",
 
           PatientData,
           {
@@ -251,12 +252,12 @@ const Isi = () => {
     console.log(index);
   };
 
-  console.log(idPasien)
+  console.log(idPasien);
 
   const deletePasien = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
-      `http://localhost:8000/api/doc-pro/v1/pasien?id=${index}`,
+      `http://192.168.100.3:8000/api/doc-pro/v1/pasien?id=${index}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -297,7 +298,11 @@ const Isi = () => {
                 key={index}
                 imageUpdate={UpdateIcon}
                 imageDelete={DeleteIcon}
-                image={data.url_photo}
+                image={
+                  data.url_photo === "default.png" || data.url_photo === ""
+                    ? DefaultPhoto
+                    : data.url_photo
+                }
                 nama={data.nama}
                 nomorTlp={data.phone}
                 tanggal={data.added_on}

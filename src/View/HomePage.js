@@ -12,7 +12,7 @@ import "../Components/FinishForm.css";
 import axios from "axios";
 import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
-
+import DefaultPhoto from "../asset/male.png";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
@@ -28,8 +28,8 @@ const Isi = () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const appointmentList = date ? date : "";
     const urlGet = date
-      ? `http://localhost:8000/api/doc-pro/v1/appointment/filter?tanggal=${appointmentList}`
-      : "http://localhost:8000/api/doc-pro/v1/appointment";
+      ? `http://192.168.100.3:8000/api/doc-pro/v1/appointment/filter?tanggal=${appointmentList}`
+      : "http://192.168.100.3:8000/api/doc-pro/v1/appointment";
 
     const { data } = await axios.get(urlGet, {
       headers: {
@@ -41,27 +41,26 @@ const Isi = () => {
 
   useEffect(() => {
     setTimeout(() => getAppointmentData(), 1500);
-    console.log("useEffect");
   }, [popupShow]);
 
-  console.log(appointment);
+  useEffect(() => {
+    setTimeout(() => getAppointmentData(), 1500);
+  }, [popupFinish]);
 
   const finishFormHandler = async (e, data) => {
     setAppointmentDetail(data);
     setPopupFinish(true);
-    console.log(data);
   };
 
   const viewDetailHandler = async (e, index) => {
     setIdPasien(index);
     setPopupViewDetails(true);
-    console.log(index);
   };
 
   const cancelAppointment = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
-      `http://localhost:8000/api/doc-pro/v1/appointment?id=${index}`,
+      `http://192.168.100.3:8000/api/doc-pro/v1/appointment?id=${index}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -74,10 +73,8 @@ const Isi = () => {
   const appointmentFilter = async (event) => {
     const newDate = await event.target.value.split("-").reverse().join("/");
     await setAppointmentDate(newDate);
-    await getAppointmentData(appointmentDate);
+    getAppointmentData(newDate);
   };
-
-  console.log(appointmentDate);
 
   useEffect(() => {
     setTimeout(() => getAppointmentData(), 1000);
@@ -86,9 +83,7 @@ const Isi = () => {
   const appointmentDateFilter = (
     <input
       type="date"
-      value={appointment && appointmentDate}
       onChange={(e) => appointmentFilter(e)}
-      onKeyUp={(e) => appointmentFilter(e)}
       className="dropdownDate"
     ></input>
   );
@@ -116,13 +111,27 @@ const Isi = () => {
           btnKanan={appointmentDateFilter}
         />
 
-        {appointment ? (
+        {!appointment ? (
+          <div className="pageLoad">
+            <ReactLoading
+              type="bubbles"
+              color="#278aff"
+              height={"15%"}
+              width={"15%"}
+            ></ReactLoading>
+          </div>
+        ) : appointment.length === 0 ? (
+          <div>Tidak ada jadwal</div>
+        ) : (
           <div className="CardContainer1">
             {appointment.map((data, index) => (
               <Card
                 key={index}
-              
-                image={data.photo}
+                image={
+                  data.photo === "default.png" || data.photo === ""
+                    ? DefaultPhoto
+                    : data.photo
+                }
                 nama={data.nama}
                 perawatan={data.keperluan}
                 jam={data.jam}
@@ -136,15 +145,6 @@ const Isi = () => {
                 functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
               />
             ))}
-          </div>
-        ) : (
-          <div className="pageLoad">
-            <ReactLoading
-              type="bubbles"
-              color="#278aff"
-              height={"15%"}
-              width={"15%"}
-            ></ReactLoading>
           </div>
         )}
       </div>

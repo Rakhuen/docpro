@@ -26,7 +26,7 @@ const Form = () => {
 
     try {
       const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/login",
+        "http://192.168.100.3:8000/api/doc-pro/v1/login",
         LoginData
       );
 
@@ -37,12 +37,10 @@ const Form = () => {
       console.log(user);
       localStorage.setItem("userInfo", JSON.stringify(user));
       app.setIsLoggedIn(true);
-      console.log(result);
     } catch (error) {
+      console.log(error.message);
       setPassword("");
       setUsername("");
-      console.log(error.response);
-      alert(error.response.data.message);
     }
   };
 

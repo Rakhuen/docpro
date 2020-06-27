@@ -15,28 +15,22 @@ const Isi = () => {
   const [pilihan, setPilihan] = useState("NewServiceOrNewDrugs");
   const [service, setService] = useState();
   const [drug, setDrug] = useState();
- 
+
   const [editService, setEditService] = useState();
   const idService = editService && editService.id_service;
-  
+
   const [editDrug, setEditDrug] = useState();
   const idDrug = editDrug && editDrug.id_drug;
-
 
   const editServiceHandler = async (e, data) => {
     setEditService(data);
     setPopupEditService(true);
-    console.log(data);
   };
 
   const editDrugHandler = async (e, data) => {
     setEditDrug(data);
     setPopupEditDrug(true);
-    console.log(data);
   };
-
-
-console.log("ini edit",editService);
 
   const NewServiceOrNewDrugs = (
     <div className="btnPilihanContainer">
@@ -54,9 +48,8 @@ console.log("ini edit",editService);
 
   const getDrugData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(info.token);
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/drug",
+      "http://192.168.100.3:8000/api/doc-pro/v1/drug",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -68,9 +61,8 @@ console.log("ini edit",editService);
 
   const getServiceData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(info.token);
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/service",
+      "http://192.168.100.3:8000/api/doc-pro/v1/service",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -86,7 +78,6 @@ console.log("ini edit",editService);
   }, [popupShow]);
 
   const NewItem = () => {
-   
     const postServiceData = async () => {
       let info = JSON.parse(localStorage.getItem("userInfo"));
       const ServiceData = {
@@ -96,7 +87,7 @@ console.log("ini edit",editService);
       };
       try {
         const result = await axios.post(
-          "http://localhost:8000/api/doc-pro/v1/service",
+          "http://192.168.100.3:8000/api/doc-pro/v1/service",
           ServiceData,
           {
             headers: {
@@ -104,10 +95,8 @@ console.log("ini edit",editService);
             },
           }
         );
-        console.log(result);
       } catch (error) {
         console.log(error.response);
-        alert(error.response.data.message);
       }
     };
 
@@ -122,7 +111,7 @@ console.log("ini edit",editService);
 
       try {
         const result = await axios.post(
-          "http://localhost:8000/api/doc-pro/v1/drug",
+          "http://192.168.100.3:8000/api/doc-pro/v1/drug",
           DrugData,
           {
             headers: {
@@ -130,11 +119,8 @@ console.log("ini edit",editService);
             },
           }
         );
-
-        console.log(result);
       } catch (error) {
         console.log(error.response);
-        alert(error.response.data.message);
       }
     };
 
@@ -160,22 +146,18 @@ console.log("ini edit",editService);
 
     const changeNamaItem = (text) => {
       setNamaItem(text.target.value);
-      console.log(namaItem);
     };
 
     const changeKeteranganItem = (text) => {
       setKeteranganItem(text.target.value);
-      console.log(keteranganItem);
     };
 
     const changeBiayaItem = (number) => {
       setBiayaItem(number.target.value);
-      console.log(biayaItem);
     };
 
     const changeKuantitasItem = (number) => {
       setKuantitasItem(number.target.value);
-      console.log(kuantitasItem);
     };
 
     const NewServiceForm = (
@@ -314,7 +296,6 @@ console.log("ini edit",editService);
       </div>
     );
 
-    
     let popupContent;
     if (pilihan === "NewServiceOrNewDrugs") {
       popupContent = NewServiceOrNewDrugs;
@@ -343,28 +324,29 @@ console.log("ini edit",editService);
     );
   };
 
-  const EditServiceItem = (props) => {
-    const { editForm } = props;
-    const [namaItem, setNamaItem] = useState(editService && editService.service_name);
-    const [keteranganItem, setKeteranganItem] = useState(editService && editService.service_desc);
-    const [biayaItem, setBiayaItem] = useState(editService && editService.service_price);
-   
+  const EditServiceItem = () => {
+    const [namaItem, setNamaItem] = useState(
+      editService && `${editService.service_name}`
+    );
+    const [keteranganItem, setKeteranganItem] = useState(
+      editService && `${editService.service_desc}`
+    );
+    const [biayaItem, setBiayaItem] = useState(
+      editService && `${editService.service_price}`
+    );
 
     const changeNamaItem = (text) => {
-      
       setNamaItem(text.target.value);
-      console.log(namaItem);
     };
 
     const changeKeteranganItem = (text) => {
       setKeteranganItem(text.target.value);
-      console.log(keteranganItem);
     };
 
     const changeBiayaItem = (number) => {
       setBiayaItem(number.target.value);
-      console.log(biayaItem);
     };
+
     const postUpdateServiceData = async () => {
       let info = JSON.parse(localStorage.getItem("userInfo"));
       const ServiceData = {
@@ -374,7 +356,7 @@ console.log("ini edit",editService);
       };
       try {
         const result = await axios.post(
-          `http://localhost:8000/api/doc-pro/v1/service/update?id=${idService}`,
+          `http://192.168.100.3:8000/api/doc-pro/v1/service/update?id=${idService}`,
           ServiceData,
           {
             headers: {
@@ -383,18 +365,10 @@ console.log("ini edit",editService);
           }
         );
         setRefresh(true);
-        console.log(result);
       } catch (error) {
         console.log(error.response);
-        alert(error.response.data.message);
       }
     };
-
-
-    useEffect(() => {
-      setTimeout(() => getServiceData, 1000);
-      setTimeout(() => getDrugData, 1000);
-    }, [refresh]);
 
     const handlePopup = () => {
       setPopupEditService(false);
@@ -406,12 +380,6 @@ console.log("ini edit",editService);
       postUpdateServiceData();
     };
 
-  
-
-
-    
-
-   
     const EditServiceForm = (
       <div className="pasienForm">
         <div className="namaItemContainer">
@@ -421,9 +389,7 @@ console.log("ini edit",editService);
               type="text"
               className="inputItem"
               name="namaItem"
-           
               value={namaItem}
-           
               onChange={changeNamaItem}
               onKeyUp={changeNamaItem}
             />
@@ -437,7 +403,6 @@ console.log("ini edit",editService);
               type="text"
               className="inputKeterangan"
               name="keterangan"
-           
               value={keteranganItem}
               onChange={changeKeteranganItem}
               onKeyUp={changeKeteranganItem}
@@ -453,7 +418,6 @@ console.log("ini edit",editService);
               className="inputBiaya"
               name="biayaItem"
               pattern="[0-9]"
-             
               value={biayaItem}
               onChange={changeBiayaItem}
               onKeyUp={changeBiayaItem}
@@ -470,11 +434,13 @@ console.log("ini edit",editService);
       </div>
     );
 
- let popupContent;
- popupContent = EditServiceForm;
+    let popupContent;
+    popupContent = EditServiceForm;
 
     return (
-      <div className={popupEditService ? "backgroundGelapItem" : "containerHidden"}>
+      <div
+        className={popupEditService ? "backgroundGelapItem" : "containerHidden"}
+      >
         <div className="popupContainer">
           <div className="containerFormNewpatient">
             <div className="headerNewPatient">
@@ -488,13 +454,9 @@ console.log("ini edit",editService);
         </div>
       </div>
     );
-
-
   };
 
-  const EditDrugItem = (props) => {
-    const { editForm } = props;
-    
+  const EditDrugItem = () => {
     const postUpdateDrugData = async () => {
       let info = JSON.parse(localStorage.getItem("userInfo"));
       const ServiceData = {
@@ -503,9 +465,10 @@ console.log("ini edit",editService);
         drug_price: biayaItem,
         drug_count: kuantitasItem,
       };
+
       try {
         const result = await axios.post(
-          `http://localhost:8000/api/doc-pro/v1/drug/update?id=${idDrug}`,
+          `http://192.168.100.3:8000/api/doc-pro/v1/drug/update?id=${idDrug}`,
           ServiceData,
           {
             headers: {
@@ -513,19 +476,12 @@ console.log("ini edit",editService);
             },
           }
         );
-        setRefresh(true);
+        setRefresh(!refresh);
         console.log(result);
       } catch (error) {
         console.log(error.response);
-        alert(error.response.data.message);
       }
     };
-
-
-    useEffect(() => {
-      setTimeout(() => getServiceData, 1000);
-      setTimeout(() => getDrugData, 1000);
-    }, [refresh]);
 
     const handlePopup = () => {
       setPopupEditDrug(false);
@@ -537,34 +493,35 @@ console.log("ini edit",editService);
       postUpdateDrugData();
     };
 
-   
-
-
-    const [namaItem, setNamaItem] = useState(editDrug && editDrug.drug_name);
-    const [keteranganItem, setKeteranganItem] = useState(editDrug && editDrug.drug_desc);
-    const [biayaItem, setBiayaItem] = useState(editDrug && editDrug.drug_price);
-    const [kuantitasItem, setKuantitasItem] = useState(editDrug && editDrug.drug_count);
+    const [namaItem, setNamaItem] = useState(
+      editDrug && `${editDrug.drug_name}`
+    );
+    const [keteranganItem, setKeteranganItem] = useState(
+      editDrug && `${editDrug.drug_desc}`
+    );
+    const [biayaItem, setBiayaItem] = useState(
+      editDrug && `${editDrug.drug_price}`
+    );
+    const [kuantitasItem, setKuantitasItem] = useState(
+      editDrug && `${editDrug.drug_count}`
+    );
 
     const changeNamaItem = (text) => {
-      
       setNamaItem(text.target.value);
-      console.log(namaItem);
     };
 
     const changeKeteranganItem = (text) => {
       setKeteranganItem(text.target.value);
-      console.log(keteranganItem);
     };
 
     const changeBiayaItem = (number) => {
       setBiayaItem(number.target.value);
-      console.log(biayaItem);
     };
 
     const changeKuantitasItem = (number) => {
       setKuantitasItem(number.target.value);
-      console.log(kuantitasItem);
     };
+
     const EditServiceForm = (
       <div className="pasienForm">
         <div className="namaItemContainer">
@@ -574,9 +531,7 @@ console.log("ini edit",editService);
               type="text"
               className="inputItem"
               name="namaItem"
-             
               value={namaItem}
-           
               onChange={changeNamaItem}
               onKeyUp={changeNamaItem}
             />
@@ -590,7 +545,6 @@ console.log("ini edit",editService);
               type="text"
               className="inputKeterangan"
               name="keterangan"
-              
               value={keteranganItem}
               onChange={changeKeteranganItem}
               onKeyUp={changeKeteranganItem}
@@ -606,7 +560,6 @@ console.log("ini edit",editService);
               className="inputBiaya"
               name="biayaItem"
               pattern="[0-9]"
-             
               value={biayaItem}
               onChange={changeBiayaItem}
               onKeyUp={changeBiayaItem}
@@ -623,14 +576,12 @@ console.log("ini edit",editService);
               name="kuantitas"
               min="1"
               max="99"
-             
               value={kuantitasItem}
               onChange={changeKuantitasItem}
               onKeyUp={changeKuantitasItem}
               required
             />
           </div>
-
         </div>
 
         <div className="backNsubmit">
@@ -641,11 +592,13 @@ console.log("ini edit",editService);
       </div>
     );
 
- let popupContent;
- popupContent = EditServiceForm;
+    let popupContent;
+    popupContent = EditServiceForm;
 
     return (
-      <div className={popupEditDrug ? "backgroundGelapItem" : "containerHidden"}>
+      <div
+        className={popupEditDrug ? "backgroundGelapItem" : "containerHidden"}
+      >
         <div className="popupContainer">
           <div className="containerFormNewpatient">
             <div className="headerNewPatient">
@@ -659,55 +612,46 @@ console.log("ini edit",editService);
         </div>
       </div>
     );
-
-
   };
 
-
-
   const [activeTab, setActiveTab] = useState("service");
-  const [refresh, setRefresh] = useState();
+  const [refresh, setRefresh] = useState(false);
 
   const deleteService = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
-      `http://localhost:8000/api/doc-pro/v1/service?id=${index}`,
+      `http://192.168.100.3:8000/api/doc-pro/v1/service?id=${index}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,
         },
       }
     );
-    setRefresh(true);
+    setRefresh(!refresh);
   };
 
   const deleteDrug = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
-      `http://localhost:8000/api/doc-pro/v1/drug?id=${index}`,
+      `http://192.168.100.3:8000/api/doc-pro/v1/drug?id=${index}`,
       {
         headers: {
           authorization: `Bearer ${info.token}`,
         },
       }
     );
-    setRefresh(true);
+    setRefresh(!refresh);
   };
 
   useEffect(() => {
-    setTimeout(() => getServiceData, 1000);
-    setTimeout(() => getDrugData, 1000);
+    setTimeout(() => getServiceData(), 1000);
+    setTimeout(() => getDrugData(), 1000);
   }, [refresh]);
-
 
   return (
     <div className="ContainerLuarHistory">
-      <EditServiceItem
-        editForm = {editService}
-      />
-      <EditDrugItem
-        editForm = {editDrug}
-      />
+      <EditServiceItem />
+      <EditDrugItem />
       <NewItem />
       <div className="ContainerHeaderHistory">
         <div className="Header">Input Biaya</div>
@@ -766,14 +710,17 @@ console.log("ini edit",editService);
                     </div>
                   </td>
                   <td>
-                    <div 
-                    className="UpdateBtn"
-                    onClick={(e) => {editServiceHandler(e,data)}}
-                    >Perbarui</div>
+                    <div
+                      className="UpdateBtn"
+                      onClick={(e) => {
+                        editServiceHandler(e, data);
+                      }}
+                    >
+                      Perbarui
+                    </div>
                   </td>
                 </tr>
               ))}
-              
 
             {activeTab === "drug" &&
               drug &&
@@ -793,9 +740,14 @@ console.log("ini edit",editService);
                     </div>
                   </td>
                   <td>
-                    <div className="UpdateBtn"
-                    onClick={(e) => {editDrugHandler(e,data)}}
-                    >Perbarui</div>
+                    <div
+                      className="UpdateBtn"
+                      onClick={(e) => {
+                        editDrugHandler(e, data);
+                      }}
+                    >
+                      Perbarui
+                    </div>
                   </td>
                 </tr>
               ))}
