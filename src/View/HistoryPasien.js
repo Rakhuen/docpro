@@ -15,7 +15,7 @@ const Isi = () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     console.log(info.token);
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/history",
+      "http://192.168.100.3:8000/api/doc-pro/v1/history",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -49,7 +49,6 @@ const Isi = () => {
             </tr>
 
             {historyData.map((data, index) => {
-              console.log(data);
               return (
                 <tr key={index}>
                   <td>{data.appointmet.tanggal} </td>

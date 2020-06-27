@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../Components/DropDown.css";
 import "../Components/FinishForm.css";
 import axios from "axios";
+import DefaultPhoto from "../asset/male.png";
 import { Multiselect } from "multiselect-react-dropdown";
 
 const InfoPasien = (props) => {
@@ -38,6 +39,10 @@ const FinishContainer = (props) => {
   const id_appointment = finishDetail && finishDetail.id_appointment;
   const [penangananPasien, setPenangananPasien] = useState("");
   const [totalBiaya, setTotalBiaya] = useState("");
+  const [selectedService, setSelectedService] = useState();
+  const [selectedDrug, setSelectedDrug] = useState();
+  const [totalService, setTotalService] = useState();
+  const [totalDrug, setTotalDrug] = useState();
   const serviceSelectRef = React.createRef();
   const drugSelectRef = React.createRef();
 
@@ -50,7 +55,7 @@ const FinishContainer = (props) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     console.log(info.token);
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/drug",
+      "http://192.168.100.3:8000/api/doc-pro/v1/drug",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -64,7 +69,7 @@ const FinishContainer = (props) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     console.log(info.token);
     const { data } = await axios.get(
-      "http://localhost:8000/api/doc-pro/v1/service",
+      "http://192.168.100.3:8000/api/doc-pro/v1/service",
       {
         headers: {
           authorization: `Bearer ${info.token}`,
@@ -81,34 +86,43 @@ const FinishContainer = (props) => {
 
   const handleService = () => {
     const biayaPengobatan = [];
+    const idPengobatan = [];
     const selectedService = serviceSelectRef.current.getSelectedItems();
 
-    for (let biaya of selectedService) {
-      biayaPengobatan.push(biaya.service_price);
+    for (let pengobatan of selectedService) {
+      biayaPengobatan.push(pengobatan.service_price);
+      idPengobatan.push(pengobatan.id_service);
     }
-  
+
     const totalPengobatan = biayaPengobatan.reduce(
-      (a, b) => Number(a) + Number(b)
+      (a, b) => Number(a) + Number(b),
+      0
     );
-   
+
     console.log("total harga pengobatan: ", totalPengobatan);
+
+    console.log(idPengobatan);
+    setTotalService(totalPengobatan);
+    setSelectedService(idPengobatan.toString());
   };
 
   const handleDrug = () => {
     const biayaObat = [];
+    const idObat = [];
     const selectedDrug = drugSelectRef.current.getSelectedItems();
 
-    for (let biaya of selectedDrug) {
-      biayaObat.push(biaya.drug_price);
+    for (let obat of selectedDrug) {
+      biayaObat.push(obat.drug_price);
+      idObat.push(obat.id_drug);
     }
 
-    const totalObat = biayaObat.reduce((a, b) => Number(a) + Number(b));
+    const totalObat = biayaObat.reduce((a, b) => Number(a) + Number(b), 0);
 
     console.log("total harga obat: ", totalObat);
+    console.log(idObat, "idObat");
+    setTotalDrug(totalObat);
+    setSelectedDrug(idObat.toString());
   };
-
-  console.log(serviceSelectRef)
-  console.log(drugSelectRef)
 
   const postDiagnosaData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -116,12 +130,14 @@ const FinishContainer = (props) => {
     const DiagnosaData = {
       id_appointment: id_appointment,
       penanganan: penangananPasien,
-      total_biaya: {},
+      services: selectedService ? selectedService : "no services",
+      drugs: selectedDrug ? selectedDrug : "no drugs",
+      total_biaya: totalDrug + totalService,
     };
 
     try {
       const result = await axios.post(
-        "http://localhost:8000/api/doc-pro/v1/pasien",
+        "http://192.168.100.3:8000/api/doc-pro/v1/diagnosa",
 
         DiagnosaData,
         {
@@ -132,11 +148,14 @@ const FinishContainer = (props) => {
       );
 
       console.log(result);
+      setPopupFinish(false);
     } catch (error) {
       console.log(error.response);
-      alert(error.response.data.message);
+      alert("belom bisa");
     }
   };
+
+  console.log(finishDetail);
 
   return (
     <div className={popupFinish ? "backgroundGelap" : "containerHidden"}>
@@ -151,7 +170,12 @@ const FinishContainer = (props) => {
 
           <div className="finishForm">
             <InfoPasien
-              foto={finishDetail && finishDetail.photo}
+              foto={
+                (finishDetail && finishDetail.photo === "default.png") ||
+                (finishDetail && finishDetail.photo === "")
+                  ? DefaultPhoto
+                  : finishDetail && finishDetail.photo
+              }
               nama={finishDetail && finishDetail.nama}
               keperluan={finishDetail && finishDetail.keperluan}
               jam={finishDetail && finishDetail.jam}
@@ -178,6 +202,7 @@ const FinishContainer = (props) => {
                 displayValue="service_name"
                 showCheckbox={true}
                 onSelect={() => handleService()}
+                onRemove={() => handleService()}
                 ref={serviceSelectRef}
               />
 
@@ -187,11 +212,27 @@ const FinishContainer = (props) => {
                 displayValue="drug_name"
                 showCheckbox={true}
                 onSelect={() => handleDrug()}
+                onRemove={() => handleDrug()}
                 ref={drugSelectRef}
               />
             </div>
+            <div className="totalBiaya">
+              <p>Total Biaya</p>
+              <p className="nominalBiaya">
+                Rp.
+                {totalService && totalDrug
+                  ? Number(totalService) + Number(totalDrug)
+                  : totalService && !totalDrug
+                  ? totalService
+                  : !totalService && totalDrug
+                  ? totalDrug
+                  : 0}
+              </p>
+            </div>
             <div className="formBawah">
-              <button type="submit" className="btnFinish" value="Finish">Finish</button>
+              <button className="btnFinish" onClick={() => postDiagnosaData()}>
+                Finish
+              </button>
             </div>
           </div>
         </div>
