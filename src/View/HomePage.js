@@ -31,8 +31,6 @@ const Isi = () => {
       ? `http://192.168.100.3:8000/api/doc-pro/v1/appointment/filter?tanggal=${appointmentList}`
       : "http://192.168.100.3:8000/api/doc-pro/v1/appointment";
 
-    console.log(date, "date dalam get");
-
     const { data } = await axios.get(urlGet, {
       headers: {
         authorization: `Bearer ${info.token}`,
@@ -43,26 +41,20 @@ const Isi = () => {
 
   useEffect(() => {
     setTimeout(() => getAppointmentData(), 1500);
-    console.log("useEffect");
   }, [popupShow]);
 
   useEffect(() => {
     setTimeout(() => getAppointmentData(), 1500);
-    console.log("useEffect");
   }, [popupFinish]);
-
-  console.log(appointment);
 
   const finishFormHandler = async (e, data) => {
     setAppointmentDetail(data);
     setPopupFinish(true);
-    console.log(data);
   };
 
   const viewDetailHandler = async (e, index) => {
     setIdPasien(index);
     setPopupViewDetails(true);
-    console.log(index);
   };
 
   const cancelAppointment = async (e, index) => {
@@ -82,7 +74,6 @@ const Isi = () => {
     const newDate = await event.target.value.split("-").reverse().join("/");
     await setAppointmentDate(newDate);
     getAppointmentData(newDate);
-    console.log("newDate", newDate);
   };
 
   useEffect(() => {

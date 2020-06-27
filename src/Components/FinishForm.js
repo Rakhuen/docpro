@@ -48,12 +48,11 @@ const FinishContainer = (props) => {
 
   const changePenangananPasien = (text) => {
     setPenangananPasien(text.target.value);
-    console.log(penangananPasien);
   };
 
   const getDrugData = async () => {
+    let drugList = [];
     let info = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(info.token);
     const { data } = await axios.get(
       "http://192.168.100.3:8000/api/doc-pro/v1/drug",
       {
@@ -62,12 +61,14 @@ const FinishContainer = (props) => {
         },
       }
     );
-    await setDrug(data);
+    for (let item of data) {
+      if (item.drug_count !== 0) drugList.push(item);
+    }
+    setDrug(drugList);
   };
 
   const getServiceData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(info.token);
     const { data } = await axios.get(
       "http://192.168.100.3:8000/api/doc-pro/v1/service",
       {
@@ -98,10 +99,6 @@ const FinishContainer = (props) => {
       (a, b) => Number(a) + Number(b),
       0
     );
-
-    console.log("total harga pengobatan: ", totalPengobatan);
-
-    console.log(idPengobatan);
     setTotalService(totalPengobatan);
     setSelectedService(idPengobatan.toString());
   };
@@ -118,8 +115,6 @@ const FinishContainer = (props) => {
 
     const totalObat = biayaObat.reduce((a, b) => Number(a) + Number(b), 0);
 
-    console.log("total harga obat: ", totalObat);
-    console.log(idObat, "idObat");
     setTotalDrug(totalObat);
     setSelectedDrug(idObat.toString());
   };
@@ -151,11 +146,8 @@ const FinishContainer = (props) => {
       setPopupFinish(false);
     } catch (error) {
       console.log(error.response);
-      alert("belom bisa");
     }
   };
-
-  console.log(finishDetail);
 
   return (
     <div className={popupFinish ? "backgroundGelap" : "containerHidden"}>
