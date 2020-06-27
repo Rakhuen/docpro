@@ -37,8 +37,7 @@
 }
 
 .btnFinish {
-  display: flex;
-  justify-content: center;
+
   color: #ffffff;
   font-size: 16px;
   font-weight: bold;
@@ -46,6 +45,7 @@
   width: 20%;
   height: 6vh;
   text-decoration: none;
+  text-align: center;
   border-radius: 6px;
   border: none;
   outline: none;

@@ -8,14 +8,21 @@ const CardPasien = (props) => {
     tanggal,
     image,
     imageDelete,
+    imageUpdate,
     btnViewDetails,
     functionDetails,
     functionDelete,
+    functionUpdate,
   } = props;
   return (
     <div className="CardContainer">
+      <div className="deleteAndUpdate">
+      <div className="DeleteContainer" onClick={functionUpdate}>
+        <img className="Delete" src={imageUpdate} alt="update icon" />
+      </div>
       <div className="DeleteContainer" onClick={functionDelete}>
         <img className="Delete" src={imageDelete} alt="delete icon" />
+      </div>
       </div>
       <div className="FotodanNamaPasien">
         <div className="NamaPasien">

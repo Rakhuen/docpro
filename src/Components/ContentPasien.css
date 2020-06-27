@@ -12,9 +12,18 @@
 }
 
 .Delete {
+  padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
-  width: 6%;
+  width: 20px;
+  height: 20px;
+}
+
+.deleteAndUpdate{
+  display: flex;
+  justify-content: space-between;
+
+
 }
 
 .FotodanNamaPasien {

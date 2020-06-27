@@ -10,9 +10,33 @@ import ReactLoading from "react-loading";
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
+  const [popupEditService, setPopupEditService] = useState(false);
+  const [popupEditDrug, setPopupEditDrug] = useState(false);
   const [pilihan, setPilihan] = useState("NewServiceOrNewDrugs");
   const [service, setService] = useState();
   const [drug, setDrug] = useState();
+ 
+  const [editService, setEditService] = useState();
+  const idService = editService && editService.id_service;
+  
+  const [editDrug, setEditDrug] = useState();
+  const idDrug = editDrug && editDrug.id_drug;
+
+
+  const editServiceHandler = async (e, data) => {
+    setEditService(data);
+    setPopupEditService(true);
+    console.log(data);
+  };
+
+  const editDrugHandler = async (e, data) => {
+    setEditDrug(data);
+    setPopupEditDrug(true);
+    console.log(data);
+  };
+
+
+console.log("ini edit",editService);
 
   const NewServiceOrNewDrugs = (
     <div className="btnPilihanContainer">
@@ -62,6 +86,7 @@ const Isi = () => {
   }, [popupShow]);
 
   const NewItem = () => {
+   
     const postServiceData = async () => {
       let info = JSON.parse(localStorage.getItem("userInfo"));
       const ServiceData = {
@@ -289,6 +314,7 @@ const Isi = () => {
       </div>
     );
 
+    
     let popupContent;
     if (pilihan === "NewServiceOrNewDrugs") {
       popupContent = NewServiceOrNewDrugs;
@@ -316,6 +342,328 @@ const Isi = () => {
       </div>
     );
   };
+
+  const EditServiceItem = (props) => {
+    const { editForm } = props;
+    const [namaItem, setNamaItem] = useState(editService && editService.service_name);
+    const [keteranganItem, setKeteranganItem] = useState(editService && editService.service_desc);
+    const [biayaItem, setBiayaItem] = useState(editService && editService.service_price);
+   
+
+    const changeNamaItem = (text) => {
+      
+      setNamaItem(text.target.value);
+      console.log(namaItem);
+    };
+
+    const changeKeteranganItem = (text) => {
+      setKeteranganItem(text.target.value);
+      console.log(keteranganItem);
+    };
+
+    const changeBiayaItem = (number) => {
+      setBiayaItem(number.target.value);
+      console.log(biayaItem);
+    };
+    const postUpdateServiceData = async () => {
+      let info = JSON.parse(localStorage.getItem("userInfo"));
+      const ServiceData = {
+        service_name: namaItem,
+        service_desc: keteranganItem,
+        service_price: biayaItem,
+      };
+      try {
+        const result = await axios.post(
+          `http://localhost:8000/api/doc-pro/v1/service/update?id=${idService}`,
+          ServiceData,
+          {
+            headers: {
+              authorization: `Bearer ${info.token}`,
+            },
+          }
+        );
+        setRefresh(true);
+        console.log(result);
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.data.message);
+      }
+    };
+
+
+    useEffect(() => {
+      setTimeout(() => getServiceData, 1000);
+      setTimeout(() => getDrugData, 1000);
+    }, [refresh]);
+
+    const handlePopup = () => {
+      setPopupEditService(false);
+      setPilihan("NewServiceOrNewDrugs");
+    };
+
+    const postEditService = () => {
+      handlePopup();
+      postUpdateServiceData();
+    };
+
+  
+
+
+    
+
+   
+    const EditServiceForm = (
+      <div className="pasienForm">
+        <div className="namaItemContainer">
+          <div className="formNamaItem">
+            <div className="Label">Nama Pengobatan</div>
+            <input
+              type="text"
+              className="inputItem"
+              name="namaItem"
+           
+              value={namaItem}
+           
+              onChange={changeNamaItem}
+              onKeyUp={changeNamaItem}
+            />
+          </div>
+        </div>
+
+        <div className="keteranganContainer">
+          <div className="formKeterangan">
+            <div className="Label">Keterangan</div>
+            <input
+              type="text"
+              className="inputKeterangan"
+              name="keterangan"
+           
+              value={keteranganItem}
+              onChange={changeKeteranganItem}
+              onKeyUp={changeKeteranganItem}
+            />
+          </div>
+        </div>
+
+        <div className="biayaContainer">
+          <div className="formBiaya">
+            <div className="Label">Biaya</div>
+            <input
+              type="tel"
+              className="inputBiaya"
+              name="biayaItem"
+              pattern="[0-9]"
+             
+              value={biayaItem}
+              onChange={changeBiayaItem}
+              onKeyUp={changeBiayaItem}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="backNsubmit">
+          <button className="btnSubmit" onClick={() => postEditService()}>
+            submit
+          </button>
+        </div>
+      </div>
+    );
+
+ let popupContent;
+ popupContent = EditServiceForm;
+
+    return (
+      <div className={popupEditService ? "backgroundGelapItem" : "containerHidden"}>
+        <div className="popupContainer">
+          <div className="containerFormNewpatient">
+            <div className="headerNewPatient">
+              <div className="judulForm">Edit Item</div>
+              <button className="btnClose" onClick={() => handlePopup()}>
+                X
+              </button>
+            </div>
+            {popupContent}
+          </div>
+        </div>
+      </div>
+    );
+
+
+  };
+
+  const EditDrugItem = (props) => {
+    const { editForm } = props;
+    
+    const postUpdateDrugData = async () => {
+      let info = JSON.parse(localStorage.getItem("userInfo"));
+      const ServiceData = {
+        drug_name: namaItem,
+        drug_desc: keteranganItem,
+        drug_price: biayaItem,
+        drug_count: kuantitasItem,
+      };
+      try {
+        const result = await axios.post(
+          `http://localhost:8000/api/doc-pro/v1/drug/update?id=${idDrug}`,
+          ServiceData,
+          {
+            headers: {
+              authorization: `Bearer ${info.token}`,
+            },
+          }
+        );
+        setRefresh(true);
+        console.log(result);
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.data.message);
+      }
+    };
+
+
+    useEffect(() => {
+      setTimeout(() => getServiceData, 1000);
+      setTimeout(() => getDrugData, 1000);
+    }, [refresh]);
+
+    const handlePopup = () => {
+      setPopupEditDrug(false);
+      setPilihan("NewServiceOrNewDrugs");
+    };
+
+    const postDrug = () => {
+      handlePopup();
+      postUpdateDrugData();
+    };
+
+   
+
+
+    const [namaItem, setNamaItem] = useState(editDrug && editDrug.drug_name);
+    const [keteranganItem, setKeteranganItem] = useState(editDrug && editDrug.drug_desc);
+    const [biayaItem, setBiayaItem] = useState(editDrug && editDrug.drug_price);
+    const [kuantitasItem, setKuantitasItem] = useState(editDrug && editDrug.drug_count);
+
+    const changeNamaItem = (text) => {
+      
+      setNamaItem(text.target.value);
+      console.log(namaItem);
+    };
+
+    const changeKeteranganItem = (text) => {
+      setKeteranganItem(text.target.value);
+      console.log(keteranganItem);
+    };
+
+    const changeBiayaItem = (number) => {
+      setBiayaItem(number.target.value);
+      console.log(biayaItem);
+    };
+
+    const changeKuantitasItem = (number) => {
+      setKuantitasItem(number.target.value);
+      console.log(kuantitasItem);
+    };
+    const EditServiceForm = (
+      <div className="pasienForm">
+        <div className="namaItemContainer">
+          <div className="formNamaItem">
+            <div className="Label">Nama Pengobatan</div>
+            <input
+              type="text"
+              className="inputItem"
+              name="namaItem"
+             
+              value={namaItem}
+           
+              onChange={changeNamaItem}
+              onKeyUp={changeNamaItem}
+            />
+          </div>
+        </div>
+
+        <div className="keteranganContainer">
+          <div className="formKeterangan">
+            <div className="Label">Keterangan</div>
+            <input
+              type="text"
+              className="inputKeterangan"
+              name="keterangan"
+              
+              value={keteranganItem}
+              onChange={changeKeteranganItem}
+              onKeyUp={changeKeteranganItem}
+            />
+          </div>
+        </div>
+
+        <div className="biayaContainer">
+          <div className="formBiaya">
+            <div className="Label">Biaya</div>
+            <input
+              type="tel"
+              className="inputBiaya"
+              name="biayaItem"
+              pattern="[0-9]"
+             
+              value={biayaItem}
+              onChange={changeBiayaItem}
+              onKeyUp={changeBiayaItem}
+              required
+            />
+          </div>
+
+          <div className="formKuantitas">
+            <div className="Label">Kuantitas</div>
+
+            <input
+              type="number"
+              className="inputKuantitas"
+              name="kuantitas"
+              min="1"
+              max="99"
+             
+              value={kuantitasItem}
+              onChange={changeKuantitasItem}
+              onKeyUp={changeKuantitasItem}
+              required
+            />
+          </div>
+
+        </div>
+
+        <div className="backNsubmit">
+          <button className="btnSubmit" onClick={() => postDrug()}>
+            submit
+          </button>
+        </div>
+      </div>
+    );
+
+ let popupContent;
+ popupContent = EditServiceForm;
+
+    return (
+      <div className={popupEditDrug ? "backgroundGelapItem" : "containerHidden"}>
+        <div className="popupContainer">
+          <div className="containerFormNewpatient">
+            <div className="headerNewPatient">
+              <div className="judulForm">Edit Item</div>
+              <button className="btnClose" onClick={() => handlePopup()}>
+                X
+              </button>
+            </div>
+            {popupContent}
+          </div>
+        </div>
+      </div>
+    );
+
+
+  };
+
+
 
   const [activeTab, setActiveTab] = useState("service");
   const [refresh, setRefresh] = useState();
@@ -351,8 +699,15 @@ const Isi = () => {
     setTimeout(() => getDrugData, 1000);
   }, [refresh]);
 
+
   return (
     <div className="ContainerLuarHistory">
+      <EditServiceItem
+        editForm = {editService}
+      />
+      <EditDrugItem
+        editForm = {editDrug}
+      />
       <NewItem />
       <div className="ContainerHeaderHistory">
         <div className="Header">Input Biaya</div>
@@ -411,10 +766,14 @@ const Isi = () => {
                     </div>
                   </td>
                   <td>
-                    <div className="UpdateBtn">Perbarui</div>
+                    <div 
+                    className="UpdateBtn"
+                    onClick={(e) => {editServiceHandler(e,data)}}
+                    >Perbarui</div>
                   </td>
                 </tr>
               ))}
+              
 
             {activeTab === "drug" &&
               drug &&
@@ -434,7 +793,9 @@ const Isi = () => {
                     </div>
                   </td>
                   <td>
-                    <div className="UpdateBtn">Perbarui</div>
+                    <div className="UpdateBtn"
+                    onClick={(e) => {editDrugHandler(e,data)}}
+                    >Perbarui</div>
                   </td>
                 </tr>
               ))}

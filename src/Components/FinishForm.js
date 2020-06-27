@@ -81,22 +81,22 @@ const FinishContainer = (props) => {
 
   const handleService = () => {
     const biayaPengobatan = [];
-    const selectedService = serviceSelectRef.current.getSelectedItem();
+    const selectedService = serviceSelectRef.current.getSelectedItems();
 
     for (let biaya of selectedService) {
       biayaPengobatan.push(biaya.service_price);
     }
-
+  
     const totalPengobatan = biayaPengobatan.reduce(
       (a, b) => Number(a) + Number(b)
     );
-
+   
     console.log("total harga pengobatan: ", totalPengobatan);
   };
 
   const handleDrug = () => {
     const biayaObat = [];
-    const selectedDrug = drugSelectRef.current.getSelectedItem();
+    const selectedDrug = drugSelectRef.current.getSelectedItems();
 
     for (let biaya of selectedDrug) {
       biayaObat.push(biaya.drug_price);
@@ -106,6 +106,9 @@ const FinishContainer = (props) => {
 
     console.log("total harga obat: ", totalObat);
   };
+
+  console.log(serviceSelectRef)
+  console.log(drugSelectRef)
 
   const postDiagnosaData = async () => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
@@ -174,7 +177,7 @@ const FinishContainer = (props) => {
                 options={service}
                 displayValue="service_name"
                 showCheckbox={true}
-                onSelect={handleService()}
+                onSelect={() => handleService()}
                 ref={serviceSelectRef}
               />
 
@@ -183,12 +186,12 @@ const FinishContainer = (props) => {
                 options={drug}
                 displayValue="drug_name"
                 showCheckbox={true}
-                onSelect={handleDrug()}
+                onSelect={() => handleDrug()}
                 ref={drugSelectRef}
               />
             </div>
             <div className="formBawah">
-              <button type="submit" className="btnFinish" value="Finish" />
+              <button type="submit" className="btnFinish" value="Finish">Finish</button>
             </div>
           </div>
         </div>

@@ -10,12 +10,14 @@ import { AppContext } from "../App";
 import { Redirect } from "react-router-dom";
 import "../Components/DropDown.css";
 import DeleteIcon from "../asset/delete.png";
-
+import UpdateIcon from "../asset/edit.png";
 import ReactLoading from "react-loading";
+import EditPatientData from "../Components/EditPatientForm.js"
 
 const Isi = () => {
   const [popupShow, setPopupShow] = useState(false);
   const [popupViewDetails, setPopupViewDetails] = useState(false);
+  const [popupUpdatePatient, setpopupUpdatePatient] = useState(false);
   const [pasien, setPasien] = useState();
   const [idPasien, setIdPasien] = useState();
   const [refresh, setRefresh] = useState();
@@ -243,6 +245,14 @@ const Isi = () => {
     console.log(index);
   };
 
+  const updateHandler = async (e, index) => {
+    setIdPasien(index);
+    setpopupUpdatePatient(true);
+    console.log(index);
+  };
+
+  console.log(idPasien)
+
   const deletePasien = async (e, index) => {
     let info = JSON.parse(localStorage.getItem("userInfo"));
     const { data } = await axios.delete(
@@ -268,6 +278,11 @@ const Isi = () => {
         setPopupViewDetails={setPopupViewDetails}
       />
       <NewAppointment />
+      <EditPatientData
+        idPasien={idPasien}
+        popup={popupUpdatePatient}
+        setPopup={setpopupUpdatePatient}
+      />
       <div className="ContainerDua">
         <div className="Header">Data Pasien</div>
 
@@ -280,6 +295,7 @@ const Isi = () => {
             {pasien.map((data, index) => (
               <CardPasien
                 key={index}
+                imageUpdate={UpdateIcon}
                 imageDelete={DeleteIcon}
                 image={data.url_photo}
                 nama={data.nama}
@@ -288,6 +304,7 @@ const Isi = () => {
                 btnViewDetails="View Details"
                 functionDetails={(e) => viewDetailHandler(e, data.id_pasien)}
                 functionDelete={(e) => deletePasien(e, data.id_pasien)}
+                functionUpdate={(e) => updateHandler(e, data.id_pasien)}
               />
             ))}
           </div>
